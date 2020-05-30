@@ -50,6 +50,28 @@ class previsy extends eqLogic {
     public function getCofingNbAlerte() {
         return config::byKey('nb_alerte', 'previsy', '0');
     }
+    
+    public function getCofingShowCommandes() {
+        $return["show_mm_max"] = config::byKey('show_mm_max', 'previsy', '0');
+        $return["show_mm_moyenne"] = config::byKey('show_mm_moyenne', 'previsy', '0');
+        $return["show_mm_total"] = config::byKey('show_mm_total', 'previsy', '0');
+        $return["show_temp_max"] = config::byKey('show_temp_max', 'previsy', '0');
+        $return["show_temp_moyenne"] = config::byKey('show_temp_moyenne', 'previsy', '0');
+        $return["show_humidite_max"] = config::byKey('show_humidite_max', 'previsy', '0');
+        $return["show_humidite_moyenne"] = config::byKey('show_humidite_moyenne', 'previsy', '0');
+        $return["show_vent_max"] = config::byKey('show_vent_max', 'previsy', '0');
+        $return["show_vent_moyenne"] = config::byKey('show_vent_moyenne', 'previsy', '0');
+        $return["show_vent_nom"] = config::byKey('show_vent_nom', 'previsy', '0');
+        $return["show_rafale_max"] = config::byKey('show_rafale_max', 'previsy', '0');
+        $return["show_rafale_moyenne"] = config::byKey('show_rafale_moyenne', 'previsy', '0');
+        $return["show_txt_start"] = config::byKey('show_txt_start', 'previsy', '0');
+        $return["show_txt_mm"] = config::byKey('show_txt_mm', 'previsy', '0');
+        $return["show_txt_humidite"] = config::byKey('show_txt_humidite', 'previsy', '0');
+        $return["show_txt_temperature"] = config::byKey('show_txt_temperature', 'previsy', '0');
+        $return["show_txt_vent"] = config::byKey('show_txt_vent', 'previsy', '0');
+        $return["show_condition_max"] = config::byKey('show_condition_max', 'previsy', '0');
+        return $return;
+    }
 
     /*     * ***********************Methode static*************************** */
 
@@ -64,6 +86,8 @@ class previsy extends eqLogic {
 
         $previsy->checkAndUpdateCmd('ville', $info["GLOBAL"]["VILLE"]);
         $previsy->checkAndUpdateCmd('last_update', $info["GLOBAL"]["LAST_SYNCHRO"]);
+        
+        $showCommande = $previsy->getCofingShowCommandes();
 
         $cpt = 0;
         foreach ($info["ALERTES"]["GROUP"] as $value_alerte) {
@@ -78,20 +102,67 @@ class previsy extends eqLogic {
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_type', $value_alerte["TYPE"]);
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_date_start', $value_alerte["START"]);
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_date_end', $value_alerte["END"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_condition_max', $value_alerte["CONDITION_MAX"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_max', $value_alerte["MM"]["MAX"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_total', $value_alerte["MM"]["TOTAL"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_temp_moyenne', $value_alerte["TEMPERATURE"]["MOY"]);
+            
+            if ($showCommande["show_condition_max"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_condition_max', $value_alerte["CONDITION_MAX"]);
+            }
+            if ($showCommande["show_mm_max"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_max', $value_alerte["MM"]["MAX"]);
+            }
+            if ($showCommande["show_mm_moyenne"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_moyenne', $value_alerte["MM"]["MOY"]);
+            }
+            if ($showCommande["show_mm_total"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_total', $value_alerte["MM"]["TOTAL"]);
+            }
+            if ($showCommande["show_temp_max"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_temp_max', $value_alerte["TEMPERATURE"]["MAX"]);
+            }
+            if ($showCommande["show_temp_moyenne"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_temp_moyenne', $value_alerte["TEMPERATURE"]["MOY"]);
+            }
+            if ($showCommande["show_humidite_max"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_humidite_max', $value_alerte["HUMIDITE"]["MAX"]);
+            }
+            if ($showCommande["show_humidite_moyenne"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_humidite_moyenne', $value_alerte["HUMIDITE"]["MOY"]);
+            }
+            if ($showCommande["show_vent_max"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_vent_max', $value_alerte["VENT_VITESSE"]["MAX"]);
+            }
+            if ($showCommande["show_vent_moyenne"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_vent_moyenne', $value_alerte["VENT_VITESSE"]["MOY"]);
+            }
+            if ($showCommande["show_vent_nom"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_vent_nom', $value_alerte["VENT_NOM"]);
+            }
+            if ($showCommande["show_rafale_max"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_rafale_max', $value_alerte["VENT_RAFALES"]["MAX"]);
+            }
+            if ($showCommande["show_rafale_moyenne"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_rafale_moyenne', $value_alerte["VENT_RAFALES"]["MOY"]);
+            }
+            
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_duree', $value_alerte["DUREE_HEURE"]);
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_full', $value_alerte["TXT"]["FULL"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_start', $value_alerte["TXT"]["START"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_mm', $value_alerte["TXT"]["MM"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_temperature', $value_alerte["TXT"]["TEMPERATURE"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_humidite', $value_alerte["TXT"]["HUMIDITE"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_vent', $value_alerte["TXT"]["VENT"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_vent_nom', $value_alerte["VENT_NOM"]);
+            
+            if ($showCommande["show_txt_start"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_start', $value_alerte["TXT"]["START"]);
+            }
+            if ($showCommande["show_txt_mm"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_mm', $value_alerte["TXT"]["MM"]);
+            }
+            if ($showCommande["show_txt_temperature"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_temperature', $value_alerte["TXT"]["TEMPERATURE"]);
+            }
+            if ($showCommande["show_txt_humidite"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_humidite', $value_alerte["TXT"]["HUMIDITE"]);
+            }
+            if ($showCommande["show_txt_vent"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_vent', $value_alerte["TXT"]["VENT"]);
+            }
 
-            $idCmd = $previsy->getIdEtNameCmd($id_key, array('widget', 'txt_full', 'txt_start', 'txt_mm', 'txt_temperature', 'txt_humidite', 'txt_vent'));
+            $idCmd = $previsy->getIdEtNameCmd($id_key, array('widget', 'txt_full'));
 
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_widget', $previsy->getWidget($value_alerte, $idCmd));
 
@@ -145,6 +216,8 @@ class previsy extends eqLogic {
         log::add('previsy', 'debug', 'postSave :. Début de la création ou Mise à jour des commandes #ID#' . $this->getId());
 
         $nb_alerte = config::byKey('nb_alerte', 'previsy', '0');
+        
+        $showCommande = $this->getCofingShowCommandes();
 
         $info = $this->getCmd(null, 'last_update');
         if (!is_object($info)) {
@@ -218,20 +291,21 @@ class previsy extends eqLogic {
             $info->setType('info');
             $info->setSubType('string');
             $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_condition_max');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_condition_max', __FILE__));
+            
+            if ($showCommande["show_condition_max"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_condition_max');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_condition_max', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_condition_max');
+                $info->setEqLogic_id($this->getId());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('string');
+                $info->save();
             }
-            $info->setLogicalId('alerte_' . $id . '_condition_max');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('string');
-            $info->save();
-
 
             $info = $this->getCmd(null, 'alerte_' . $id . '_date_start');
             if (!is_object($info)) {
@@ -258,49 +332,183 @@ class previsy extends eqLogic {
             $info->setType('info');
             $info->setSubType('numeric');
             $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_mm_max');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_mm_max', __FILE__));
+            
+            if ($showCommande["show_mm_moyenne"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_mm_moyenne');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_mm_moyenne', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_mm_moyenne');
+                $info->setEqLogic_id($this->getId());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setUnite('MM');
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
             }
-            $info->setLogicalId('alerte_' . $id . '_mm_max');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setUnite('MM');
-            $info->setType('info');
-            $info->setSubType('numeric');
-            $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_mm_total');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_mm_total', __FILE__));
+            
+            if ($showCommande["show_mm_max"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_mm_max');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_mm_max', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_mm_max');
+                $info->setEqLogic_id($this->getId());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setUnite('MM');
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
             }
-            $info->setLogicalId('alerte_' . $id . '_mm_total');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setUnite('MM');
-            $info->setType('info');
-            $info->setSubType('numeric');
-            $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_temp_moyenne');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_temp_moyenne', __FILE__));
+            
+            if ($showCommande["show_mm_total"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_mm_total');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_mm_total', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_mm_total');
+                $info->setEqLogic_id($this->getId());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setUnite('MM');
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
             }
-            $info->setLogicalId('alerte_' . $id . '_temp_moyenne');
-            $info->setEqLogic_id($this->getId());
-            $info->setUnite($this->getCofingFormatDegres());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('numeric');
-            $info->save();
-
+            
+            if ($showCommande["show_temp_max"] == 1) {           
+                $info = $this->getCmd(null, 'alerte_' . $id . '_temp_max');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_temp_max', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_temp_max');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
+            if ($showCommande["show_temp_moyenne"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_temp_moyenne');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_temp_moyenne', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_temp_moyenne');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
+            if ($showCommande["show_humidite_max"] == 1) {            
+                $info = $this->getCmd(null, 'alerte_' . $id . '_humidite_max');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_humidite_max', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_humidite_max');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
+            if ($showCommande["show_humidite_moyenne"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_humidite_moyenne');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_humidite_moyenne', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_humidite_moyenne');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
+            if ($showCommande["show_vent_max"] == 1) {            
+                $info = $this->getCmd(null, 'alerte_' . $id . '_vent_max');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_vent_max', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_vent_max');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
+            if ($showCommande["show_vent_moyenne"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_vent_moyenne');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_vent_moyenne', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_vent_moyenne');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
+            if ($showCommande["show_rafale_max"] == 1) {            
+                $info = $this->getCmd(null, 'alerte_' . $id . '_rafale_max');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_rafale_max', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_rafale_max');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
+            if ($showCommande["show_rafale_moyenne"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_rafale_moyenne');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_rafale_moyenne', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_rafale_moyenne');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
             $info = $this->getCmd(null, 'alerte_' . $id . '_duree');
             if (!is_object($info)) {
                 $info = new previsyCmd();
@@ -314,20 +522,22 @@ class previsy extends eqLogic {
             $info->setType('info');
             $info->setSubType('numeric');
             $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_txt_start');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_txt_start', __FILE__));
+            
+            if ($showCommande["show_txt_start"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_txt_start');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_txt_start', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_txt_start');
+                $info->setEqLogic_id($this->getId());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('string');
+                $info->save();
             }
-            $info->setLogicalId('alerte_' . $id . '_txt_start');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('string');
-            $info->save();
-
+            
             $info = $this->getCmd(null, 'alerte_' . $id . '_txt_full');
             if (!is_object($info)) {
                 $info = new previsyCmd();
@@ -339,71 +549,81 @@ class previsy extends eqLogic {
             $info->setType('info');
             $info->setSubType('string');
             $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_txt_mm');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_txt_mm', __FILE__));
+            
+            if ($showCommande["show_txt_mm"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_txt_mm');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_txt_mm', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_txt_mm');
+                $info->setEqLogic_id($this->getId());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('string');
+                $info->save();
             }
-            $info->setLogicalId('alerte_' . $id . '_txt_mm');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('string');
-            $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_txt_temperature');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_txt_temperature', __FILE__));
+            
+            if ($showCommande["show_txt_temperature"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_txt_temperature');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_txt_temperature', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_txt_temperature');
+                $info->setEqLogic_id($this->getId());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('string');
+                $info->save();
             }
-            $info->setLogicalId('alerte_' . $id . '_txt_temperature');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('string');
-            $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_txt_humidite');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_txt_humidite', __FILE__));
+            
+            if ($showCommande["show_txt_humidite"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_txt_humidite');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_txt_humidite', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_txt_humidite');
+                $info->setEqLogic_id($this->getId());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('string');
+                $info->save();
             }
-            $info->setLogicalId('alerte_' . $id . '_txt_humidite');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('string');
-            $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_txt_vent');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_txt_vent', __FILE__));
+            
+            if ($showCommande["show_txt_vent"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_txt_vent');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_txt_vent', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_txt_vent');
+                $info->setEqLogic_id($this->getId());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('string');
+                $info->save();
             }
-            $info->setLogicalId('alerte_' . $id . '_txt_vent');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('string');
-            $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_vent_nom');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_vent_nom', __FILE__));
+            
+            if ($showCommande["show_vent_nom"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_vent_nom');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_vent_nom', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_vent_nom');
+                $info->setEqLogic_id($this->getId());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('string');
+                $info->save();
             }
-            $info->setLogicalId('alerte_' . $id . '_vent_nom');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('string');
-            $info->save();
         }
 
         $refresh = $this->getCmd(null, 'refresh');
@@ -458,6 +678,8 @@ class previsy extends eqLogic {
         if (!is_array($replace)) {
             return $replace;
         }
+        
+        $showCommande = $this->getCofingShowCommandes();
 
         $this->emptyCacheWidget(); //vide le cache. Pratique pour le développement
         $version = jeedom::versionAlias($_version);
@@ -489,49 +711,117 @@ class previsy extends eqLogic {
             ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
             $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
 
-            $tmp_cmd = "alerte_0" . $i . "_mm_max";
-            ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-            $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            if ($showCommande["show_mm_max"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_mm_max";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
 
-            $tmp_cmd = "alerte_0" . $i . "_mm_total";
-            ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-            $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            if ($showCommande["show_mm_moyenne"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_mm_moyenne";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
 
-            $tmp_cmd = "alerte_0" . $i . "_temp_moyenne";
-            ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-            $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            if ($showCommande["show_mm_total"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_mm_total";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            }
+
+            if ($showCommande["show_temp_max"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_temp_max";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
+
+            if ($showCommande["show_temp_moyenne"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_temp_moyenne";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
+
+            if ($showCommande["show_humidite_max"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_humidite_max";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
+
+            if ($showCommande["show_humidite_moyenne"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_humidite_moyenne";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
+
+            if ($showCommande["show_vent_max"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_vent_max";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
+
+            if ($showCommande["show_vent_moyenne"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_vent_moyenne";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
+
+            if ($showCommande["show_rafale_max"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_rafale_max";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
+
+            if ($showCommande["show_rafale_moyenne"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_rafale_moyenne";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
 
             $tmp_cmd = "alerte_0" . $i . "_txt_full";
             ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
             $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
 
-            $tmp_cmd = "alerte_0" . $i . "_txt_start";
-            ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-            $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            if ($showCommande["show_txt_start"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_txt_start";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            }
 
-            $tmp_cmd = "alerte_0" . $i . "_txt_mm";
-            ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-            $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            if ($showCommande["show_txt_mm"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_txt_mm";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            }
 
-            $tmp_cmd = "alerte_0" . $i . "_txt_temperature";
-            ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-            $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            if ($showCommande["show_txt_temperature"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_txt_temperature";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            }
 
-            $tmp_cmd = "alerte_0" . $i . "_txt_humidite";
-            ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-            $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            if ($showCommande["show_txt_humidite"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_txt_humidite";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            }
 
-            $tmp_cmd = "alerte_0" . $i . "_txt_vent";
-            ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-            $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            if ($showCommande["show_txt_vent"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_txt_vent";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            }
 
-            $tmp_cmd = "alerte_0" . $i . "_vent_nom";
-            ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-            $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            if ($showCommande["show_vent_nom"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_vent_nom";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            }
 
-            $tmp_cmd = "alerte_0" . $i . "_condition_max";
-            ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-            $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            if ($showCommande["show_condition_max"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_condition_max";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
+            }
 
             $tmp_cmd = "alerte_0" . $i . "_widget";
             ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
@@ -892,7 +1182,7 @@ class previsy extends eqLogic {
             log::add('previsy', 'debug', 'miseEnCacheJson :. Enregistrement du Json : ' . $file);
         } else {
             log::add('previsy', 'debug', 'miseEnCacheJson :.  Impossible de se connecter à https://www.prevision-meteo.ch/services/json/' . $ville . '. Le cache est donc conservé.');
-            log::add('previsy', 'error', 'miseEnCacheJson :. Impossible de se connecter à https://www.prevision-meteo.ch/services/json/' . $ville . '. Le cache est donc conservé.');
+            //log::add('previsy', 'error', 'miseEnCacheJson :. Impossible de se connecter à https://www.prevision-meteo.ch/services/json/' . $ville . '. Le cache est donc conservé.');
         }
     }
 

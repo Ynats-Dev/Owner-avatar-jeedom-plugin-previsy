@@ -228,7 +228,7 @@ class previsy_language {
             }            
         }
         
-        if($return["MM"] > 0){
+        if($_input["MM"]["TOTAL"] > 0){
             $return["MM"] .= "Il y aura un total de " . number_format($_input["MM"]["TOTAL"], 1) . " millimètre";
             if ($_input["MM"]["TOTAL"] > 1) {
                 $return["MM"] .= "s";

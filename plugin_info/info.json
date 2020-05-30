@@ -1,7 +1,7 @@
 {
 	"id" : "previsy",
 	"name" : "Previsy",
-	"description" : "Plugin de prévision météorolique à 72H (France et Suisse)",
+	"description" : "Plugin de prévision météorolique à 72H (France, Belgique et Suisse)",
 	"licence" : "AGPL",
 	"author" : "Ynats",
         "require" : "1.a",
