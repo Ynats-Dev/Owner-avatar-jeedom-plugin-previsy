@@ -35,7 +35,7 @@ class previsy extends eqLogic {
     public function getConfigPrevisy() {
         $return["urlApi"] = "https://www.prevision-meteo.ch/services/json/"; // Url du Json de prevision-meteo.ch
         $return["jsonTampon"] = __DIR__ . "/../../../../plugins/previsy/core/json/"; // Dossier des Json en Tampon
-        $return["icons"] = "/plugins/previsy/icons/"; // Dossier des icones
+        $return["icons"] = "/plugins/previsy/desktop/icons/"; // Dossier des icones
         $return["phrasesLangues"] = __DIR__ . "/../../../../plugins/previsy/core/class/translate/"; // Dossier des class permettant de construire des phrases en différentes langues
         $return["prevHeure"] = 72; // Heure max de récupération des données dans le Json
         $return["maxAlerte"] = 5; // Nombre max d'alerte ou widget à afficher

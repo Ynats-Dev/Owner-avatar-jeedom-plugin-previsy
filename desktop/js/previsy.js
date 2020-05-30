@@ -21,7 +21,6 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
  * Fonction pour l'ajout de commande, appellé automatiquement par plugin.template
  */
 
-
 function addCmdToTable(_cmd) {
     if (!isset(_cmd)) {
         var _cmd = {configuration: {}};
@@ -52,3 +51,26 @@ function addCmdToTable(_cmd) {
     }
     jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
 }
+
+function previsyNormalizer(str) {
+  var accents    = "ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž' ";
+  var accentsOut = "aaaaaaaaaaaaaooooooooooooeeeeeeeeeccdiiiiiiiiuuuuuuuunnssyyyzz--";
+  str = str.split('');
+  var strLen = str.length;
+  var i, x;
+  for (i = 0; i < strLen; i++) {
+    if ((x = accents.indexOf(str[i])) != -1) {
+      str[i] = accentsOut[x];
+    }
+  }
+  var final = str.join('').toLowerCase();
+  
+  if(final !== ''){
+      $( "#previsyLinkVille" ).replaceWith('<a class="btn btn-sm btn-default" id="previsyLinkVille" href="https://www.prevision-meteo.ch/meteo/localite/'+final+'" target="_blank">Testez la ville de <b>'+final+'</b> sur prevision-meteo.ch</a>');
+  } else {
+      $( "#previsyLinkVille" ).replaceWith('<span id="previsyLinkVille"></span>');
+  }
+ 
+  return final;
+}
+

@@ -1,0 +1,17 @@
+{
+	"id" : "previsy",
+	"name" : "Previsy",
+	"description" : "Plugin de prévision météorolique à 72H (France et Suisse)",
+	"licence" : "AGPL",
+	"author" : "Ynats",
+        "require" : "1.a",
+	"category" : "weather",
+	"changelog" : "https://jeedom.github.io/plugin-template/#language#/changelog",
+	"documentation" : "https://jeedom.github.io/plugin-template/#language#/",
+	"link" : {
+		"forum":"Lien vers le forum",
+		"video" : "Lien vers une video"
+	},
+	"language" : ["fr_FR"],
+	"compatibility" : ["miniplus","smart","rpi","docker","diy","mobile", "v4"]
+}

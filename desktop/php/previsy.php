@@ -96,8 +96,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
                         <div class="form-group" style="margin-top: 15px;">
                             <label class="col-sm-3 control-label">{{Nom de la ville}}</label>
                             <div class="col-sm-3">
-                                <input type="text" onkeyup="this.value=this.value.toLowerCase()" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="ville" placeholder="ville" />
+                                <input type="text" onkeyup="this.value=previsyNormalizer(this.value);" onfocus="this.value=previsyNormalizer(this.value);" class="eqLogicAttr form-control previsyVille" data-l1key="configuration" data-l2key="ville" placeholder="ville" />
                             </div>
+                            <span style="float:left">
+                                <span id="previsyLinkVille"></span>
+                            </span>
                             <div><a href="" target="_blank"></a></div>
                         </div>
                         <div class="form-group" style="margin-top: 5px;">
