@@ -1,20 +1,27 @@
 ---
 langs: [fr_FR]
 baseurl: "/"
+sass:
+  sass_dir: assets/css
+  style: compressed
+markdown: kramdown
+permalink: /404.html
 kramdown:
   input: GFM
   hard_wrap: false
 highlighter: rouge
+gems:
+ - jekyll-paginate
+ - jekyll-seo-tag
 exclude:
-- vendor
-title: "Documentation Jeedom"
-description: "Ceci est la documentation, lier à la solution domotique Jeedom."
+ - vendor
+plugins:
+ - jekyll-seo-tag
+title: "Documentation plugin Previsy"
+description: "Ceci est la documentation, liée au plugin Previsy pour Jeedom."
 author: "Ynats"
+image: https://www.jeedom.com/site/logo.png
 social:
-  name: Jeedom
+  name:  Jeedom-Previsy
   links:
-    - https://github.com/Ynats/jeedom-previsy
-community: https://community.jeedom.com
-market: https://market.jeedom.com
-blog: https://blog.jeedom.com
-doc: https://doc.jeedom.com
+    - https://github.com/Ynats/jeedom-plugin-previsy/
