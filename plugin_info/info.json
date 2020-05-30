@@ -6,8 +6,8 @@
 	"author" : "Ynats",
         "require" : "1.a",
 	"category" : "weather",
-	"changelog" : "https://jeedom.github.io/plugin-template/#language#/changelog",
-	"documentation" : "https://jeedom.github.io/plugin-template/#language#/",
+	"changelog" : "https://ynats.github.io/jeedom-plugin-previsy/#language#/changelog",
+	"documentation" : "https://ynats.github.io/jeedom-plugin-previsy/#language#/",
 	"link" : {
 		"forum":"Lien vers le forum",
 		"video" : "Lien vers une video"
