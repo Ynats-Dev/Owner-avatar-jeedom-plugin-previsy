@@ -25,14 +25,17 @@ Installation
 
 - **Nombre d'alerte en prévision à afficher**
 > Cela permet de configurer le nombre d'alertes que vous souhaitez afficher. 
+
 > Exemple : "Pour toujours afficher les deux prochaines alertes on sélectionne 2 alertes."
 
 - **Temperature**
 > Vous avez la possibilité d'afficher les températures en degrés Celsius (°C) ou en degrés Fahrenheit (°F)
 
 - **Commandes à afficher (en option pour vos scénarios)**
-> Si vous souhaitez utiliser certaines données pour vous créer des scénarios sur mesures. Il suffit de cocher les commandes que vous souhaitez voir apparaitre. 
+> Si vous souhaitez utiliser certaines données pour vous créer des scénarios sur mesures. Il suffit de cocher les commandes que vous souhaitez voir apparaitre.
+
 > Toutes les commandes seront décrite par la suite. 
+
 > Attention, si vous voulez afficher 5 alertes et toutes les commandes vous allez en avoir beaucoup ! 
 
 Gestion
@@ -68,22 +71,27 @@ Dans les prochaines commandes le "01" correspond au numéro de l'alerte associé
 
 - **Alerte+01_txt_start [info] (optionnel)**
 > C'est la première partie de la pharse complète. 
+
 > Exemple : "Dans 18 heures, soit demain à partir de 16 heures, il va pleuvoir durant 1 heure."
 
 - **Alerte+01_txt_mm [info] (optionnel)**
 > C'est la partie liée à la précipitation. 
+
 > Exemple : "Il y aura un total de 0.3 millimètre de précipatation."
 
 - **Alerte+01_txt_humidite [info] (optionnel)**
 > C'est la partie liée à l'humidité. 
+
 > Exemple : "Le taux d'humidité sera de 99.0%."
 
 - **Alerte+01_txt_temperature [info] (optionnel)**
 > C'est la partie liée à la température. 
+
 > Exemple : "La température sera de 10.5°C."
 
 - **Alerte+01_txt_vent [info] (optionnel)**
 > C'est la partie lié au vent. 
+
 > Exemple : "Le vent soufflera en moyenne à 24.0KM/H avec des rafales pouvant aller jusqu'à 38.0KM/H."
 
 ***Vous l'aurez compris, cela vous permettra de reconstruire vos phrases comme vous le souhaitez.***
