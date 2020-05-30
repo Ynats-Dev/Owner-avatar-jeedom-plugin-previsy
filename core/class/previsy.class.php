@@ -555,9 +555,10 @@ class previsy extends eqLogic {
 
     /*     * **********************Getteur Setteur*************************** */
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # START -> PREVISY
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+    
     public function get($_id) {
 
         log::add('previsy', 'debug', 'get :. #ID#' . $_id . ' lancement');
@@ -570,10 +571,10 @@ class previsy extends eqLogic {
 
         if ($config["LANGUE"] == "fr_FR") {
             log::add('previsy', 'debug', 'get :. Chargement du module de construction des phrases en Français');
-            require_once $config["phrasesLangues"] . 'fr_FR.php';
+            require_once $config["phrasesLangues"] . 'previsy.class.fr_FR.php';
         } else {
             log::add('previsy', 'debug', 'get :. Chargement du module de construction des phrases en Anglais');
-            require_once $config["phrasesLangues"] . 'en_US.php';
+            require_once $config["phrasesLangues"] . 'previsy.class.en_US.php';
         }
 
         $now = $tmp_now = $al_last = array();
@@ -651,6 +652,7 @@ class previsy extends eqLogic {
                     if ($txt_meteo == NULL AND $alerteVent == FALSE) {
                         unset($al_last);
                     } elseif ($alertes < $eqLogic->getCofingNbAlerte()) {
+                        
                         if (!isset($al_last["TYPE"])) {
                             $alertes++;
                             $al_last["START"] = $date->format('YmdH') . "00";
@@ -699,6 +701,7 @@ class previsy extends eqLogic {
                         } else {
                             $temperature = $eqLogic->celsiusToFahrenheit($json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->TMP2m);
                         }
+                        
                         $al_last["TEMPERATURE"] = $eqLogic->getMinMaxMoyenne($al_last["TEMPERATURE"], $temperature);
 
                         // Autres données
@@ -912,7 +915,7 @@ class previsy extends eqLogic {
         }
         $return = "<div data-cmd_id='" . $_cmdIds["widget"] . "' class='previsyWidget'>
         
-                    <div style='margin:5px;'>
+                    
                         <div style ='text-align: center; display: inline-block; margin: 2px;'>
                             <div style='font-size: 1em;'>" . $dansHeure . "</div>
                             <div style='font-size: 4em; margin-top: -10px;'><img title='Alerte " . $_datas["TYPE"] . "' src='" . $_datas["ICON"] . "' width='60px'></img></div>
@@ -920,108 +923,105 @@ class previsy extends eqLogic {
                             <div style='font-size:0.9em' margin-top: -10px;><span style='font-weight: bold;'>" . $_datas["CONDITION_MAX"] . "</span> au plus haut et pour une durée de <span style='font-weight: bold;'>" . $_datas["DUREE_HEURE"] . "H</span></div>
                             <div style='font-size:0.9em;'>Type de vent : <span style='font-weight: bold;'>" . $_datas["VENT_NOM"] . "</span></div>                        
                         </div>
-                    </div>
                     
                     <div style='display: inline-block; text-align: center;'>
-                    
-                        <div class='previsyBlock'>
+                        <div class='previsyBlock previsyBlock1'>
                             <div class='previsyBlockMoyenne'>
                                 <div><i title='Total des précipitation' class='fas fa-tachometer-alt' style='font-size:2em; height: 31px;'></i></div>
-                                <div style='font-size:1.5em'>" . $_datas["MM"]["TOTAL"] . "<span style='font-size:0.7em'>MM</span></div>
-                                <div style='font-size:0.7em'>Précipitation Total</div>
+                                <div class='previsySubTitleMoyenne'>- Moyenne -</div>
+                                <div class='previsySubChiffreMoyenne'>" . number_format($_datas["MM"]["MOY"], 1) . "<span style='font-size:0.7em'>MM</span></div>
+                                <div class='previsySubTitleMoyenne'>Précipitation (" . $_datas["MM"]["TOTAL"] . "<span style='font-size:0.6em'>MM</span>)</div>
                             </div>";
         if ($_datas["DUREE_HEURE"] > 1) {
             $return .= "<div class='previsyBlockMinMax'>
-                                <div class ='previsySubBlock'>
-                                    <div style='font-size:1em'>" . $_datas["MM"]["MIN"] . "<span style='font-size:0.7em'>MM</span></div>
-                                    <div style='font-size:0.7em'>Min.</div>
+                                <div class ='previsySubBlock previsySubBlock_G'>
+                                    <div class='previsySubChiffre'>" . $_datas["MM"]["MIN"] . "<span style='font-size:0.7em'>MM</span></div>
+                                    <div class='previsySubTitleMoyenne'>Min.</div>
                                 </div>
-
-                                <div class ='previsySubBlock'>
-                                    <div style='font-size:1em'>" . number_format($_datas["MM"]["MOY"], 1) . "<span style='font-size:0.7em'>MM</span></div>
-                                    <div style='font-size:0.7em'>Moy.</div>
-                                </div>
-
-                                <div class ='previsySubBlock'>
-                                    <div style='font-size:1em'>" . $_datas["MM"]["MAX"] . "<span style='font-size:0.7em'>MM</span></div>
-                                    <div style='font-size:0.7em'>Max.</div>
+                                <div class ='previsySubBlock previsySubBlock_D'>
+                                    <div class='previsySubChiffre'>" . $_datas["MM"]["MAX"] . "<span style='font-size:0.7em'>MM</span></div>
+                                    <div class='previsySubTitleMoyenne'>Max.</div>
                                 </div>
                             </div>";
         }
         $return .= "</div>
-                        <div class='previsyBlock'>
+                        <div class='previsyBlock  previsyBlock2'>
                             <div class='previsyBlockMoyenne'>
                                 <div><i title='Tempétature moyenne' class='icon jeedom-thermo-moyen' style='font-size:2em'></i></div>
-                                <div style='font-size:1.5em'>" . number_format($_datas["TEMPERATURE"]["MOY"], 1) . "<span style='font-size:0.7em'>" . $degre . "</span></div>
-                                <div style='font-size:0.7em'>Température Moy.</div>
+                                <div class='previsySubTitleMoyenne'>- Moyenne -</div>
+                                <div class='previsySubChiffreMoyenne'>" . number_format($_datas["TEMPERATURE"]["MOY"], 1) . "<span style='font-size:0.7em'>" . $degre . "</span></div>
+                                <div class='previsySubTitleMoyenne'>Température</div>
                             </div>";
         if ($_datas["DUREE_HEURE"] > 1) {
             $return .= "<div class='previsyBlockMinMax'>
-                                <div class ='previsySubBlock'>
-                                    <div style='font-size:1em'>" . $_datas["TEMPERATURE"]["MIN"] . "<span style='font-size:0.7em'>" . $degre . "</span></div>
-                                    <div style='font-size:0.7em'>Min.</div>
+                                <div class ='previsySubBlock previsySubBlock_G'>
+                                    <div class='previsySubChiffre'>" . $_datas["TEMPERATURE"]["MIN"] . "<span style='font-size:0.7em'>" . $degre . "</span></div>
+                                    <div class='previsySubTitleMoyenne'>Min.</div>
                                 </div>
-                                <div class ='previsySubBlock'>
-                                    <div style='font-size:1em'>" . $_datas["TEMPERATURE"]["MAX"] . "<span style='font-size:0.7em'>" . $degre . "</span></div>
-                                    <div style='font-size:0.7em'>Max.</div>
+                                <div class ='previsySubBlock previsySubBlock_D'>
+                                    <div class='previsySubChiffre'>" . $_datas["TEMPERATURE"]["MAX"] . "<span style='font-size:0.7em'>" . $degre . "</span></div>
+                                    <div class='previsySubTitleMoyenne'>Max.</div>
                                 </div>
                             </div>";
         }
         $return .= "</div>
-                        <div class='previsyBlock'>
+                        <div class='previsyBlock  previsyBlock3'>
                             <div class='previsyBlockMoyenne'>
                                 <div><i title='Humidité moyenne en pourcentage' class='icon jeedomapp-humidity' style='font-size:2em'></i></div>
-                                <div style='font-size:1.5em'>" . number_format($_datas["HUMIDITE"]["MOY"], 1) . "<span style='font-size:0.7em'>%</span></div>
-                                <div style='font-size:0.7em'>Humidité Moy.</div>
+                                <div class='previsySubTitleMoyenne'>- Moyenne -</div>
+                                <div class='previsySubChiffreMoyenne'>" . number_format($_datas["HUMIDITE"]["MOY"], 1) . "<span style='font-size:0.7em'>%</span></div>
+                                <div class='previsySubTitleMoyenne'>Humidité</div>
                             </div>";
         if ($_datas["DUREE_HEURE"] > 1) {
             $return .= "<div class='previsyBlockMinMax'>
-                                <div class ='previsySubBlock'>
+                                <div class ='previsySubBlock previsySubBlock_G'>
                                     <div style='font-size:1em'>" . $_datas["HUMIDITE"]["MIN"] . "<span style='font-size:0.7em'>%</span></div>
-                                    <div style='font-size:0.7em'>Min.</div>
+                                    <div class='previsySubTitleMoyenne'>Min.</div>
                                 </div>
-                                <div class ='previsySubBlock'>
-                                    <div style='font-size:1em'>" . $_datas["HUMIDITE"]["MAX"] . "<span style='font-size:0.7em'>%</span></div>
-                                    <div style='font-size:0.7em'>Max.</div>
+                                <div class ='previsySubBlock previsySubBlock_D'>
+                                    <div class='previsySubChiffre'>" . $_datas["HUMIDITE"]["MAX"] . "<span style='font-size:0.7em'>%</span></div>
+                                    <div class='previsySubTitleMoyenne'>Max.</div>
                                 </div>
                             </div>";
         }
         $return .= "</div>
-                        <div class='previsyBlock'>
+                        <div class='previsyBlock  previsyBlock4'>
                             <div class='previsyBlockMoyenne'>
                                 <div><i title='Vitesse moyenne du vent' class='icon meteo-vent' style='font-size:2em'></i></div>
-                                <div style='font-size:1.5em'>" . number_format($_datas["VENT_VITESSE"]["MOY"], 1) . "<span style='font-size:0.7em'>Km/H</span></div>
-                                <div style='font-size:0.7em'>Vitesse du vent Moy.</div>
+                                <div class='previsySubTitleMoyenne'>- Moyenne -</div>
+                                <div class='previsySubChiffreMoyenne'>" . number_format($_datas["VENT_VITESSE"]["MOY"], 1) . "<span style='font-size:0.7em'>Km/H</span></div>
+                                <div class='previsySubTitleMoyenne'>Vitesse du vent</div>
                             </div>";
         if ($_datas["DUREE_HEURE"] > 1) {
             $return .= "<div class='previsyBlockMinMax'>
-                                <div class ='previsySubBlock'>
-                                    <div style='font-size:1em'>" . $_datas["VENT_VITESSE"]["MIN"] . "<span style='font-size:0.7em'>Km/H</span></div>
-                                    <div style='font-size:0.7em'>Min.</div>
+                                <div class ='previsySubBlock previsySubBlock_G'>
+                                    <div class='previsySubChiffre'>" . $_datas["VENT_VITESSE"]["MIN"] . "<span style='font-size:0.7em'>Km/H</span></div>
+                                    <div class='previsySubTitleMoyenne'>Min.</div>
                                 </div>
-                                <div class ='previsySubBlock'>
+                                <div class ='previsySubBlock previsySubBlock_D'>
                                     <div style='font-size:1em'>" . $_datas["VENT_VITESSE"]["MAX"] . "<span style='font-size:0.7em'>Km/H</span></div>
-                                    <div style='font-size:0.7em'>Max.</div>
+                                    <div class='previsySubTitleMoyenne'>Max.</div>
                                 </div>
                             </div>";
         }
         $return .= "</div>
 
-                        <div class='previsyBlock'>
+                        <div class='previsyBlock  previsyBlock5'>
                             <div class='previsyBlockMoyenne'>
                                 <div><i title='Vitesse moyenne des rafales' class='icon techno-ventilation' style='font-size:2em'></i></div>
-                                <div style='font-size:1.5em'>" . number_format($_datas["VENT_RAFALES"]["MOY"], 1) . "<span style='font-size:0.7em'>Km/H</span></div>
-                                <div style='font-size:0.7em'>Moy. des Rafales</div>
+                                <div class='previsySubTitleMoyenne'>- Moyenne -</div>
+                                <div class='previsySubChiffreMoyenne'>" . number_format($_datas["VENT_RAFALES"]["MOY"], 1) . "<span style='font-size:0.7em'>Km/H</span></div>
+                                <div class='previsySubTitleMoyenne'>Force Rafales</div>
                             </div>";
         if ($_datas["DUREE_HEURE"] > 1) {
             $return .= "<div class='previsyBlockMinMax'>
-                                <div class ='previsySubBlock'>
-                                    <div style='font-size:1em'>" . $_datas["VENT_RAFALES"]["MIN"] . "<span style='font-size:0.7em'>Km/H</span></div>
-                                    <div style='font-size:0.7em'>Min.</div>
+                                <div class ='previsySubBlock previsySubBlock_G'>
+                                    <div class='previsySubChiffre'>" . $_datas["VENT_RAFALES"]["MIN"] . "<span style='font-size:0.7em'>Km/H</span></div>
+                                    <div class='previsySubTitleMoyenne'>Min.</div>
                                 </div>
-                                <div class ='previsySubBlock'>
-                                    <div style='font-size:1em'>" . $_datas["VENT_RAFALES"]["MAX"] . "<span style='font-size:0.7em'>Km/H</span></div>
-                                    <div style='font-size:0.7em'>Max.</div>
+                                <div class ='previsySubBlock previsySubBlock_D'>
+                                    <div class='previsySubChiffre'>" . $_datas["VENT_RAFALES"]["MAX"] . "<span style='font-size:0.7em'>Km/H</span></div>
+                                    <div class='previsySubTitleMoyenne'>Max.</div>
                                 </div>
                             </div>";
         }
@@ -1030,7 +1030,7 @@ class previsy extends eqLogic {
 
         if ($_datas["AFFICHE_TXT_WIDGET"] == 1) {
             $return .= "<div data-cmd_id='" . $_cmdIds["txt_full"]["id"] . "'>
-                        <textarea rows='4' style='width:95%;'>" . $_datas["TXT"]["FULL"] . "</textarea>
+                        <textarea rows='4' style='width:100%;'>" . $_datas["TXT"]["FULL"] . "</textarea>
                     </div>";
         }
         $return .= "<div style='float:none; clear:both'></div>
@@ -1043,20 +1043,20 @@ class previsy extends eqLogic {
 
     public function getWidgetNull() {
         log::add('previsy', 'debug', 'getWidgetNull :. Création widget rien à signaler');
-        return "<div class='previsyWidget'>
-                    <div style='margin:5px;'>
+        return "<div style='width:100%; padding:0 5px;'>
+                    <div class='previsyWidget' style='margin:0; padding:5px; width:100%;'>
                         <div style ='text-align: center; display: inline-block; margin: 2px;'>
                             <div style='font-size: 4em; margin-top: -10px;'><i class='far fa-check-circle'></i></div>
                             <div style='font-size: 1em;'>Auncune alerte à déclarer</div>  
-                       </div>
-                    </div>
-                   </div>";
+                        </div>
+                   </div>
+                </div>";
     }
 
     public function getWidgetError($_ville) {
         log::add('previsy', 'debug', 'getWidgetError :. Création widget error');
-        return "<div class='previsyWidget'>
-                    <div style='margin:5px;'>
+        return "<div style='width:100%; padding:0 5px;'>
+                    <div class='previsyWidget' style='margin:0; padding:5px; width:100%;'>
                         <div style ='text-align: center; display: inline-block; margin: 2px;'>
                             <div style='font-size: 4em; margin-top: -10px;'><i class='fas fa-exclamation-triangle'></i></div>
                             <div style='font-size: 1em;'>La ville de <span style='font-weight: bold;'>" . $_ville . "</span> n'est pas référencée sur prevision-meteo.ch </div>

@@ -285,7 +285,7 @@ class previsy_language {
         }
 
         $return["VENT"] = " Le vent soufflera en moyenne à " . number_format($_input["VENT_VITESSE"]["MOY"], 1) . "KM/H";
-        $return["VENT"] .= " avec des rafales pouvants aller jusqu'à " . number_format($_input["VENT_RAFALES"]["MAX"], 1) . "KM/H.";
+        $return["VENT"] .= " avec des rafales pouvant aller jusqu'à " . number_format($_input["VENT_RAFALES"]["MAX"], 1) . "KM/H.";
 
         $return["FULL"] = $return["START"] . $return["MM"] . $return["HUMIDITE"] . $return["TEMPERATURE"] . $return["VENT"];
 
