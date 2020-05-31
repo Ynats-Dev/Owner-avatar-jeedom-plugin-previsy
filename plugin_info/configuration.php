@@ -48,126 +48,126 @@ if (!isConnect()) {
         <div class="form-group">
             <label class="col-lg-4 control-label">{{Commandes à afficher (en option pour vos scénarios)}}</label>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_mm_max" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_mm_max" />
                 <span>Commandes mm_max</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_mm_moyenne" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_mm_moyenne" />
                 <span>Commandes mm_moyenne</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_mm_total" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_mm_total" />
                 <span>Commandes mm_total</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_temp_max" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_temp_max" />
                 <span>Commandes temp_max</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_temp_moyenne" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_temp_moyenne" />
                 <span>Commandes temp_moyenne</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_humidite_max" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_humidite_max" />
                 <span>Commandes humidite_max</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_humidite_moyenne" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_humidite_moyenne" />
                 <span>Commandes humidite_moyenne</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_vent_max" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_vent_max" />
                 <span>Commandes vent_max</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_vent_moyenne" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_vent_moyenne" />
                 <span>Commandes vent_moyenne</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_vent_nom" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_vent_nom" />
                 <span>Commandes vent_nom</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_rafale_max" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_rafale_max" />
                 <span>Commandes rafale_max</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_rafale_moyenne" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_rafale_moyenne" />
                 <span>Commandes rafale_moyenne</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_txt_start" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_txt_start" />
                 <span>Commandes txt_start</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_txt_mm" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_txt_mm" />
                 <span>Commandes txt_mm</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_txt_humidite" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_txt_humidite" />
                 <span>Commandes txt_humidite</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_txt_temperature" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_txt_temperature" />
                 <span>Commandes txt_temperature</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_txt_vent" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_txt_vent" />
                 <span>Commandes txt_vent</span>
             </div>
         </div>
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" style="top:0" data-l1key="show_condition_max" />
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_condition_max" />
                 <span>Commandes condition_max</span>
             </div>
         </div>

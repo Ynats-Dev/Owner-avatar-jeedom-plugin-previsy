@@ -21,6 +21,19 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
  * Fonction pour l'ajout de commande, appellé automatiquement par plugin.template
  */
 
+function previsyInArray(name){
+    if(name.match(/widget/)){ return 1; }
+    else if(name.match(/dans_heure/)){ return 1; }
+    else if(name.match(/Ville/)){ return 1; }
+    else if(name.match(/type/)){ return 1; }
+    else if(name.match(/LastUpDate/)){ return 1; }
+    else if(name.match(/date_end/)){ return 1; }
+    else if(name.match(/date_start/)){ return 1; }
+    else if(name.match(/duree/)){ return 1; }
+    else if(name.match(/txt_full/)){ return 1; }
+    else { return 0; }
+}
+
 function addCmdToTable(_cmd) {
     if (!isset(_cmd)) {
         var _cmd = {configuration: {}};
@@ -45,6 +58,9 @@ function addCmdToTable(_cmd) {
     if (is_numeric(_cmd.id) && !previsyText.match(/widget/)) {
         tr += '<a class="btn btn-default btn-xs cmdAction" data-action="configure"><i class="fa fa-cogs"></i></a> ';
         tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fa fa-rss"></i> {{Tester}}</a>';
+    }
+    if (_cmd.type != 'action' && previsyInArray(previsyText) == 0) {
+        tr += '<i class="fas fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
     }
     tr += '</td>';
     tr += '</tr>';
