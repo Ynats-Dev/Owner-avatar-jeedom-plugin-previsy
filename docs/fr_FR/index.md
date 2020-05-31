@@ -20,9 +20,7 @@ Ce plugin annonce les prochaines alertes (72H) météo en France, Belgique et Su
 
 > Après-demain dans 31H, Previsy vous annonce une bonne brise. Idéal pour sortie la planche à voile !
 
-> Passionné de surf, vous attendez la prochaine poudreuse ? Previsy vous annonce que la neige s'arrête se tomber ce week-end, ça tombe plutôt bien !
-
-> Ce week-end, le taux d'humidité est très haut dans la montagne ? Pourquoi ne pas aller ramasser des champignons ?
+> Passionné de surf, vous attendez la prochaine poudreuse ? Previsy vous annonce que la neige s'arrête de tomber ce week-end, ça tombe plutôt bien !
 
 Comme vous pouvez le voir, les prévisions peuvent vous aider sur pas mal de points.
 
@@ -122,7 +120,7 @@ Vous pouvez régler le seuil du vent suivant la localité. L'alerte "vent" ne se
 
 ### Les commandes liées aux alertes
 
-> Ici les commandes sont liées à l'alerte 1, identifié par le "01" , plus il y a d'alerte plus il y aura de commande.
+> Les commandes qui suivent sont liées à l'alerte 1 identifié par le "01". Plus il y a d'alerte plus il y aura de commande.
 
 | Type | Commande | Description |
 | ------------ | ------------ | ------------ |
