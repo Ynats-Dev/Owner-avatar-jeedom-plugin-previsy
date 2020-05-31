@@ -48,7 +48,7 @@ prevision-meteo.ch est géré par une personne. Le serveur OVH qui porte ce serv
 
 ## Configuration
 
-![previsy2](../images/config-1.png)
+![previsy3](../images/config-1.png)
 
 ### Nombre d'alerte en prévision à afficher
 
@@ -69,14 +69,14 @@ Les données vous permettant de créer vos scénarios sur mesures. Il vous suffi
 ### Tâche planifiée
 Si vous désactivez la tâche planifiée qui à lieu toutes les heures ... le plugin ne servira plus à rien ...
 
-![previsy3](../images/config-2.png)
+![previsy4](../images/config-2.png)
 
 Gestion
 ===
 
 ## Equipement
 
-![previsy4](../images/parametre-1.png)
+![previsy5](../images/parametre-1.png)
 
 ### Ville
 Ici on entre le mot clé correspondant à la ville que vous désirez sonder. Pour vous permettre de tester, un bouton va s'afficher à droite de la saisie pour tester directement sur le site de prevision-meteo.ch
@@ -84,21 +84,21 @@ Si le site est offline ou met du temps à répondre il faudra retenter plus tard
 
 > Dans l'url le mot clé de la ville : https://www.prevision-meteo.ch/meteo/localite/***
 
+![previsy6](../images/parametre-saisie.png)
+
 ### Coordonnées du point
 
 Renseignez la latitude et la longitude de l'endroit que vous désirez sonder. Si vous renseigner les coordonées la ville ne sera pas prise en compte.
 
 > Dans l'url le mot clé par coordonées : https://www.prevision-meteo.ch/meteo/localite/lat=***lng=***
 
-![previsy5](../images/widget-txt.png)
+![previsy7](../images/widget-txt.png)
 
-![previsy6](../images/parametre-saisie.png)
-
-![previsy7](../images/parametre-vent.png)
+![previsy8](../images/parametre-vent.png)
 
 ## Commandes
 
-![previsy8](../images/parametre-commandes.png)
+![previsy9](../images/parametre-commandes.png)
 
 > Le nombre de commande sera forcément proportionnel au nombre d'alerte que vous avez configuré.
 
