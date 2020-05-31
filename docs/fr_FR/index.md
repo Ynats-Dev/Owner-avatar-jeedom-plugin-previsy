@@ -47,18 +47,15 @@ Gestion
 
 # Commandes
 
-Le nombre de commande sera forcément proportionnel au nombre d'alerte que vous avez configuré.
+> Le nombre de commande sera forcément proportionnel au nombre d'alerte que vous avez configuré.
 
 ## Les commandes générales
 
-#### SynchroVille [info]
-Cela correspond à la ville que vous avez enregistré.
-
-#### SynchroLastUpDate [info]
-Date au format "timestamp" de la dernière synchronisation avec le site prevision-meteo.ch
-
-#### Rafraichir [action]
-La fameuse commande permettant de raffraichir le widget. Cela lancera un synchro au prêt de prevision-meteo.ch
+| Type | Commande | Description |
+| ------------ | ------------ | ------------ | 
+| info | Cela correspond à la ville que vous avez enregistré. |
+| info | SynchroLastUpDate | Date au format "timestamp" de la dernière synchronisation avec le site prevision-meteo.ch. | 
+| action | Rafraichir | La fameuse commande permettant de raffraichir le widget. Cela lancera un synchro au prêt de prevision-meteo.ch. | 
 
 ### Les commandes liées aux alertes
 
@@ -73,7 +70,7 @@ Dans les prochaines commandes le "01" correspond au numéro de l'alerte associé
 | info | Alerte+01_txt_temperature | C'est la partie de la phrase liée à la température. Exemple : "La température sera de 10.5°C." | 
 | info | Alerte+01_txt_vent | C'est la partie de la phrase liée au vent. Exemple : "Le vent soufflera en moyenne à 24.0KM/H avec des rafales pouvant aller jusqu'à 38.0KM/H." | 
 
-***Vous l'aurez compris, cela vous permettra de reconstruire vos phrases comme vous le souhaitez.***
+> Vous l'aurez compris, cela vous permettra de reconstruire vos phrases comme vous le souhaitez !
 
 | Type | Commande | Description |
 | ------------ | ------------ | ------------ | 

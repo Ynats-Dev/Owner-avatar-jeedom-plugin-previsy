@@ -48,6 +48,13 @@ if (!isConnect()) {
         <div class="form-group">
             <label class="col-lg-4 control-label">{{Commandes à afficher (en option pour vos scénarios)}}</label>
             <div class="col-lg-3">
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_mm_min" />
+                <span>Commandes mm_min</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-lg-4 control-label"></span>
+            <div class="col-lg-3">
                 <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_mm_max" />
                 <span>Commandes mm_max</span>
             </div>
@@ -69,6 +76,13 @@ if (!isConnect()) {
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_temp_min" />
+                <span>Commandes temp_min</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-lg-4 control-label"></span>
+            <div class="col-lg-3">
                 <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_temp_max" />
                 <span>Commandes temp_max</span>
             </div>
@@ -83,6 +97,13 @@ if (!isConnect()) {
         <div class="form-group">
             <span class="col-lg-4 control-label"></span>
             <div class="col-lg-3">
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_humidite_min" />
+                <span>Commandes humidite_min</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-lg-4 control-label"></span>
+            <div class="col-lg-3">
                 <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_humidite_max" />
                 <span>Commandes humidite_max</span>
             </div>
@@ -92,6 +113,13 @@ if (!isConnect()) {
             <div class="col-lg-3">
                 <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_humidite_moyenne" />
                 <span>Commandes humidite_moyenne</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-lg-4 control-label"></span>
+            <div class="col-lg-3">
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_vent_min" />
+                <span>Commandes vent_min</span>
             </div>
         </div>
         <div class="form-group">
@@ -113,6 +141,13 @@ if (!isConnect()) {
             <div class="col-lg-3">
                 <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_vent_nom" />
                 <span>Commandes vent_nom</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-lg-4 control-label"></span>
+            <div class="col-lg-3">
+                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_rafale_min" />
+                <span>Commandes rafale_min</span>
             </div>
         </div>
         <div class="form-group">

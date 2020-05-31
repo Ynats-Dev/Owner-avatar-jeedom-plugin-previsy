@@ -52,16 +52,21 @@ class previsy extends eqLogic {
     }
     
     public function getCofingShowCommandes() {
+        $return["show_mm_min"] = config::byKey('show_mm_min', 'previsy', '0');
         $return["show_mm_max"] = config::byKey('show_mm_max', 'previsy', '0');
         $return["show_mm_moyenne"] = config::byKey('show_mm_moyenne', 'previsy', '0');
         $return["show_mm_total"] = config::byKey('show_mm_total', 'previsy', '0');
+        $return["show_temp_min"] = config::byKey('show_temp_min', 'previsy', '0');
         $return["show_temp_max"] = config::byKey('show_temp_max', 'previsy', '0');
         $return["show_temp_moyenne"] = config::byKey('show_temp_moyenne', 'previsy', '0');
+        $return["show_humidite_min"] = config::byKey('show_humidite_min', 'previsy', '0');
         $return["show_humidite_max"] = config::byKey('show_humidite_max', 'previsy', '0');
         $return["show_humidite_moyenne"] = config::byKey('show_humidite_moyenne', 'previsy', '0');
+        $return["show_vent_min"] = config::byKey('show_vent_min', 'previsy', '0');
         $return["show_vent_max"] = config::byKey('show_vent_max', 'previsy', '0');
         $return["show_vent_moyenne"] = config::byKey('show_vent_moyenne', 'previsy', '0');
         $return["show_vent_nom"] = config::byKey('show_vent_nom', 'previsy', '0');
+        $return["show_rafale_min"] = config::byKey('show_rafale_min', 'previsy', '0');
         $return["show_rafale_max"] = config::byKey('show_rafale_max', 'previsy', '0');
         $return["show_rafale_moyenne"] = config::byKey('show_rafale_moyenne', 'previsy', '0');
         $return["show_txt_start"] = config::byKey('show_txt_start', 'previsy', '0');
@@ -106,6 +111,9 @@ class previsy extends eqLogic {
             if ($showCommande["show_condition_max"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_condition_max', $value_alerte["CONDITION_MAX"]);
             }
+            if ($showCommande["show_mm_min"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_min', $value_alerte["MM"]["MIN"]);
+            }
             if ($showCommande["show_mm_max"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_max', $value_alerte["MM"]["MAX"]);
             }
@@ -115,17 +123,26 @@ class previsy extends eqLogic {
             if ($showCommande["show_mm_total"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_total', $value_alerte["MM"]["TOTAL"]);
             }
+            if ($showCommande["show_temp_min"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_temp_min', $value_alerte["TEMPERATURE"]["MIN"]);
+            }
             if ($showCommande["show_temp_max"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_temp_max', $value_alerte["TEMPERATURE"]["MAX"]);
             }
             if ($showCommande["show_temp_moyenne"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_temp_moyenne', $value_alerte["TEMPERATURE"]["MOY"]);
             }
+            if ($showCommande["show_humidite_min"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_humidite_min', $value_alerte["HUMIDITE"]["MIN"]);
+            }
             if ($showCommande["show_humidite_max"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_humidite_max', $value_alerte["HUMIDITE"]["MAX"]);
             }
             if ($showCommande["show_humidite_moyenne"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_humidite_moyenne', $value_alerte["HUMIDITE"]["MOY"]);
+            }
+            if ($showCommande["show_vent_min"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_vent_min', $value_alerte["VENT_VITESSE"]["MIN"]);
             }
             if ($showCommande["show_vent_max"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_vent_max', $value_alerte["VENT_VITESSE"]["MAX"]);
@@ -135,6 +152,9 @@ class previsy extends eqLogic {
             }
             if ($showCommande["show_vent_nom"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_vent_nom', $value_alerte["VENT_NOM"]);
+            }
+            if ($showCommande["show_rafale_min"] == 1) {
+                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_rafale_min', $value_alerte["VENT_RAFALES"]["MIN"]);
             }
             if ($showCommande["show_rafale_max"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_rafale_max', $value_alerte["VENT_RAFALES"]["MAX"]);
@@ -349,6 +369,22 @@ class previsy extends eqLogic {
                 $info->save();
             }
             
+            if ($showCommande["show_mm_min"] == 1) {
+                $info = $this->getCmd(null, 'alerte_' . $id . '_mm_min');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_mm_min', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_mm_min');
+                $info->setEqLogic_id($this->getId());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setUnite('MM');
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
             if ($showCommande["show_mm_max"] == 1) {
                 $info = $this->getCmd(null, 'alerte_' . $id . '_mm_max');
                 if (!is_object($info)) {
@@ -381,6 +417,22 @@ class previsy extends eqLogic {
                 $info->save();
             }
             
+            if ($showCommande["show_temp_min"] == 1) {           
+                $info = $this->getCmd(null, 'alerte_' . $id . '_temp_min');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_temp_min', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_temp_min');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
             if ($showCommande["show_temp_max"] == 1) {           
                 $info = $this->getCmd(null, 'alerte_' . $id . '_temp_max');
                 if (!is_object($info)) {
@@ -404,6 +456,22 @@ class previsy extends eqLogic {
                     $info->setName(__('Alerte+' . $id . '_temp_moyenne', __FILE__));
                 }
                 $info->setLogicalId('alerte_' . $id . '_temp_moyenne');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
+            if ($showCommande["show_humidite_min"] == 1) {            
+                $info = $this->getCmd(null, 'alerte_' . $id . '_humidite_min');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_humidite_min', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_humidite_min');
                 $info->setEqLogic_id($this->getId());
                 $info->setUnite($this->getCofingFormatDegres());
                 $info->setIsHistorized(0);
@@ -445,6 +513,22 @@ class previsy extends eqLogic {
                 $info->save();
             }
             
+            if ($showCommande["show_vent_min"] == 1) {            
+                $info = $this->getCmd(null, 'alerte_' . $id . '_vent_min');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_vent_min', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_vent_min');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
             if ($showCommande["show_vent_max"] == 1) {            
                 $info = $this->getCmd(null, 'alerte_' . $id . '_vent_max');
                 if (!is_object($info)) {
@@ -468,6 +552,22 @@ class previsy extends eqLogic {
                     $info->setName(__('Alerte+' . $id . '_vent_moyenne', __FILE__));
                 }
                 $info->setLogicalId('alerte_' . $id . '_vent_moyenne');
+                $info->setEqLogic_id($this->getId());
+                $info->setUnite($this->getCofingFormatDegres());
+                $info->setIsHistorized(0);
+                $info->setIsVisible(0);
+                $info->setType('info');
+                $info->setSubType('numeric');
+                $info->save();
+            }
+            
+            if ($showCommande["show_rafale_min"] == 1) {            
+                $info = $this->getCmd(null, 'alerte_' . $id . '_rafale_min');
+                if (!is_object($info)) {
+                    $info = new previsyCmd();
+                    $info->setName(__('Alerte+' . $id . '_rafale_min', __FILE__));
+                }
+                $info->setLogicalId('alerte_' . $id . '_rafale_min');
                 $info->setEqLogic_id($this->getId());
                 $info->setUnite($this->getCofingFormatDegres());
                 $info->setIsHistorized(0);
@@ -710,7 +810,13 @@ class previsy extends eqLogic {
             $tmp_cmd = "alerte_0" . $i . "_duree";
             ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
             $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
-
+            
+            if ($showCommande["show_mm_min"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_mm_min";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
+            
             if ($showCommande["show_mm_max"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_mm_max";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
@@ -728,6 +834,12 @@ class previsy extends eqLogic {
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
                 $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
             }
+            
+            if ($showCommande["show_temp_min"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_temp_min";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
 
             if ($showCommande["show_temp_max"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_temp_max";
@@ -737,6 +849,12 @@ class previsy extends eqLogic {
 
             if ($showCommande["show_temp_moyenne"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_temp_moyenne";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
+            
+            if ($showCommande["show_humidite_min"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_humidite_min";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
                 $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
             }
@@ -752,6 +870,12 @@ class previsy extends eqLogic {
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
                 $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
             }
+            
+            if ($showCommande["show_vent_min"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_vent_min";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
 
             if ($showCommande["show_vent_max"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_vent_max";
@@ -761,6 +885,12 @@ class previsy extends eqLogic {
 
             if ($showCommande["show_vent_moyenne"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_vent_moyenne";
+                ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+            }
+            
+            if ($showCommande["show_rafale_min"] == 1) {
+                $tmp_cmd = "alerte_0" . $i . "_rafale_min";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
                 $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
             }
