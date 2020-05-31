@@ -8,7 +8,7 @@ Description
 
 Ce plugin annonce les prochaines alertes (72H) météo en France, Belgique et Suisse. Previsy construit également des phrases qui peuvent être utilisées pour vous être envoyées par sms, annoncées par votre home ou slack etc...
 
-## Exemples d'utilsation
+## Exemples d'utilisation
 
 ### Alertes de la vie courante
 
@@ -26,11 +26,11 @@ Comme vous pouvez le voir, les prévisions peuvent vous aider sur pas mal de poi
 
 ## Deux manières d'utiliser Previsy
 
-### Visuellement avec le widget
+### Avec le widget et les phrases préconstruites.
 
 ![previsy1](../images/widget-sans-txt.png)
 
-### En utilisant les données brutes
+### En utilisant directement les données brutes
 
 Vous pourrez, bien évidemment, récupérer les données brutes pour créer vos scénarios et ainsi les associer à des services (SMS, Slack, Notification, etc.)
 
