@@ -11,6 +11,8 @@ Ce plugin annonce les prochaines alertes (72H) météo en France, Belgique et Su
 **Exemple**
 > "Dans 23 heures, soit demain à partir de 20 heures, un orage est prévu durant 1 heure. Il y aura un total de 0.7 millimètre de précipatation. Le taux d’humidité sera de 86.0%. La température sera de 13.1°C. Le vent soufflera en moyenne à 8.0KM/H avec des rafales pouvant aller jusqu’à 13.0KM/H"
 
+![previsy1](../images/widget-sans-txt.png)
+
 Vous pourrez, bien évidemment, récupérer les données brutes pour créer des scénarios particuliers.
 
 Installation
@@ -21,9 +23,9 @@ Installation
 
 ## Configuration
 
-![previsy1](../images/config-1.png)
+![previsy2](../images/config-1.png)
 
-![previsy2](../images/config-2.png)
+![previsy3](../images/config-2.png)
 
 ### Nombre d'alerte en prévision à afficher
 
@@ -44,12 +46,17 @@ Gestion
 
 ## Equipement
 
-![previsy3](../images/parametre-1.png)
+![previsy4](../images/parametre-1.png)
 
+![previsy5](../images/widget-txt.png)
 
-![previsy4](../images/parametre-vent.png)
+![previsy6](../images/parametre-saisie.png)
+
+![previsy7](../images/parametre-vent.png)
 
 ## Commandes
+
+![previsy8](../images/parametre-commandes.png)
 
 > Le nombre de commande sera forcément proportionnel au nombre d'alerte que vous avez configuré.
 
