@@ -14,7 +14,7 @@ Ce plugin annonce les prochaines alertes (72H) météo en France, Belgique et Su
 
 > Vous souhaitez savoir ou étendre le linge ? Prévisy vous annoncera que la prochaine pluie est dans 14H et il y aura un peu de vent cela vaut le coup de l'étendre dehors.
 
-> Vous venez d'ouvrir un vélux ? Prévisy vous annoncera les prochaines précipitation pour penser à la fermer ou vous aider à paramètrer automatiquement une alerte une heure avant la pluie.
+> Vous venez d'ouvrir un vélux ? Prévisy vous annoncera les prochaines précipitation pour penser à la fermer ou vous aider à paramétrer automatiquement une alerte une heure avant la pluie.
 
 ### Indicateurs pour les sportifs
 
@@ -24,7 +24,7 @@ Ce plugin annonce les prochaines alertes (72H) météo en France, Belgique et Su
 
 > Ce week-end, le taux d'humidité est très haut dans la montagne ? Pourquoi ne pas aller ramasser des champignons ?
 
-Comme vous pouvez le voir, les prévisions peut vous aider sur pas mal de point.
+Comme vous pouvez le voir, les prévisions peuvent vous aider sur pas mal de points.
 
 ## Deux manières d'utiliser Previsy
 
@@ -43,7 +43,7 @@ Installation
 
 ## Le plugin utilise prevision-meteo.ch
 
-prevision-meteo.ch est géré par une personne. Le serveur OVH qui porte ce serveur est très régulièrement saturé voir offline. Pour palier à ce problème, Previsy enregistre les données en cache et s'en sert pour ré-actualiser les widgets si le site est down.
+Prevision-meteo.ch est géré par une personne. Le serveur OVH qui porte ce serveur est très régulièrement saturé voire offline. Pour pallier à ce problème, Previsy enregistre les données en cache et s'en sert pour réactualiser les widgets si le site est down.
 
 
 ## Configuration
@@ -57,11 +57,11 @@ Cela permet de configurer le nombre d'alertes que vous souhaitez afficher.
 **Exemple**
 > "Vous souhaitez afficher uniquement les 2 prochaines alertes."*
 
-### Temperature
+### Température
 Vous avez la possibilité d'afficher les températures en degrés Celsius (°C) ou en degrés Fahrenheit (°F)
 
 ### Commandes à afficher (en option pour vos scénarios)
-Les données vous permettant de créer vos scénarios sur mesures. Il vous suffit de cocher les commandes que vous souhaitez voir apparaitre. Vous n'aurez probablement pas besoin de tout utiliser. (toutes les commandes seront décrite par la suite). 
+Les données vous permettant de créer vos scénarios sur mesure. Il vous suffit de cocher les commandes que vous souhaitez voir apparaitre. Vous n'aurez probablement pas besoin de tout utiliser. (toutes les commandes seront décrites par la suite). 
 
 **Attention**
 > Si vous voulez afficher 5 alertes et toutes les commandes vous allez en avoir beaucoup ! 
@@ -79,38 +79,46 @@ Gestion
 ![previsy5](../images/parametre-1.png)
 
 ### Ville
-Ici on entre le mot clé correspondant à la ville que vous désirez sonder. Pour vous permettre de tester, un bouton va s'afficher à droite de la saisie pour tester directement sur le site de prevision-meteo.ch
+Ici on entre le mot-clé correspondant à la ville que vous désirez sonder. Pour vous permettre de tester, un bouton va s'afficher à droite de la saisie pour tester directement sur le site de prevision-meteo.ch
 Si le site est offline ou met du temps à répondre il faudra retenter plus tard.
 
-> Dans l'url le mot clé de la ville : https://www.prevision-meteo.ch/meteo/localite/***
+> Dans l'url le mot-clé de la ville : https://www.prevision-meteo.ch/meteo/localite/***
 
 ![previsy6](../images/parametre-saisie.png)
 
 ### Coordonnées du point
 
-Renseignez la latitude et la longitude de l'endroit que vous désirez sonder. Si vous renseigner les coordonées la ville ne sera pas prise en compte.
+Renseignez la latitude et la longitude de l'endroit que vous désirez sonder. Si vous renseignez des coordonnées la ville ne sera pas prise en compte.
 
-> Dans l'url le mot clé par coordonées : https://www.prevision-meteo.ch/meteo/localite/lat=***lng=***
+> Dans l'url les coordonnées : https://www.prevision-meteo.ch/meteo/localite/lat=***lng=***
+
+### Afficher le texte prédictif dans le widget 
 
 ![previsy7](../images/widget-txt.png)
 
+Cela permet d'afficher le texte prédictif dans le widget.
+
+### Seuil d'alerte pour le vent
+
 ![previsy8](../images/parametre-vent.png)
+
+Vous pouvez régler le seuil du vent suivant la localité. L'alerte "vent" ne se déclenchera pas en dessous de ce seuil.
 
 ## Commandes
 
 ![previsy9](../images/parametre-commandes.png)
 
-> Le nombre de commande sera forcément proportionnel au nombre d'alerte que vous avez configuré.
+> Le nombre de commandes sera forcément proportionnel au nombre d'alerte que vous avez configurée.
 
 ### Les commandes générales
 
 | Type | Commande | Description |
 | ------------ | ------------ | ------------ | 
-| info | SynchroVille | Cela correspond à la ville que vous avez enregistré. |
+| info | SynchroVille | Cela correspond à la ville que vous avez enregistrée. |
 | info | SynchroLastUpDate | Date au format "timestamp" de la dernière synchronisation avec le site prevision-meteo.ch. | 
 | info | Latitude | Comme son nom l'indique | 
 | info | Longitude | Comme son nom l'indique | 
-| action | Rafraichir | La fameuse commande permettant de raffraichir le widget. Cela lancera un synchro au prêt de prevision-meteo.ch. | 
+| action | Rafraichir | La fameuse commande permettant de rafraîchir le widget. Cela lancera une synchro au prêt de prevision-meteo.ch. | 
 
 ### Les commandes liées aux alertes
 
@@ -118,12 +126,12 @@ Renseignez la latitude et la longitude de l'endroit que vous désirez sonder. Si
 
 | Type | Commande | Description |
 | ------------ | ------------ | ------------ |
-| info | Alerte+01_txt_full | C'est la phrase complète. Elle comporte toutes les indications lié à la météo. Exemple : "Dans 18 heures, soit demain à partir de 16 heures, il va pleuvoir durant 1 heure. Il y aura un total de 0.3 millimètre de précipatation. Le taux d'humidité sera de 99.0%. La température sera de 10.5°C. Le vent soufflera en moyenne à 24.0KM/H avec des rafales pouvant aller jusqu'à 38.0KM/H." |  
+| info | Alerte+01_txt_full | C'est la phrase complète. Elle comporte toutes les indications liées à la météo. Exemple : "Dans 18 heures, soit demain à partir de 16 heures, il va pleuvoir durant 1 heure. Il y aura un total de 0.3 millimètre de précipitation. Le taux d'humidité sera de 99.0%. La température sera de 10.5°C. Le vent soufflera en moyenne à 24.0 KM/H avec des rafales pouvant aller jusqu'à 38.0 KM/H." |  
 | info | Alerte+01_txt_start | C'est la première partie de la phrase. Exemple : "Dans 18 heures, soit demain à partir de 16 heures, il va pleuvoir durant 1 heure." | 
-| info | Alerte+01_txt_mm | C'est la partie de la phrase liée à la précipitation. Exemple : "Il y aura un total de 0.3 millimètre de précipatation." | 
+| info | Alerte+01_txt_mm | C'est la partie de la phrase liée à la précipitation. Exemple : "Il y aura un total de 0.3 millimètre de précipitation." | 
 | info | Alerte+01_txt_humidite  | C'est la partie de la phrase liée à l'humidité. Exemple : "Le taux d'humidité sera de 99.0%." | 
 | info | Alerte+01_txt_temperature | C'est la partie de la phrase liée à la température. Exemple : "La température sera de 10.5°C." | 
-| info | Alerte+01_txt_vent | C'est la partie de la phrase liée au vent. Exemple : "Le vent soufflera en moyenne à 24.0KM/H avec des rafales pouvant aller jusqu'à 38.0KM/H." | 
+| info | Alerte+01_txt_vent | C'est la partie de la phrase liée au vent. Exemple : "Le vent soufflera en moyenne à 24.0 KM/H avec des rafales pouvant aller jusqu'à 38.0 KM/H." | 
 
 > Vous l'aurez compris, cela vous permettra de reconstruire vos phrases comme vous le souhaitez !
 

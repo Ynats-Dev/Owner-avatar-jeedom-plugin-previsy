@@ -233,7 +233,7 @@ class previsy_language {
             if ($_input["MM"]["TOTAL"] > 1) {
                 $return["MM"] .= "s";
             }
-            $return["MM"] .= " de précipatation"; 
+            $return["MM"] .= " de précipitation"; 
             
             if ($_input["DUREE_HEURE"] > 1) {
             $return["MM"] .= " soit une moyenne de " . number_format($_input["MM"]["MOY"], 1) . " millimètre";
@@ -284,8 +284,8 @@ class previsy_language {
             $return["HUMIDITE"] = " Le taux d'humidité sera de " . number_format($_input["HUMIDITE"]["MOY"], 1) . "%.";
         }
 
-        $return["VENT"] = " Le vent soufflera en moyenne à " . number_format($_input["VENT_VITESSE"]["MOY"], 1) . "KM/H";
-        $return["VENT"] .= " avec des rafales pouvant aller jusqu'à " . number_format($_input["VENT_RAFALES"]["MAX"], 1) . "KM/H.";
+        $return["VENT"] = " Le vent soufflera en moyenne à " . number_format($_input["VENT_VITESSE"]["MOY"], 1) . " KM/H";
+        $return["VENT"] .= " avec des rafales pouvant aller jusqu'à " . number_format($_input["VENT_RAFALES"]["MAX"], 1) . " KM/H.";
 
         $return["FULL"] = $return["START"] . $return["MM"] . $return["HUMIDITE"] . $return["TEMPERATURE"] . $return["VENT"];
 
