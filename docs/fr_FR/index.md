@@ -80,7 +80,7 @@ Gestion
 Ici on entre le mot-clé correspondant à la ville que vous désirez sonder. Pour vous permettre de tester, un bouton va s'afficher à droite de la saisie pour tester directement sur le site de prevision-meteo.ch
 Si le site est offline ou met du temps à répondre il faudra retenter plus tard.
 
-> Dans l'url le mot-clé de la ville : https://www.prevision-meteo.ch/meteo/localite/***
+> Dans l'url le mot-clé de la ville : https://www.prevision-meteo.ch/meteo/localite/votreville
 
 ![previsy6](../images/parametre-saisie.png)
 
@@ -88,7 +88,7 @@ Si le site est offline ou met du temps à répondre il faudra retenter plus tard
 
 Renseignez la latitude et la longitude de l'endroit que vous désirez sonder. Si vous renseignez des coordonnées la ville ne sera pas prise en compte.
 
-> Dans l'url les coordonnées : https://www.prevision-meteo.ch/meteo/localite/lat=***lng=***
+> Dans l'url les coordonnées : https://www.prevision-meteo.ch/meteo/localite/lat=01.500lng=65.100
 
 ### Afficher le texte prédictif dans le widget 
 
