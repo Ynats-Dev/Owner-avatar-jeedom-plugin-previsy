@@ -103,6 +103,16 @@ $eqLogics = eqLogic::byType($plugin->getId());
                             </span>
                             <div><a href="" target="_blank"></a></div>
                         </div>
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label class="col-sm-3 control-label">{{Coordonnées du point (prend le dessus sur la ville)}}</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="latitude" placeholder="latitude" />
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="longitude" placeholder="longitude" />
+                            </div>
+                            <div><a href="" target="_blank"></a></div>
+                        </div>
                         <div class="form-group" style="margin-top: 5px;">
                             <label class="col-sm-3 control-label">{{Afficher le texte prédictif dans le widget }}</label>
                             <div class="col-sm-3">

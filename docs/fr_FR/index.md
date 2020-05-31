@@ -8,38 +8,68 @@ Description
 
 Ce plugin annonce les prochaines alertes (72H) météo en France, Belgique et Suisse. Previsy construit également des phrases qui peuvent être utilisées pour vous être envoyées par sms, annoncées par votre home ou slack etc...
 
-**Exemple**
-> "Dans 23 heures, soit demain à partir de 20 heures, un orage est prévu durant 1 heure. Il y aura un total de 0.7 millimètre de précipatation. Le taux d’humidité sera de 86.0%. La température sera de 13.1°C. Le vent soufflera en moyenne à 8.0KM/H avec des rafales pouvant aller jusqu’à 13.0KM/H"
+## Exemples d'utilsation
+
+### Alertes de la vie courante
+
+> Vous souhaitez savoir ou étendre le linge ? Prévisy vous annoncera que la prochaine pluie est dans 14H et il y aura un peu de vent cela vaut le coup de l'étendre dehors.
+
+> Vous venez d'ouvrir un vélux ? Prévisy vous annoncera les prochaines précipitation pour penser à la fermer ou vous aider à paramètrer automatiquement une alerte une heure avant la pluie.
+
+### Indicateurs pour les sportifs
+
+> Après-demain dans 31H, Previsy vous annonce une bonne brise. Idéal pour sortie la planche à voile !
+
+> Passionné de surf, vous attendez la prochaine poudreuse ? Previsy vous annonce que la neige s'arrête se tomber ce week-end, ça tombe plutôt bien !
+
+> Ce week-end, le taux d'humidité est très haut dans la montagne ? Pourquoi ne pas aller ramasser des champignons ?
+
+Comme vous pouvez le voir, les prévisions peut vous aider sur pas mal de point.
+
+## Deux manières d'utiliser Previsy
+
+### Visuellement avec le widget
 
 ![previsy1](../images/widget-sans-txt.png)
 
-Vous pourrez, bien évidemment, récupérer les données brutes pour créer des scénarios particuliers.
+### En utilisant les données brutes
+
+Vous pourrez, bien évidemment, récupérer les données brutes pour créer vos scénarios et ainsi les associer à des services (SMS, Slack, Notification, etc.)
+
+![previsy2](../images/commandes.png)
 
 Installation
 ===
 
 ## Le plugin utilise prevision-meteo.ch
 
+prevision-meteo.ch est géré par une personne. Le serveur OVH qui porte ce serveur est très régulièrement saturé voir offline. Pour palier à ce problème, Previsy enregistre les données en cache et s'en sert pour ré-actualiser les widgets si le site est down.
+
 
 ## Configuration
 
 ![previsy2](../images/config-1.png)
 
-![previsy3](../images/config-2.png)
-
 ### Nombre d'alerte en prévision à afficher
 
 Cela permet de configurer le nombre d'alertes que vous souhaitez afficher. 
+
 **Exemple**
-> "Pour toujours afficher les deux prochaines alertes on sélectionne 2 alertes."*
+> "Vous souhaitez afficher uniquement les 2 prochaines alertes."*
 
 ### Temperature
 Vous avez la possibilité d'afficher les températures en degrés Celsius (°C) ou en degrés Fahrenheit (°F)
 
 ### Commandes à afficher (en option pour vos scénarios)
-Si vous souhaitez utiliser certaines données pour vous créer des scénarios sur mesures. Il suffit de cocher les commandes que vous souhaitez voir apparaitre.
-Toutes les commandes seront décrite par la suite. 
-Attention, si vous voulez afficher 5 alertes et toutes les commandes vous allez en avoir beaucoup ! 
+Les données vous permettant de créer vos scénarios sur mesures. Il vous suffit de cocher les commandes que vous souhaitez voir apparaitre. Vous n'aurez probablement pas besoin de tout utiliser. (toutes les commandes seront décrite par la suite). 
+
+**Attention**
+> Si vous voulez afficher 5 alertes et toutes les commandes vous allez en avoir beaucoup ! 
+
+### Tâche planifiée
+Si vous désactivez la tâche planifiée qui à lieu toutes les heures ... le plugin ne servira plus à rien ...
+
+![previsy3](../images/config-2.png)
 
 Gestion
 ===
@@ -47,6 +77,18 @@ Gestion
 ## Equipement
 
 ![previsy4](../images/parametre-1.png)
+
+### Ville
+Ici on entre le mot clé correspondant à la ville que vous désirez sonder. Pour vous permettre de tester, un bouton va s'afficher à droite de la saisie pour tester directement sur le site de prevision-meteo.ch
+Si le site est offline ou met du temps à répondre il faudra retenter plus tard.
+
+> Dans l'url le mot clé de la ville : https://www.prevision-meteo.ch/meteo/localite/***
+
+### Coordonnées du point
+
+Renseignez la latitude et la longitude de l'endroit que vous désirez sonder. Si vous renseigner les coordonées la ville ne sera pas prise en compte.
+
+> Dans l'url le mot clé par coordonées : https://www.prevision-meteo.ch/meteo/localite/lat=***lng=***
 
 ![previsy5](../images/widget-txt.png)
 
@@ -66,11 +108,13 @@ Gestion
 | ------------ | ------------ | ------------ | 
 | info | SynchroVille | Cela correspond à la ville que vous avez enregistré. |
 | info | SynchroLastUpDate | Date au format "timestamp" de la dernière synchronisation avec le site prevision-meteo.ch. | 
+| info | Latitude | Comme son nom l'indique | 
+| info | Longitude | Comme son nom l'indique | 
 | action | Rafraichir | La fameuse commande permettant de raffraichir le widget. Cela lancera un synchro au prêt de prevision-meteo.ch. | 
 
 ### Les commandes liées aux alertes
 
-Dans les prochaines commandes le "01" correspond au numéro de l'alerte associé à la valeur. Il peut donc y avoir cinq déclinaisons si vous avez configuré 5 alertes.
+> Ici les commandes sont liées à l'alerte 1, identifié par le "01" , plus il y a d'alerte plus il y aura de commande.
 
 | Type | Commande | Description |
 | ------------ | ------------ | ------------ |

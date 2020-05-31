@@ -90,6 +90,8 @@ class previsy extends eqLogic {
         log::add('previsy', 'debug', 'UpdateDatas :. Lancement des mises à jour des données de #ID#' . $previsy->getId());
 
         $previsy->checkAndUpdateCmd('ville', $info["GLOBAL"]["VILLE"]);
+        $previsy->checkAndUpdateCmd('latitude', $info["GLOBAL"]["LATITUDE"]);
+        $previsy->checkAndUpdateCmd('longitude', $info["GLOBAL"]["LONGITUDE"]);
         $previsy->checkAndUpdateCmd('last_update', $info["GLOBAL"]["LAST_SYNCHRO"]);
         
         $showCommande = $previsy->getCofingShowCommandes();
@@ -263,6 +265,32 @@ class previsy extends eqLogic {
         $info->setIsVisible(0);
         $info->setType('info');
         $info->setSubType('string');
+        $info->save();
+        
+        $info = $this->getCmd(null, 'latitude');
+        if (!is_object($info)) {
+            $info = new previsyCmd();
+            $info->setName(__('Latitude', __FILE__));
+        }
+        $info->setLogicalId('latitude');
+        $info->setEqLogic_id($this->getId());
+        $info->setIsHistorized(0);
+        $info->setIsVisible(0);
+        $info->setType('info');
+        $info->setSubType('numeric');
+        $info->save();
+        
+        $info = $this->getCmd(null, 'longitude');
+        if (!is_object($info)) {
+            $info = new previsyCmd();
+            $info->setName(__('Longitude', __FILE__));
+        }
+        $info->setLogicalId('longitude');
+        $info->setEqLogic_id($this->getId());
+        $info->setIsHistorized(0);
+        $info->setIsVisible(0);
+        $info->setType('info');
+        $info->setSubType('numeric');
         $info->save();
 
         for ($i = 1; $i <= $nb_alerte; $i++) {
@@ -786,6 +814,12 @@ class previsy extends eqLogic {
 
         $last_date = $this->getCmd(null, 'ville');
         $replace['#ville#'] = (is_object($last_date)) ? $last_date->execCmd() : '';
+        
+        $last_date = $this->getCmd(null, 'latitude');
+        $replace['#latitude#'] = (is_object($last_date)) ? $last_date->execCmd() : '';
+        
+        $last_date = $this->getCmd(null, 'longitude');
+        $replace['#longitude#'] = (is_object($last_date)) ? $last_date->execCmd() : '';
 
         $last_date = $this->getCmd(null, 'last_update');
         $replace['#last_date#'] = (is_object($last_date)) ? $last_date->execCmd() : '';
@@ -1011,6 +1045,16 @@ class previsy extends eqLogic {
 
             $json = $getJson["datas"];
             $now["GLOBAL"]["LAST_SYNCHRO"] = $getJson["datetime"];
+            
+            if(!empty($eqLogic->getConfiguration("latitude")) AND !empty($eqLogic->getConfiguration("longitude"))){
+                $now["GLOBAL"]["VILLE"] = NULL;
+                $now["GLOBAL"]["LATITUDE"] = $eqLogic->getConfiguration("latitude");
+                $now["GLOBAL"]["LONGITUDE"] = $eqLogic->getConfiguration("longitude");
+            } elseif(!empty($eqLogic->getConfiguration("ville"))){
+                $now["GLOBAL"]["VILLE"] = $eqLogic->getConfiguration("ville");
+                $now["GLOBAL"]["LATITUDE"] = $json->city_info->latitude;
+                $now["GLOBAL"]["LONGITUDE"] = $json->city_info->longitude;
+            }
 
             if (!is_array($json->errors)) {
 
@@ -1253,6 +1297,10 @@ class previsy extends eqLogic {
         $eqLogic = self::byId($_id);
 
         $ville = $eqLogic->getConfiguration("ville");
+        
+        $latitude = $eqLogic->getConfiguration("latitude");
+        $ongitude = $eqLogic->getConfiguration("longitude");
+        
         $config = $eqLogic->getConfigPrevisy();
 
         $tempJson = $config["jsonTampon"] . $_id . ".json";
@@ -1281,6 +1329,16 @@ class previsy extends eqLogic {
         $eqLogic = self::byId($_id);
 
         $ville = $this->getConfiguration("ville");
+        
+        $latitude = $this->getConfiguration("latitude");
+        $longitude = $this->getConfiguration("longitude");
+        
+        if(!empty($latitude) AND !empty($longitude)){
+            $searchBy = "lat=".$latitude."lng=".$longitude;
+        } else {
+            $searchBy = $ville;
+        }
+        
         $config = $this->getConfigPrevisy();
 
         $tempStartTimeUrl = time();
@@ -1291,7 +1349,7 @@ class previsy extends eqLogic {
         }
 
         log::add('previsy', 'debug', 'miseEnCacheJson :. Récupération des données ' . $config["urlApi"] . $ville);
-        $json = file_get_contents($config["urlApi"] . $ville); // Prod
+        $json = file_get_contents($config["urlApi"] . $searchBy); // Prod
 
         if (!empty($json)) {
             $file_tmp = $config["jsonTampon"] . $_id . ".temp";

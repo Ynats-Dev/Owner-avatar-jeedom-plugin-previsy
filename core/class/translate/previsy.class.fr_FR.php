@@ -15,7 +15,7 @@ class previsy_language {
         $return["HEURE"] = $_date->format('H:i');
         $return["DATE"] = $_date->format('d/m/Y');
         $return["JOUR"] = $_date->format('l');
-        $return["JOUR_TXT"] = self::traduitDateTimeJour($_date->format('l')) . " " . $_date->format('d') . " " . self::traduitDateTimeMois($_date->format('M')) . " " . $_date->format('Y') . " à " . $_date->format('H') . "H00";
+        $return["JOUR_TXT"] = self::traduitDateTimeJour($_date->format('l')) . " " . $_date->format('d') . " " . self::traduitDateTimeMois($_date->format('F')) . " " . $_date->format('Y') . " à " . $_date->format('H') . "H00";
         return $return;
     }
 
