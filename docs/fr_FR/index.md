@@ -16,14 +16,16 @@ Vous pourrez, bien évidemment, récupérer les données brutes pour créer des 
 Installation
 ===
 
-# Le plugin utilise prevision-meteo.ch
+## Le plugin utilise prevision-meteo.ch
 
 
-# Configuration
+## Configuration
 
 ![previsy1](../images/config-1.png)
 
-## Nombre d'alerte en prévision à afficher
+![previsy2](../images/config-2.png)
+
+### Nombre d'alerte en prévision à afficher
 
 Cela permet de configurer le nombre d'alertes que vous souhaitez afficher. 
 **Exemple**
@@ -40,20 +42,22 @@ Attention, si vous voulez afficher 5 alertes et toutes les commandes vous allez 
 Gestion
 ===
 
-# Equipement
+## Equipement
 
-![previsy2](../images/parametre-1.png)
-![previsy3](../images/parametre-vent.png)
+![previsy3](../images/parametre-1.png)
 
-# Commandes
+
+![previsy4](../images/parametre-vent.png)
+
+## Commandes
 
 > Le nombre de commande sera forcément proportionnel au nombre d'alerte que vous avez configuré.
 
-## Les commandes générales
+### Les commandes générales
 
 | Type | Commande | Description |
 | ------------ | ------------ | ------------ | 
-| info | Cela correspond à la ville que vous avez enregistré. |
+| info | SynchroVille | Cela correspond à la ville que vous avez enregistré. |
 | info | SynchroLastUpDate | Date au format "timestamp" de la dernière synchronisation avec le site prevision-meteo.ch. | 
 | action | Rafraichir | La fameuse commande permettant de raffraichir le widget. Cela lancera un synchro au prêt de prevision-meteo.ch. | 
 
@@ -96,4 +100,3 @@ Dans les prochaines commandes le "01" correspond au numéro de l'alerte associé
 | info | Alerte+01_rafale_min | Vitesse Minimum des rafales. | 
 | info | Alerte+01_rafale_max | Vitesse Maximum des rafales. | 
 | info | Alerte+01_rafale_moyenne | Moyenne de la Vitesse des rafales. | 
-
