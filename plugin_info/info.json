@@ -1,7 +1,7 @@
 {
 	"id" : "previsy",
 	"name" : "Previsy",
-	"description" : "Plugin de prévision météorolique à 72H (France, Belgique et Suisse)",
+	"description" : "Ce plugin annonce les prochaines alertes (72H) météo en France, Belgique et Suisse. Previsy construit également des phrases qui peuvent être utilisées pour vous être envoyées par sms, annoncées par votre home ou slack etc… Par ailleurs, vous avez la possibilité d'utiliser les données brutes pour vous créer des scénarios sur mensures.",
 	"licence" : "AGPL",
 	"author" : "Ynats",
         "require" : "4.0",
