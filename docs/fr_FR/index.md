@@ -41,7 +41,7 @@ Installation
 
 ## Le plugin utilise prevision-meteo.ch
 
-Prevision-meteo.ch est géré par une personne. Le serveur OVH qui porte ce serveur est très régulièrement saturé voire offline. Pour pallier à ce problème, Previsy enregistre les données en cache et s'en sert pour réactualiser les widgets si le site est down.
+Prevision-meteo.ch est très régulièrement saturé. Pour pallier à ce problème, Previsy enregistre les données de l'API en cache et s'en sert pour réactualiser les widgets si l'API est indisponible ou trop longue à répondre.
 
 
 ## Configuration
