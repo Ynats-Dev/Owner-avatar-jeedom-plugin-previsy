@@ -25,6 +25,8 @@ function previsyInArray(name){
     if(name.match(/widget/)){ return 1; }
     else if(name.match(/dans_heure/)){ return 1; }
     else if(name.match(/Ville/)){ return 1; }
+    else if(name.match(/Latitude/)){ return 1; }
+    else if(name.match(/Longitude/)){ return 1; }
     else if(name.match(/type/)){ return 1; }
     else if(name.match(/LastUpDate/)){ return 1; }
     else if(name.match(/date_end/)){ return 1; }

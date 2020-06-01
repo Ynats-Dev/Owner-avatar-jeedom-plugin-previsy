@@ -14,7 +14,7 @@ gems:
  - jekyll-paginate
  - jekyll-seo-tag
 exclude:
- - vendor
+ - nbproject
 plugins:
  - jekyll-seo-tag
 title: "Documentation plugin Previsy"
@@ -25,3 +25,4 @@ social:
   name:  Jeedom-Previsy
   links:
     - https://github.com/Ynats/jeedom-plugin-previsy/
+    - https://github.com/jeedom
