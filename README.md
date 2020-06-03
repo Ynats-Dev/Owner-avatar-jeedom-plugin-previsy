@@ -28,13 +28,13 @@ Comme vous pouvez le voir, les prévisions peuvent vous aider sur pas mal de poi
 
 ### Avec le widget et les phrases préconstruites.
 
-![previsy1](docs/fr_FR/images/widget-sans-txt.png)
+![previsy1](docs/images/widget-sans-txt.png)
 
 ### En utilisant directement les données brutes
 
 Vous pourrez, bien évidemment, récupérer les données brutes pour créer vos scénarios et ainsi les associer à des services (SMS, Slack, Notification, etc.)
 
-![previsy2](docs/fr_FR/images/commandes.png)
+![previsy2](docs/images/commandes.png)
 
 Installation
 ===
@@ -46,7 +46,7 @@ Prevision-meteo.ch est très régulièrement saturé. Pour pallier à ce problè
 
 ## Configuration
 
-![previsy3](../docs/fr_FR/images/config-1.png)
+![previsy3](../docs/images/config-1.png)
 
 ### Nombre d'alerte en prévision à afficher
 
@@ -67,14 +67,14 @@ Les données vous permettant de créer vos scénarios sur mesure. Il vous suffit
 ### Tâche planifiée
 Si vous désactivez la tâche planifiée qui à lieu toutes les heures ... le plugin ne servira plus à rien ...
 
-![previsy4](docs/fr_FR/images/config-2.png)
+![previsy4](docs/images/config-2.png)
 
 Gestion
 ===
 
 ## Equipement
 
-![previsy5](../docs/fr_FR/images/parametre-1.png)
+![previsy5](../docs/images/parametre-1.png)
 
 ### Ville
 Ici on entre le mot-clé correspondant à la ville que vous désirez sonder. Pour vous permettre de tester, un bouton va s'afficher à droite de la saisie pour tester directement sur le site de prevision-meteo.ch
@@ -82,7 +82,7 @@ Si le site est offline ou met du temps à répondre il faudra retenter plus tard
 
 > Dans l'url le mot-clé de la ville : https://www.prevision-meteo.ch/meteo/localite/votreville
 
-![previsy6](../docs/fr_FR/images/parametre-saisie.png)
+![previsy6](../docs/images/parametre-saisie.png)
 
 ### Coordonnées du point
 
@@ -92,19 +92,19 @@ Renseignez la latitude et la longitude de l'endroit que vous désirez sonder. Si
 
 ### Afficher le texte prédictif dans le widget 
 
-![previsy7](docs/fr_FR/images/widget-txt.png)
+![previsy7](docs/images/widget-txt.png)
 
 Cela permet d'afficher le texte prédictif dans le widget.
 
 ### Seuil d'alerte pour le vent
 
-![previsy8](docs/fr_FR/images/parametre-vent.png)
+![previsy8](docs/images/parametre-vent.png)
 
 Vous pouvez régler le seuil du vent suivant la localité. L'alerte "vent" ne se déclenchera pas en dessous de ce seuil.
 
 ## Commandes
 
-![previsy9](docs/fr_FR/images/parametre-commandes.png)
+![previsy9](docs/images/parametre-commandes.png)
 
 > Le nombre de commandes sera forcément proportionnel au nombre d'alerte que vous avez configurée.
 
