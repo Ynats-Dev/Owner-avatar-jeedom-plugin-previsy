@@ -46,7 +46,7 @@ Prevision-meteo.ch est très régulièrement saturé. Pour pallier à ce problè
 
 ## Configuration
 
-![previsy3](../docs/images/config-1.png)
+![previsy3](docs/images/config-1.png)
 
 ### Nombre d'alerte en prévision à afficher
 
@@ -74,7 +74,7 @@ Gestion
 
 ## Equipement
 
-![previsy5](../docs/images/parametre-1.png)
+![previsy5](docs/images/parametre-1.png)
 
 ### Ville
 Ici on entre le mot-clé correspondant à la ville que vous désirez sonder. Pour vous permettre de tester, un bouton va s'afficher à droite de la saisie pour tester directement sur le site de prevision-meteo.ch
@@ -82,7 +82,7 @@ Si le site est offline ou met du temps à répondre il faudra retenter plus tard
 
 > Dans l'url le mot-clé de la ville : https://www.prevision-meteo.ch/meteo/localite/votreville
 
-![previsy6](../docs/images/parametre-saisie.png)
+![previsy6](docs/images/parametre-saisie.png)
 
 ### Coordonnées du point
 
