@@ -136,11 +136,11 @@ Vous pouvez régler le seuil du vent suivant la localité. L'alerte "vent" ne se
 | Type | Commande | Description |
 | ------------ | ------------ | ------------ | 
 | info | Alerte+01_dans_heure | Prochaine alerte en heure. |
-| info | Alerte+01_date_start | Date de début de la prochaine alerte. | 
-| info | Alerte+01_date_end | Date de fin de la prochaine alerte. | 
+| info | Alerte+01_date_start | Date de début de la prochaine alerte au format YmdHi. | 
+| info | Alerte+01_date_end | Date de fin de la prochaine alerte au format YmdHi. | 
 | info | Alerte+01_type | Type d'alerte (pluie, neige, neige_pluie, orage, brouillard ou vent). | 
 | info | Alerte+01_condition_max | Description de l'alerte au plus haut. | 
-| info | Alerte+01_duree | Durée de l'alerte (du même type). | 
+| info | Alerte+01_duree | Durée de l'alerte (du même type et successif). | 
 | info | Alerte+01_mm_min | Précipitation Minimum. |
 | info | Alerte+01_mm_max | Précipitation Maximum. | 
 | info | Alerte+01_mm_moyenne | Moyenne des Précipitations. | 

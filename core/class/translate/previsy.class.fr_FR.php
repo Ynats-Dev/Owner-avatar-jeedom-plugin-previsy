@@ -58,7 +58,7 @@ class previsy_language {
                 $return["ALERTE"] = "pluie";
                 break;
             case "Pluie faible":
-                $return["TXT"] = "il y aaura de faibles précipitations de pluie";
+                $return["TXT"] = "il y aura de faibles précipitations de pluie";
                 $return["ALERTE"] = "pluie";
                 break;
             case "Pluie forte":

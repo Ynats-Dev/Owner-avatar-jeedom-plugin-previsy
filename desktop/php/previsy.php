@@ -113,6 +113,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
                             </div>
                             <div><a href="" target="_blank"></a></div>
                         </div>
+<!--                        <div class="form-group" style="margin-top: 5px;">
+                            <label class="col-sm-3 control-label">{{Afficher le widget (si vous utilisez seulement les datas)}}</label>
+                            <div class="col-sm-3">
+                                <input type="checkbox" class="eqLogicAttr checkbox-inline" data-l1key="configuration"  data-l2key="afficheBigWidget" />
+                            </div>
+                        </div>-->
                         <div class="form-group" style="margin-top: 5px;">
                             <label class="col-sm-3 control-label">{{Afficher le texte prédictif dans le widget }}</label>
                             <div class="col-sm-3">
