@@ -15,7 +15,11 @@
             "fr_FR"
         ],
 	"compatibility" : [
-            "rpi",
-            "v4"
+			"miniplus",
+			"smart",
+			"rpi",
+			"docker",
+			"diy",
+			"v4"
         ]
 }
