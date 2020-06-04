@@ -1124,18 +1124,19 @@ class previsy extends eqLogic {
                             $dur = 1;
                             $al_last["DANS_JOUR"] = $a;
                             $al_last["DANS_HEURE"] = $i;
+                            
+                            if ($txt_meteo != NULL) {
+                                $al_last["TYPE"] = $txt_meteo["ALERTE"];
+                            } else {
+                                $al_last["TYPE"] = "vent";
+                            }
+                            
                             log::add('previsy', 'debug', 'get :. Alerte [' . $al_last["START"] . '] ' . $al_last["TYPE"] . ' ajoutée pour ' . $now["GLOBAL"]["VILLE"]);
                         }
 
                         $al_last["END"] = $date_plus_un->format('YmdH') . "00";
                         $al_last["END_TXT"] = $tmp_day_plus_un["JOUR_TXT"];
-
-                        if ($txt_meteo != NULL) {
-                            $al_last["TYPE"] = $txt_meteo["ALERTE"];
-                        } else {
-                            $al_last["TYPE"] = "vent";
-                        }
-
+                        
                         $al_last["HEURE"] = $date->format('G');
                         $al_last["ICON"] = $eqLogic->getIcon($al_last["TYPE"]);
 
@@ -1243,7 +1244,6 @@ class previsy extends eqLogic {
     public function getIcon($_type) {
 
         $config = $this->getConfigPrevisy();
-        $config["icons"];
 
         switch ($_type) {
             case "pluie":
