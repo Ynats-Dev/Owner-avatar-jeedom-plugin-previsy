@@ -44,11 +44,11 @@ class previsy extends eqLogic {
     }
 
     public function getCofingFormatDegres() {
-        return config::byKey('type_degre', 'previsy', '°C');
+        return config::byKey('type_degre', 'previsy', 0);
     }
 
     public function getCofingNbAlerte() {
-        return config::byKey('nb_alerte', 'previsy', '2');
+        return config::byKey('nb_alerte', 'previsy', 0);
     }
     
     public function getCofingShowCommandes() {
@@ -93,6 +93,7 @@ class previsy extends eqLogic {
         $previsy->checkAndUpdateCmd('latitude', $info["GLOBAL"]["LATITUDE"]);
         $previsy->checkAndUpdateCmd('longitude', $info["GLOBAL"]["LONGITUDE"]);
         $previsy->checkAndUpdateCmd('last_update', $info["GLOBAL"]["LAST_SYNCHRO"]);
+        $previsy->checkAndUpdateCmd('type_degre', $previsy->getCofingFormatDegres());
         
         $showCommande = $previsy->getCofingShowCommandes();
 
@@ -188,8 +189,6 @@ class previsy extends eqLogic {
 
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_widget', $previsy->getWidget($value_alerte, $idCmd));
 
-            $mc = cache::byKey('previsyWidgetdashboard' . $previsy->getId());
-            $mc->remove();
         }
 
         if (empty($value_alerte["TYPE"]) AND empty($info["ERROR"])) {
@@ -237,7 +236,13 @@ class previsy extends eqLogic {
     public function postSave() {
         log::add('previsy', 'debug', 'postSave :. Début de la création ou Mise à jour des commandes #ID#' . $this->getId());
 
-        $nb_alerte = config::byKey('nb_alerte', 'previsy', '0');
+        $nb_alerte = $this->getCofingNbAlerte();
+        
+        if($nb_alerte == 0){ // Si pas d'enregistrement de config on enregistre des valeurs
+            log::add('previsy', 'debug', 'postSave :. Config Manquante. Enregistrement des valeurs à defaut.');
+            config::save('type_degre', '°C', 'previsy');
+            config::save('nb_alerte', 1, 'previsy');
+        }
         
         $showCommande = $this->getCofingShowCommandes();
 
@@ -291,6 +296,19 @@ class previsy extends eqLogic {
         $info->setIsVisible(0);
         $info->setType('info');
         $info->setSubType('numeric');
+        $info->save();
+        
+        $info = $this->getCmd(null, 'type_degre');
+        if (!is_object($info)) {
+            $info = new previsyCmd();
+            $info->setName(__('Type_degre', __FILE__));
+        }
+        $info->setLogicalId('type_degre');
+        $info->setEqLogic_id($this->getId());
+        $info->setIsHistorized(0);
+        $info->setIsVisible(0);
+        $info->setType('info');
+        $info->setSubType('string');
         $info->save();
 
         for ($i = 1; $i <= $nb_alerte; $i++) {
@@ -823,6 +841,9 @@ class previsy extends eqLogic {
 
         $last_date = $this->getCmd(null, 'last_update');
         $replace['#last_date#'] = (is_object($last_date)) ? $last_date->execCmd() : '';
+        
+        $last_date = $this->getCmd(null, 'type_degre');
+        $replace['#type_degre#'] = (is_object($last_date)) ? $last_date->execCmd() : '';
 
         for ($i = 1; $i <= $config["maxAlerte"]; $i++) {
             $tmp_cmd = "alerte_0" . $i . "_dans_heure";

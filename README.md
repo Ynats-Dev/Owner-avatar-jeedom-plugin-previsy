@@ -116,6 +116,7 @@ Vous pouvez régler le seuil du vent suivant la localité. L'alerte "vent" ne se
 | info | SynchroLastUpDate | Date au format "timestamp" de la dernière synchronisation avec le site prevision-meteo.ch. | 
 | info | Latitude | Comme son nom l'indique | 
 | info | Longitude | Comme son nom l'indique | 
+| info | Type_degre | °C ou °F | 
 | action | Rafraichir | La fameuse commande permettant de rafraîchir le widget. Cela lancera une synchro au prêt de prevision-meteo.ch. | 
 
 ### Les commandes liées aux alertes
