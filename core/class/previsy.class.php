@@ -242,6 +242,8 @@ class previsy extends eqLogic {
             log::add('previsy', 'debug', 'postSave :. Config Manquante. Enregistrement des valeurs à defaut.');
             config::save('type_degre', '°C', 'previsy');
             config::save('nb_alerte', 1, 'previsy');
+            
+            $nb_alerte = 1;
         }
         
         $showCommande = $this->getCofingShowCommandes();
