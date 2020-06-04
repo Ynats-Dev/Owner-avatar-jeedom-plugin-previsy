@@ -44,11 +44,11 @@ class previsy extends eqLogic {
     }
 
     public function getCofingFormatDegres() {
-        return config::byKey('type_degre', 'previsy', '0');
+        return config::byKey('type_degre', 'previsy', '°C');
     }
 
     public function getCofingNbAlerte() {
-        return config::byKey('nb_alerte', 'previsy', '0');
+        return config::byKey('nb_alerte', 'previsy', '2');
     }
     
     public function getCofingShowCommandes() {
@@ -1139,7 +1139,6 @@ class previsy extends eqLogic {
                         
                         $al_last["HEURE"] = $date->format('G');
                         $al_last["ICON"] = $eqLogic->getIcon($al_last["TYPE"]);
-
 
                         // Précipitations
                         $mm = $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->APCPsfc;
