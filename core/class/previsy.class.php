@@ -1134,35 +1134,50 @@ class previsy extends eqLogic {
                     } else {
                         $alerteVent = FALSE;
                     }
-
+                    
                     // Regroupe les alertes
-                    if ($txt_meteo == NULL AND $alerteVent == FALSE) {
-                        unset($al_last);
-                    } elseif ($alertes < $eqLogic->getCofingNbAlerte()) {
-                        
-                        if (!isset($al_last["TYPE"])) {
+                    if ($txt_meteo["ALERTE"] == NULL AND $alerteVent == FALSE) {
+                        unset($al_last); 
+                    } 
+                    elseif ($alertes <= $eqLogic->getCofingNbAlerte() AND 
+                            ($txt_meteo["ALERTE"] != NULL 
+                            OR ($txt_meteo["ALERTE"] == NULL AND $alerteVent == TRUE))
+                            ) {
+
+                        if(!isset($al_last["TYPE"])){
+                            
                             $alertes++;
                             $al_last["START"] = $date->format('YmdH') . "00";
                             $al_last["START_TXT"] = $tmp_day["JOUR_TXT"];
+                            
                             $dur = 1;
                             $al_last["DANS_JOUR"] = $a;
                             $al_last["DANS_HEURE"] = $i;
                             
-                            if ($txt_meteo != NULL) {
+                            if (isset($txt_meteo["ALERTE"])) {
                                 $al_last["TYPE"] = $txt_meteo["ALERTE"];
                             } else {
                                 $al_last["TYPE"] = "vent";
                             }
-                            
-                            log::add('previsy', 'debug', 'get :. Alerte [' . $al_last["START"] . '] ' . $al_last["TYPE"] . ' ajoutée pour ' . $now["GLOBAL"]["VILLE"]);
+                        
+                            log::add('previsy', 'debug', 'get :. Alerte [' . $al_last["START"] . '] ' . $txt_meteo["ALERTE"] . ' ajoutée pour ' . $now["GLOBAL"]["VILLE"]);
+                        }
+                        
+                        $al_last["END"] = $date->format('YmdH') . "00";
+                        $al_last["END_TXT"] = $tmp_day["JOUR_TXT"]; 
+                        
+                        if($al_last["END"] == $al_last["START"]){
+                            $al_last["END"] = $date_plus_un->format('YmdH') . "00";
+                            $al_last["END_TXT"] = $tmp_day_plus_un["JOUR_TXT"];
+                            $al_last["DUREE_HEURE"] = 1;
+                        }
+                        else{
+                            $al_last["DUREE_HEURE"] = $dur++;
                         }
 
-                        $al_last["END"] = $date_plus_un->format('YmdH') . "00";
-                        $al_last["END_TXT"] = $tmp_day_plus_un["JOUR_TXT"];
-                        
                         $al_last["HEURE"] = $date->format('G');
                         $al_last["ICON"] = $eqLogic->getIcon($al_last["TYPE"]);
-
+                        
                         // Précipitations
                         $mm = $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->APCPsfc;
 
@@ -1198,16 +1213,18 @@ class previsy extends eqLogic {
 
                         $al_last["VENT_NOM"] = $lang->echelleBeaufort($al_last["VENT_VITESSE"]["MOY"]);
 
-                        $al_last["DUREE_HEURE"] = $dur++;
                         $al_last["AFFICHE_TXT_WIDGET"] = $eqLogic->getConfiguration("afficheTxt");
 
                         $al_last["TXT"] = $lang->constructTxt($al_last, $now["GLOBAL"]["TYPE_DEGRE"]);
 
-                        $now["ALERTES"]["GROUP"][$alertes] = $al_last;
-
-                        $now["ALERTES"]["DETAILS"][] = $tmp_now;
+                        if($alertes <= $eqLogic->getCofingNbAlerte()) {
+                            $now["ALERTES"]["GROUP"][$alertes] = $al_last;
+                            $now["ALERTES"]["DETAILS"][] = $tmp_now;
+                        }     
                     }
+                    
                 }
+                
                 if (!isset($now["ALERTES"]["DETAILS"][0]["CONDITION_KEY"])) {
                     log::add('previsy', 'debug', 'get :. Aucune alerte pour ' . $now["GLOBAL"]["VILLE"]);
                 }
@@ -1392,7 +1409,6 @@ class previsy extends eqLogic {
             log::add('previsy', 'debug', 'miseEnCacheJson :. Enregistrement du Json : ' . $file);
         } else {
             log::add('previsy', 'debug', 'miseEnCacheJson :.  Impossible de se connecter à https://www.prevision-meteo.ch/services/json/' . $ville . '. Le cache est donc conservé.');
-            //log::add('previsy', 'error', 'miseEnCacheJson :. Impossible de se connecter à https://www.prevision-meteo.ch/services/json/' . $ville . '. Le cache est donc conservé.');
         }
     }
 
@@ -1413,7 +1429,7 @@ class previsy extends eqLogic {
         } else {
             $dansHeure = "Dans <span style='font-weight: bold;'>" . $_datas["DANS_HEURE"] . "H</span>";
         }
-        $return = "<div data-cmd_id='" . $_cmdIds["widget"] . "' class='previsyWidget'>
+        $return = "<div data-cmd_id='" . $_cmdIds["widget"]["id"] . "' class='previsyWidget'>
         
                     
                         <div style ='text-align: center; display: inline-block; margin: 2px;'>
