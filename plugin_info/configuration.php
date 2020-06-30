@@ -45,167 +45,47 @@ if (!isConnect()) {
                 </select>
             </div>
         </div>
+       
+<?php function addTrConfig($_datal1key, $_name){
+    echo '  <tr style="background-color:transparent!important;">
+                <td style="padding:2px;"><input type="checkbox" class="configKey form-control" style="top:0" data-l1key="'.$_datal1key.'" /></td>
+                <td style="padding:2px;">'.$_name.'</td>
+            </tr>';
+}
+?>
         <div class="form-group">
             <label class="col-lg-4 control-label">{{Commandes à afficher (en option pour vos scénarios)}}</label>
             <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_mm_min" />
-                <span>Commandes mm_min</span>
+                 <table>
+                    <?php
+                        addTrConfig("show_mm_min", "Commandes mm_min");
+                        addTrConfig("show_mm_max", "Commandes mm_max");
+                        addTrConfig("show_mm_moyenne", "Commandes mm_moyenne");
+                        addTrConfig("show_mm_total", "Commandes mm_total");
+                        addTrConfig("show_temp_min", "Commandes temp_min");
+                        addTrConfig("show_temp_max", "Commandes temp_max");
+                        addTrConfig("show_temp_moyenne", "Commandes temp_moyenne");
+                        addTrConfig("show_humidite_min", "Commandes humidite_min");
+                        addTrConfig("show_humidite_max", "Commandes humidite_max");
+                        addTrConfig("show_humidite_moyenne", "Commandes humidite_moyenne");  
+                        addTrConfig("show_vent_min", "Commandes vent_min");  
+                        addTrConfig("show_vent_max", "Commandes vent_max");  
+                        addTrConfig("show_vent_moyenne", "Commandes vent_moyenne");  
+                        addTrConfig("show_vent_nom", "Commandes vent_nom");  
+                        addTrConfig("show_rafale_min", "Commandes rafale_min");  
+                        addTrConfig("show_rafale_max", "Commandes rafale_max");  
+                        addTrConfig("show_rafale_moyenne", "Commandes rafale_moyenne");  
+                        addTrConfig("show_txt_start", "Commandes txt_start");  
+                        addTrConfig("show_txt_mm", "Commandes txt_mm");  
+                        addTrConfig("show_txt_humidite", "Commandes txt_humidite");
+                        addTrConfig("show_txt_temperature", "Commandes txt_temperature");
+                        addTrConfig("show_txt_vent", "Commandes txt_vent");
+                        addTrConfig("show_condition_max", "Commandes condition_max");
+                    ?>
+                </table>
             </div>
         </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_mm_max" />
-                <span>Commandes mm_max</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_mm_moyenne" />
-                <span>Commandes mm_moyenne</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_mm_total" />
-                <span>Commandes mm_total</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_temp_min" />
-                <span>Commandes temp_min</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_temp_max" />
-                <span>Commandes temp_max</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_temp_moyenne" />
-                <span>Commandes temp_moyenne</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_humidite_min" />
-                <span>Commandes humidite_min</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_humidite_max" />
-                <span>Commandes humidite_max</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_humidite_moyenne" />
-                <span>Commandes humidite_moyenne</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_vent_min" />
-                <span>Commandes vent_min</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_vent_max" />
-                <span>Commandes vent_max</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_vent_moyenne" />
-                <span>Commandes vent_moyenne</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_vent_nom" />
-                <span>Commandes vent_nom</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_rafale_min" />
-                <span>Commandes rafale_min</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_rafale_max" />
-                <span>Commandes rafale_max</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_rafale_moyenne" />
-                <span>Commandes rafale_moyenne</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_txt_start" />
-                <span>Commandes txt_start</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_txt_mm" />
-                <span>Commandes txt_mm</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_txt_humidite" />
-                <span>Commandes txt_humidite</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_txt_temperature" />
-                <span>Commandes txt_temperature</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_txt_vent" />
-                <span>Commandes txt_vent</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-lg-4 control-label"></span>
-            <div class="col-lg-3">
-                <input type="checkbox" class="configKey form-control" style="top:0" data-l1key="show_condition_max" />
-                <span>Commandes condition_max</span>
-            </div>
-        </div>
+
   </fieldset>
 </form>
 

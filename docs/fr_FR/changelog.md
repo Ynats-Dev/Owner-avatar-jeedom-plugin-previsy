@@ -1,6 +1,7 @@
 # 30/06/2020 | Beta 1.2
 - BUG : Priorisation des alretes autres que le vent et décompte du temps de l'alerte
 - Possibilité d'installer sur une V3 pour test
+- Fix décalage config en V3
 
 # 05/06/2020 | Beta 1.1
 
