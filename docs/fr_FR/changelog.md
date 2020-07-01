@@ -1,3 +1,6 @@
+# 01/07/2020 | Stable 1
+- Passage en stable
+
 # 30/06/2020 | Beta 1.2
 - BUG : Priorisation des alretes autres que le vent et décompte du temps de l'alerte
 - Possibilité d'installer sur une V3 pour test
