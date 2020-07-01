@@ -961,7 +961,7 @@ class previsy extends eqLogic {
             if ($showCommande["show_rafale_moyenne"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_rafale_moyenne";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
 
             $tmp_cmd = "alerte_0" . $i . "_txt_full";
