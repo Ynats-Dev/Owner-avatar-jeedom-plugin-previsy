@@ -98,8 +98,9 @@ class previsy extends eqLogic {
         $showCommande = $previsy->getCofingShowCommandes();
 
         $cpt = 0;
+            
         foreach ($info["ALERTES"]["GROUP"] as $value_alerte) {
-            $idCmd = array();
+            //$idCmd = array();
             $cpt++;
             if ($cpt < 10) {
                 $id_key = "0" . $cpt;
@@ -110,7 +111,7 @@ class previsy extends eqLogic {
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_type', $value_alerte["TYPE"]);
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_date_start', $value_alerte["START"]);
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_date_end', $value_alerte["END"]);
-            
+
             if ($showCommande["show_condition_max"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_condition_max', $value_alerte["CONDITION_MAX"]);
             }
@@ -165,10 +166,10 @@ class previsy extends eqLogic {
             if ($showCommande["show_rafale_moyenne"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_rafale_moyenne', $value_alerte["VENT_RAFALES"]["MOY"]);
             }
-            
+
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_duree', $value_alerte["DUREE_HEURE"]);
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_full', $value_alerte["TXT"]["FULL"]);
-            
+
             if ($showCommande["show_txt_start"] == 1) {
                 $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_start', $value_alerte["TXT"]["START"]);
             }
@@ -188,7 +189,6 @@ class previsy extends eqLogic {
             $idCmd = $previsy->getIdEtNameCmd($id_key, array('widget', 'txt_full'));
 
             $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_widget', $previsy->getWidget($value_alerte, $idCmd));
-
         }
 
         if (empty($value_alerte["TYPE"]) AND empty($info["ERROR"])) {
@@ -871,19 +871,19 @@ class previsy extends eqLogic {
             if ($showCommande["show_mm_min"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_mm_min";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
             
             if ($showCommande["show_mm_max"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_mm_max";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
 
             if ($showCommande["show_mm_moyenne"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_mm_moyenne";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
 
             if ($showCommande["show_mm_total"] == 1) {
@@ -895,67 +895,67 @@ class previsy extends eqLogic {
             if ($showCommande["show_temp_min"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_temp_min";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
 
             if ($showCommande["show_temp_max"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_temp_max";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
 
             if ($showCommande["show_temp_moyenne"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_temp_moyenne";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
             
             if ($showCommande["show_humidite_min"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_humidite_min";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
 
             if ($showCommande["show_humidite_max"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_humidite_max";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
 
             if ($showCommande["show_humidite_moyenne"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_humidite_moyenne";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
             
             if ($showCommande["show_vent_min"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_vent_min";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
 
             if ($showCommande["show_vent_max"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_vent_max";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
 
             if ($showCommande["show_vent_moyenne"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_vent_moyenne";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
             
             if ($showCommande["show_rafale_min"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_rafale_min";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
 
             if ($showCommande["show_rafale_max"] == 1) {
                 $tmp_cmd = "alerte_0" . $i . "_rafale_max";
                 ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
-                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(${$tmp_cmd}->execCmd(), 1) : '';
+                $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? number_format(floatval(${$tmp_cmd}->execCmd()), 1) : '';
             }
 
             if ($showCommande["show_rafale_moyenne"] == 1) {
@@ -1078,8 +1078,8 @@ class previsy extends eqLogic {
                 $now["GLOBAL"]["LATITUDE"] = $json->city_info->latitude;
                 $now["GLOBAL"]["LONGITUDE"] = $json->city_info->longitude;
             }
-
-            if (!is_array($json->errors)) {
+            
+            if (empty($json->error)) {
 
                 $date = new DateTime("Now");
                 $date_plus_un = new DateTime("Now");

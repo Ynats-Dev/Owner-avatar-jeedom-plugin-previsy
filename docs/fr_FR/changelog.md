@@ -1,9 +1,12 @@
 # 01/07/2020 | Stable 1
 
 - Passage en stable
+- BUG : Fix PHP Warning - number_format() expects parameter 1 to be float
+- BUG : Fix PHP Notice - Undefined property: stdClass::$errors
 
 # 30/06/2020 | Beta 1.2
-- BUG : Priorisation des alretes autres que le vent et décompte du temps de l'alerte
+- BUG : Priorisation des alertes par rapport aux alertes vent
+- BUG : Correction du décompte du temps d'alerte
 - Possibilité d'installer sur une V3 pour test
 - Fix décalage config en V3
 
