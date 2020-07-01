@@ -1388,7 +1388,7 @@ class previsy extends eqLogic {
         }
 
         log::add('previsy', 'debug', 'miseEnCacheJson :. Récupération des données ' . $config["urlApi"] . $ville);
-        $json = file_get_contents($config["urlApi"] . $searchBy); // Prod
+        $json = @file_get_contents($config["urlApi"] . $searchBy); // Prod
 
         if (!empty($json)) {
             $file_tmp = $config["jsonTampon"] . $_id . ".temp";
