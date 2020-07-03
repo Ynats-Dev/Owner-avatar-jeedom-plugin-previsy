@@ -1154,6 +1154,8 @@ class previsy extends eqLogic {
                             $al_last["DANS_JOUR"] = $a;
                             $al_last["DANS_HEURE"] = $i;
                             
+                            $al_last["HEURE"] = $date->format('G');
+                            
                             if (isset($txt_meteo["ALERTE"])) {
                                 $al_last["TYPE"] = $txt_meteo["ALERTE"];
                             } else {
@@ -1175,7 +1177,7 @@ class previsy extends eqLogic {
                             $al_last["DUREE_HEURE"] = $dur++;
                         }
 
-                        $al_last["HEURE"] = $date->format('G');
+                        
                         $al_last["ICON"] = $eqLogic->getIcon($al_last["TYPE"]);
                         
                         // Précipitations

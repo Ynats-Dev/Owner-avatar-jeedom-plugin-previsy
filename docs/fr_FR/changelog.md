@@ -1,3 +1,7 @@
+# 03/07/2020 | Stable 1.0.1
+
+- BUG : Dans le message prédictif, l'heure annoncée était l'heure de fin de l'alerte
+
 # 01/07/2020 | Stable 1
 
 - Passage en stable
@@ -20,4 +24,3 @@
 
 - Première version du plugin previsy 
 - Documentation Fr
-
