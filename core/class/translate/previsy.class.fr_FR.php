@@ -255,7 +255,7 @@ class previsy_language {
                 }
                 $return["MM"] .= " de précipitation. ";
             } else {
-                $return["MM"] .= " En résumé, " . $_input["MM"]["CONDITION_MAX_TXT"] . ", avec des précipatations allant de " . number_format($_input["MM"]["MIN"], 1);
+                $return["MM"] .= " En résumé, " . $_input["MM"]["CONDITION_MAX_TXT"] . ", avec des précipitations allant de " . number_format($_input["MM"]["MIN"], 1);
                 $return["MM"] .= " à " . $_input["MM"]["MAX"] . " millimètre";
                 if ($_input["MM"]["MAX"] > 1) {
                     $return["MM"] .= "s";

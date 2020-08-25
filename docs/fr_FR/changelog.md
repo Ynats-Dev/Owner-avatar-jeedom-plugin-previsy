@@ -1,3 +1,11 @@
+# 25/08/2020 | Stable 1.0.2
+
+- BUG : Correction sur les alertes et plus particulièrement sur le cumul avec le vent.
+- BUG : Correction d'une faute de frappe dans le message
+- Les alertes météos sont prioritaires à celles du vent
+- Modification du widget quand il n'y a pas de précipitation
+- Amélioration des logs en mode debug 
+
 # 03/07/2020 | Stable 1.0.1
 
 - BUG : Dans le message prédictif, l'heure annoncée était l'heure de fin de l'alerte

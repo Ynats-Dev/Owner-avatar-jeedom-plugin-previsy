@@ -95,6 +95,7 @@ Renseignez la latitude et la longitude de l'endroit que vous désirez sonder. Si
 ![previsy7](../images/widget-txt.png)
 
 Cela permet d'afficher le texte prédictif dans le widget.
+Les alertes météos (pluie, neige, etc..) sont prioritaires sur celle du vent.
 
 ### Seuil d'alerte pour le vent
 

@@ -1088,7 +1088,8 @@ class previsy extends eqLogic {
 
                 $tmp_day = $lang->getDate($date);
 
-                $dur = $alertes = 0;
+                $dur = 0;
+                $alertes = 0;
 
                 if ($date->format('i') >= 50) { // A partir de 50 on annonce le temps de l'heure suivante
                     $date->add(new DateInterval('PT1H'));
@@ -1127,22 +1128,47 @@ class previsy extends eqLogic {
 
                     // Récupération des alertes météo
                     $txt_meteo = $lang->infosCondition($tmp_now["TMP"]["CONDITION"]);
+                    
+                    if(isset($txt_meteo["ALERTE"]) AND $alertes <= $eqLogic->getCofingNbAlerte()) { 
+                        log::add('previsy', 'debug', 'get :. Alerte [' . $txt_meteo["ALERTE"] . ' -> ' . $tmp_now["TMP"]["CONDITION"].']'); 
+                    }                    
 
-                    // Créer une alerte en fonction du seuil de vent
-                    if ($json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDSPD10m >= $eqLogic->getConfiguration("seuilVent")) {
-                        $alerteVent = TRUE;
+                    if (!isset($txt_meteo["ALERTE"])){
+                        // Créer une alerte en fonction du seuil de vent
+                        if ($json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDSPD10m >= $eqLogic->getConfiguration("seuilVent")) {
+                            $alerteVent = TRUE;
+                        } else {
+                            $alerteVent = FALSE;
+                        }
                     } else {
                         $alerteVent = FALSE;
                     }
                     
                     // Regroupe les alertes
-                    if ($txt_meteo["ALERTE"] == NULL AND $alerteVent == FALSE) {
-                        unset($al_last); 
+                    if (!isset($txt_meteo["ALERTE"]) AND $alerteVent == FALSE) { // Si aucune alerte
+                        unset($al_last);
+                        $traitement = NULL;
                     } 
-                    elseif ($alertes <= $eqLogic->getCofingNbAlerte() AND 
-                            ($txt_meteo["ALERTE"] != NULL 
-                            OR ($txt_meteo["ALERTE"] == NULL AND $alerteVent == TRUE))
-                            ) {
+                    elseif(isset($txt_meteo["ALERTE"]) AND !isset($al_last["TYPE"])){ // Si alerte météo
+                        unset($al_last);
+                        $traitement = "meteo";
+                    }
+                    elseif(isset($txt_meteo["ALERTE"]) AND $al_last["TYPE"] == "vent"){ // Si alerte météo
+                        unset($al_last);
+                        $traitement = "meteo";
+                    }
+                    elseif($alerteVent == TRUE AND $al_last["TYPE"] != "vent"){ // Si alerte vent
+                        unset($al_last);
+                        $traitement = "vent";
+                    }
+                    
+                    if($alertes <= $eqLogic->getCofingNbAlerte() AND $traitement != NULL) { 
+                        log::add('previsy', 'debug', 'get :. Type de traitement ['. $traitement .']'); 
+                    }
+                              
+                    if ($alertes <= $eqLogic->getCofingNbAlerte() AND $traitement != NULL) {
+                        
+                        $lastAlerte = $txt_meteo["ALERTE"];
 
                         if(!isset($al_last["TYPE"])){
                             
@@ -1162,7 +1188,13 @@ class previsy extends eqLogic {
                                 $al_last["TYPE"] = "vent";
                             }
                         
-                            log::add('previsy', 'debug', 'get :. Alerte [' . $al_last["START"] . '] ' . $txt_meteo["ALERTE"] . ' ajoutée pour ' . $now["GLOBAL"]["VILLE"]);
+                            if ($alertes <= $eqLogic->getCofingNbAlerte()) {
+                                log::add('previsy', 'debug', 'get :. Alerte [' . $al_last["START"] . '] ' . $txt_meteo["ALERTE"] . ' ajoutée pour ' . $now["GLOBAL"]["VILLE"]);
+                            }
+                        }
+                        
+                        if ($alertes > $eqLogic->getCofingNbAlerte()) {
+                                log::add('previsy', 'debug', 'get :. Alertes suivantes Ignorées : ' . $eqLogic->getCofingNbAlerte() . ' en paramètre.');
                         }
                         
                         $al_last["END"] = $date->format('YmdH') . "00";
@@ -1171,19 +1203,26 @@ class previsy extends eqLogic {
                         if($al_last["END"] == $al_last["START"]){
                             $al_last["END"] = $date_plus_un->format('YmdH') . "00";
                             $al_last["END_TXT"] = $tmp_day_plus_un["JOUR_TXT"];
-                            $al_last["DUREE_HEURE"] = 1;
+                            //$al_last["DUREE_HEURE"] = 1;
                         }
-                        else{
-                            $al_last["DUREE_HEURE"] = $dur++;
-                        }
-
+                            
+                        $al_last["DUREE_HEURE"] = $dur++;
+                        
                         
                         $al_last["ICON"] = $eqLogic->getIcon($al_last["TYPE"]);
+                        
+                        if ($alertes <= $eqLogic->getCofingNbAlerte()) {
+                            log::add('previsy', 'debug', 'get :. DAY_JSON [' . $tmp_now["TMP"]["DAY_JSON"] . ']'); 
+                            log::add('previsy', 'debug', 'get :. HOUR_JSON [' . $tmp_now["TMP"]["HOUR_JSON"] . ']');
+                            log::add('previsy', 'debug', 'get :. MM [' . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->APCPsfc . ']');
+                        }
                         
                         // Précipitations
                         $mm = $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->APCPsfc;
 
-                        $al_last["MM"]["ARRAY"][] = $mm;
+                        if($mm > 0){
+                            $al_last["MM"]["ARRAY"][] = $mm;
+                        }
 
                         $al_last["MM"]["MIN"] = min($al_last["MM"]["ARRAY"]);
                         if ($mm == min($al_last["MM"]["ARRAY"])) {
@@ -1222,11 +1261,15 @@ class previsy extends eqLogic {
                         if($alertes <= $eqLogic->getCofingNbAlerte()) {
                             $now["ALERTES"]["GROUP"][$alertes] = $al_last;
                             $now["ALERTES"]["DETAILS"][] = $tmp_now;
-                        }     
+                        }    
+                        if ($alertes <= $eqLogic->getCofingNbAlerte()) {
+                            log::add('previsy', 'debug', 'get :. Start [' . $al_last["START"] . ' ('.$mm.')] / End [' . $al_last["END"] . ']');                     
+                            log::add('previsy', 'debug', 'get :. Durée [' . $al_last["DUREE_HEURE"] . ']');
+                        }
                     }
                     
                 }
-                
+                                
                 if (!isset($now["ALERTES"]["DETAILS"][0]["CONDITION_KEY"])) {
                     log::add('previsy', 'debug', 'get :. Aucune alerte pour ' . $now["GLOBAL"]["VILLE"]);
                 }
@@ -1431,6 +1474,7 @@ class previsy extends eqLogic {
         } else {
             $dansHeure = "Dans <span style='font-weight: bold;'>" . $_datas["DANS_HEURE"] . "H</span>";
         }
+        
         $return = "<div data-cmd_id='" . $_cmdIds["widget"]["id"] . "' class='previsyWidget'>
         
                     
@@ -1445,12 +1489,19 @@ class previsy extends eqLogic {
                     <div style='display: inline-block; text-align: center;'>
                         <div class='previsyBlock previsyBlock1'>
                             <div class='previsyBlockMoyenne'>
-                                <div><i title='Total des précipitation' class='fas fa-tachometer-alt' style='font-size:2em; height: 31px;'></i></div>
-                                <div class='previsySubTitleMoyenne'>- Moyenne -</div>
+                                <div><i title='Total des précipitation' class='fas fa-tachometer-alt' style='font-size:2em; height: 31px;'></i></div>";
+        if(isset($_datas["MM"]["TOTAL"])){                        
+                                $return .= "<div class='previsySubTitleMoyenne'>- Moyenne -</div>
                                 <div class='previsySubChiffreMoyenne'>" . number_format($_datas["MM"]["MOY"], 1) . "<span style='font-size:0.7em'>MM</span></div>
                                 <div class='previsySubTitleMoyenne'>Précipitation (" . $_datas["MM"]["TOTAL"] . "<span style='font-size:0.6em'>MM</span>)</div>
                             </div>";
-        if ($_datas["DUREE_HEURE"] > 1) {
+        } else {
+                                $return .= "<div class='previsySubTitleMoyenne'>- Néant -</div>
+                                <div class='previsySubChiffreMoyenne'>0<span style='font-size:0.7em'>MM</span></div>
+                                <div class='previsySubTitleMoyenne'>Précipitation</div>
+                            </div>";
+        }
+        if ($_datas["DUREE_HEURE"] > 1 AND isset($_datas["MM"]["MIN"])) {
             $return .= "<div class='previsyBlockMinMax'>
                                 <div class ='previsySubBlock previsySubBlock_G'>
                                     <div class='previsySubChiffre'>" . $_datas["MM"]["MIN"] . "<span style='font-size:0.7em'>MM</span></div>
