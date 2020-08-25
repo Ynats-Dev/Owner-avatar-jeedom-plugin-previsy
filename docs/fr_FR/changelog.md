@@ -2,6 +2,7 @@
 
 - BUG : Correction sur les alertes et plus particulièrement sur le cumul avec le vent.
 - BUG : Correction d'une faute de frappe dans le message
+- BUG : Affichage de l'heure de fin plus logique
 - Les alertes météos sont prioritaires à celles du vent
 - Modification du widget quand il n'y a pas de précipitation
 - Amélioration des logs en mode debug 

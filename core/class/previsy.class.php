@@ -1197,14 +1197,10 @@ class previsy extends eqLogic {
                                 log::add('previsy', 'debug', 'get :. Alertes suivantes Ignorées : ' . $eqLogic->getCofingNbAlerte() . ' en paramètre.');
                         }
                         
-                        $al_last["END"] = $date->format('YmdH') . "00";
-                        $al_last["END_TXT"] = $tmp_day["JOUR_TXT"]; 
-                        
-                        if($al_last["END"] == $al_last["START"]){
-                            $al_last["END"] = $date_plus_un->format('YmdH') . "00";
-                            $al_last["END_TXT"] = $tmp_day_plus_un["JOUR_TXT"];
-                            //$al_last["DUREE_HEURE"] = 1;
-                        }
+ 
+                        $al_last["END"] = $date_plus_un->format('YmdH') . "00";
+                        $al_last["END_TXT"] = $tmp_day_plus_un["JOUR_TXT"];
+
                             
                         $al_last["DUREE_HEURE"] = $dur++;
                         
