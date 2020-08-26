@@ -1,3 +1,6 @@
+# 28/08/2020 | Stable 1.0.2
+- Passage en stable
+
 # 25/08/2020 | Beta 1.0.2
 
 - BUG : Correction sur les alertes et plus particulièrement sur le cumul avec le vent.

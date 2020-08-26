@@ -81,6 +81,7 @@ class previsy extends eqLogic {
     /*     * ***********************Methode static*************************** */
 
     public function UpdateDatas($previsy) {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'UpdateDatas :. Lancement #ID#' . $previsy->getId());
 
         $previsy->clearDatas($previsy);
@@ -201,9 +202,11 @@ class previsy extends eqLogic {
         $previsy->refreshWidget();
 
         log::add('previsy', 'debug', 'UpdateDatas :. Fin des mises à jour des données de #ID#' . $previsy->getId());
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
     }
 
     public function updateTampon() {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'updateTampon :. Lancement');
     }
 
@@ -214,6 +217,7 @@ class previsy extends eqLogic {
         foreach ($eqLogics as $previsy) {
             if ($previsy->getIsEnable() == 1) {
                 $previsy->updateJsonDatas($previsy->getId());
+                log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
                 log::add('previsy', 'debug', 'cronHourly :. Lancement pour #ID#' . $previsy->getId());
             }
         }
@@ -222,18 +226,22 @@ class previsy extends eqLogic {
     /*     * *********************Méthodes d'instance************************* */
 
     public function preInsert() {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'preInsert :. Lancement');
     }
 
     public function postInsert() {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'postInsert :. Lancement');
     }
 
     public function preSave() {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'preSave :. Lancement');
     }
 
     public function postSave() {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'postSave :. Début de la création ou Mise à jour des commandes #ID#' . $this->getId());
 
         $nb_alerte = $this->getCofingNbAlerte();
@@ -784,7 +792,7 @@ class previsy extends eqLogic {
         $refresh->setType('action');
         $refresh->setSubType('other');
         $refresh->save();
-
+        
         log::add('previsy', 'debug', 'postSave :. Fin de la création ou Mise à jour des commandes #ID#' . $this->getId());
 
         $eqLogic = self::byId($this->getId());
@@ -792,13 +800,17 @@ class previsy extends eqLogic {
             log::add('previsy', 'debug', 'postSave :. miseEnCacheJson : ' . $eqLogic->getConfiguration("ville"));
             $this->updateJsonDatas($this->getId());
         }
+        
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
     }
 
     public function preUpdate() {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'preUpdate :. lancement');
     }
 
     public function postUpdate() {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'postUpdate :. lancement');
     }
 
@@ -806,18 +818,23 @@ class previsy extends eqLogic {
         $config = $this->getConfigPrevisy();
         $tempJson = $config["jsonTampon"] . $this->getConfiguration("ville") . ".json";
         if (is_file($tempJson)) {
+            log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
             log::add('previsy', 'debug', 'preRemove :. Suppression du fichier Json : ' . $tempJson);
             unlink($tempJson);
         }
     }
 
     public function postRemove() {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'postRemove :. lancement');
     }
 
 // Non obligatoire mais permet de modifier l'affichage du widget si vous en avez besoin
 
     public function toHtml($_version = 'dashboard') {
+        
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+        log::add('previsy', 'debug', 'toHtml :. lancement');
 
         $config = $this->getConfigPrevisy();
 
@@ -1014,7 +1031,10 @@ class previsy extends eqLogic {
             ${$tmp_cmd} = $this->getCmd(null, $tmp_cmd);
             $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
         }
-
+        
+        log::add('previsy', 'debug', 'toHtml :. fin');
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+        
         return template_replace($replace, getTemplate('core', $version, 'previsy', 'previsy'));
     }
 
@@ -1037,7 +1057,7 @@ class previsy extends eqLogic {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
     
     public function get($_id) {
-
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'get :. #ID#' . $_id . ' lancement');
 
         $eqLogic = self::byId($_id);
@@ -1063,6 +1083,7 @@ class previsy extends eqLogic {
             $now["GLOBAL"]["TYPE_DEGRE"] = $eqLogic->getCofingFormatDegres();
 
             // Récuprération des données JSON
+            log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
             log::add('previsy', 'debug', 'get :. Chargement des données du Json en Tampon #ID#' . $_id);
             $getJson = $eqLogic->getJsonTampon($eqLogic->getId());
 
@@ -1130,6 +1151,7 @@ class previsy extends eqLogic {
                     $txt_meteo = $lang->infosCondition($tmp_now["TMP"]["CONDITION"]);
                     
                     if(isset($txt_meteo["ALERTE"]) AND $alertes <= $eqLogic->getCofingNbAlerte()) { 
+                        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
                         log::add('previsy', 'debug', 'get :. Alerte [' . $txt_meteo["ALERTE"] . ' -> ' . $tmp_now["TMP"]["CONDITION"].']'); 
                     }                    
 
@@ -1195,8 +1217,7 @@ class previsy extends eqLogic {
                         
                         if ($alertes > $eqLogic->getCofingNbAlerte()) {
                                 log::add('previsy', 'debug', 'get :. Alertes suivantes Ignorées : ' . $eqLogic->getCofingNbAlerte() . ' en paramètre.');
-                        }
-                        
+                        }  
  
                         $al_last["END"] = $date_plus_un->format('YmdH') . "00";
                         $al_last["END_TXT"] = $tmp_day_plus_un["JOUR_TXT"];
@@ -1263,7 +1284,7 @@ class previsy extends eqLogic {
                             log::add('previsy', 'debug', 'get :. Durée [' . $al_last["DUREE_HEURE"] . ']');
                         }
                     }
-                    
+                                        
                 }
                                 
                 if (!isset($now["ALERTES"]["DETAILS"][0]["CONDITION_KEY"])) {
@@ -1272,22 +1293,29 @@ class previsy extends eqLogic {
 
                 return $now;
             } else {
+                log::add('previsy', 'error', '---------------------------------------------------------------------------------------');
                 log::add("previsy", "error", "get :. La ville " . $now["GLOBAL"]["VILLE"] . " n'est pas référencé sur prevision-meteo.ch");
+                log::add('previsy', 'error', '---------------------------------------------------------------------------------------');
                 $now["ERROR"] = TRUE;
                 return $now;
             }
         }
+        
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
     }
 
     public function clearDatas($previsy) {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'clearDatas :. Lancement du nettoyage des commandes');
         $cmds = $previsy->getCmd();
         foreach ($cmds as $cmd) {
             if ($cmd->getLogicalId() != 'refresh') {
                 $previsy->checkAndUpdateCmd($cmd->getLogicalId(), NULL);
+                log::add('previsy', 'debug', 'clearDatas :. ID : '. $cmd->getLogicalId());
             }
         }
         log::add('previsy', 'debug', 'clearDatas :. Fin du nettoyage des commandes');
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
     }
 
     public function getIdEtNameCmd($_idKey, $_sarray) {
@@ -1369,11 +1397,13 @@ class previsy extends eqLogic {
         $config = $this->getConfigPrevisy();
         $return["datas"] = json_decode(file_get_contents($config["jsonTampon"] . $_id . ".json"));
         $return["datetime"] = filemtime($config["jsonTampon"] . $_id . ".json");
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'getJsonTampon :. Chargement du Json : ' . $config["jsonTampon"] . $_id . '.json');
         return $return;
     }
 
     public function updateJsonDatas($_id = NULL) {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         $eqLogic = self::byId($_id);
 
         $ville = $eqLogic->getConfiguration("ville");
@@ -1406,6 +1436,7 @@ class previsy extends eqLogic {
     }
 
     public function miseEnCacheJson($_id = NULL) {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         $eqLogic = self::byId($_id);
 
         $ville = $this->getConfiguration("ville");
@@ -1448,8 +1479,10 @@ class previsy extends eqLogic {
 
             log::add('previsy', 'debug', 'miseEnCacheJson :. La récupération des données de ' . $ville . ' faite en ' . $tempTimeUrl . ' secondes');
             log::add('previsy', 'debug', 'miseEnCacheJson :. Enregistrement du Json : ' . $file);
+            log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         } else {
             log::add('previsy', 'debug', 'miseEnCacheJson :.  Impossible de se connecter à https://www.prevision-meteo.ch/services/json/' . $ville . '. Le cache est donc conservé.');
+            log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         }
     }
 
@@ -1461,6 +1494,7 @@ class previsy extends eqLogic {
 
     public function getWidget($_datas, $_cmdIds = NULL) {
 
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'getWidget :. Lancement de la création ou de la mise à jour du Widget #ID#' . $_cmdIds["widget"]["id"]);
 
         $degre = $this->getCofingFormatDegres();
@@ -1602,11 +1636,13 @@ class previsy extends eqLogic {
             </div>";
 
         log::add('previsy', 'debug', 'getWidget :. Fin de la création ou de la mise à jour du Widget #ID#' . $_cmdIds["widget"]["id"]);
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
 
         return $return;
     }
 
     public function getWidgetNull() {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'getWidgetNull :. Création widget rien à signaler');
         return "<div style='width:100%; padding:0 5px;'>
                     <div class='previsyWidget' style='margin:0; padding:5px; width:100%;'>
@@ -1619,6 +1655,7 @@ class previsy extends eqLogic {
     }
 
     public function getWidgetError($_ville) {
+        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', 'getWidgetError :. Création widget error');
         return "<div style='width:100%; padding:0 5px;'>
                     <div class='previsyWidget' style='margin:0; padding:5px; width:100%;'>
@@ -1655,6 +1692,7 @@ class previsyCmd extends cmd {
         $eqlogic = $this->getEqLogic();
         switch ($this->getLogicalId()) { //vérifie le logicalid de la commande 			
             case 'refresh': // LogicalId de la commande rafraîchir que l’on a créé dans la méthode Postsave 
+                log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
                 log::add('previsy', 'debug', 'execute :. Lancement de la commande refresh : #ID#' . $eqlogic->getId());
                 $eqlogic->updateJsonDatas($eqlogic->getId());
                 break;
