@@ -235,7 +235,7 @@ class previsy_language {
             }
             $return["MM"] .= " de précipitation"; 
             
-            if ($_input["DUREE_HEURE"] > 1) {
+            if ($_input["DUREE_HEURE"] > 1 AND $_input["MM"]["MOY"] != $_input["MM"]["TOTAL"]) {
             $return["MM"] .= " soit une moyenne de " . number_format($_input["MM"]["MOY"], 1) . " millimètre";
             if ($_input["MM"]["MOY"] > 1) {
                 $return["MM"] .= "s";
@@ -253,7 +253,7 @@ class previsy_language {
                 if ($_input["MM"]["MAX"] > 1) {
                     $return["MM"] .= "s";
                 }
-                $return["MM"] .= " de précipitation. ";
+                $return["MM"] .= " de précipitation.";
             } else {
                 $return["MM"] .= " En résumé, " . $_input["MM"]["CONDITION_MAX_TXT"] . ", avec des précipitations allant de " . number_format($_input["MM"]["MIN"], 1);
                 $return["MM"] .= " à " . $_input["MM"]["MAX"] . " millimètre";
@@ -271,21 +271,21 @@ class previsy_language {
         }
 
         if ($_input["TEMPERATURE"]["MIN"] != $_input["TEMPERATURE"]["MAX"]) {
-            $return["TEMPERATURE"] = " La température moyenne sera de " . number_format($_input["TEMPERATURE"]["MOY"], 1) . $_degre;
-            $return["TEMPERATURE"] .= " allant d'une amplitude de " . number_format($_input["TEMPERATURE"]["MIN"], 1) . $_degre . " à " . number_format($_input["TEMPERATURE"]["MAX"], 1) . $_degre . ".";
+            $return["TEMPERATURE"] = "La température moyenne sera de " . number_format($_input["TEMPERATURE"]["MOY"], 1) . $_degre;
+            $return["TEMPERATURE"] .= " allant d'une amplitude de " . number_format($_input["TEMPERATURE"]["MIN"], 1) . $_degre . " à " . number_format($_input["TEMPERATURE"]["MAX"], 1) . $_degre . ". ";
         } else {
-            $return["TEMPERATURE"] = " La température sera de " . number_format($_input["TEMPERATURE"]["MOY"], 1) . $_degre . ".";
+            $return["TEMPERATURE"] = "La température sera de " . number_format($_input["TEMPERATURE"]["MOY"], 1) . $_degre . ". ";
         }
 
         if ($_input["HUMIDITE"]["MIN"] != $_input["HUMIDITE"]["MAX"]) {
-            $return["HUMIDITE"] = " Le taux d'humidité sera en moyenne à " . number_format($_input["HUMIDITE"]["MOY"], 1) . "%";
-            $return["HUMIDITE"] .= " allant d'une amplitude de " . number_format($_input["HUMIDITE"]["MIN"], 1) . "% à " . number_format($_input["HUMIDITE"]["MAX"], 1) . "%.";
+            $return["HUMIDITE"] = "Le taux d'humidité sera en moyenne à " . number_format($_input["HUMIDITE"]["MOY"], 1) . "%";
+            $return["HUMIDITE"] .= " allant d'une amplitude de " . number_format($_input["HUMIDITE"]["MIN"], 1) . "% à " . number_format($_input["HUMIDITE"]["MAX"], 1) . "%. ";
         } else {
-            $return["HUMIDITE"] = " Le taux d'humidité sera de " . number_format($_input["HUMIDITE"]["MOY"], 1) . "%.";
+            $return["HUMIDITE"] = "Le taux d'humidité sera de " . number_format($_input["HUMIDITE"]["MOY"], 1) . "%. ";
         }
 
-        $return["VENT"] = " Le vent soufflera en moyenne à " . number_format($_input["VENT_VITESSE"]["MOY"], 1) . " KM/H";
-        $return["VENT"] .= " avec des rafales pouvant aller jusqu'à " . number_format($_input["VENT_RAFALES"]["MAX"], 1) . " KM/H.";
+        $return["VENT"] = "Le vent soufflera en moyenne à " . number_format($_input["VENT_VITESSE"]["MOY"], 1) . " KM/H";
+        $return["VENT"] .= " avec des rafales pouvant aller jusqu'à " . number_format($_input["VENT_RAFALES"]["MAX"], 1) . " KM/H. ";
 
         $return["FULL"] = $return["START"] . $return["MM"] . $return["HUMIDITE"] . $return["TEMPERATURE"] . $return["VENT"];
 

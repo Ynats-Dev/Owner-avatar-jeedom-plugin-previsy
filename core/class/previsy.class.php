@@ -1112,13 +1112,13 @@ class previsy extends eqLogic {
                 $dur = 0;
                 $alertes = 0;
 
-                if ($date->format('i') >= 50) { // A partir de 50 on annonce le temps de l'heure suivante
-                    $date->add(new DateInterval('PT1H'));
-                    $date_plus_un->add(new DateInterval('PT2H'));
+//                if ($date->format('i') >= 50) { // A partir de 50 on annonce le temps de l'heure suivante
+//                    $date->add(new DateInterval('PT1H'));
+//                    $date_plus_un->add(new DateInterval('PT2H'));
+//                    $now["GLOBAL"]["HEURE+0"] = $eqLogic->formatHeure($date->format('H')) . "H00";
+//                } else {
                     $now["GLOBAL"]["HEURE+0"] = $eqLogic->formatHeure($date->format('H')) . "H00";
-                } else {
-                    $now["GLOBAL"]["HEURE+0"] = $eqLogic->formatHeure($date->format('H')) . "H00";
-                }
+//                }
 
                 for ($i = 0; $i <= $config["prevHeure"]; $i++) {
 
