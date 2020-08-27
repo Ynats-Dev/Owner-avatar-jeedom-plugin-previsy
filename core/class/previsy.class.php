@@ -1194,6 +1194,8 @@ class previsy extends eqLogic {
 
                         if(!isset($al_last["TYPE"])){
                             
+                            log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+                            
                             $alertes++;
                             $al_last["START"] = $date->format('YmdH') . "00";
                             $al_last["START_TXT"] = $tmp_day["JOUR_TXT"];
