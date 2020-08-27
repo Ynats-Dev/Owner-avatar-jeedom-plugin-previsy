@@ -1057,7 +1057,7 @@ class previsy extends eqLogic {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
     
     public function get($_id) {
-        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+        log::add('previsy', 'debug', '#######################################################################################');
         log::add('previsy', 'debug', 'get :. #ID#' . $_id . ' lancement');
 
         $eqLogic = self::byId($_id);
@@ -1085,10 +1085,14 @@ class previsy extends eqLogic {
             // Récuprération des données JSON
             log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
             log::add('previsy', 'debug', 'get :. Chargement des données du Json en Tampon #ID#' . $_id);
+
             $getJson = $eqLogic->getJsonTampon($eqLogic->getId());
 
             $json = $getJson["datas"];
             $now["GLOBAL"]["LAST_SYNCHRO"] = $getJson["datetime"];
+            
+            log::add('previsy', 'debug', 'get :. LAST_SYNCHRO : [' .date("d/m/Y H:i", $now["GLOBAL"]["LAST_SYNCHRO"]) .']');
+            log::add('previsy', 'debug', 'get :. DATE : [' .date("d/m/Y H:i") .']');
             
             if(!empty($eqLogic->getConfiguration("latitude")) AND !empty($eqLogic->getConfiguration("longitude"))){
                 $now["GLOBAL"]["VILLE"] = NULL;
@@ -1194,7 +1198,7 @@ class previsy extends eqLogic {
 
                         if(!isset($al_last["TYPE"])){
                             
-                            log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+                            log::add('previsy', 'debug', '=======================================================================================');
                             
                             $alertes++;
                             $al_last["START"] = $date->format('YmdH') . "00";
@@ -1213,7 +1217,7 @@ class previsy extends eqLogic {
                             }
                         
                             if ($alertes <= $eqLogic->getCofingNbAlerte()) {
-                                log::add('previsy', 'debug', 'get :. Alerte [' . $al_last["START"] . '] ' . $txt_meteo["ALERTE"] . ' ajoutée pour ' . $now["GLOBAL"]["VILLE"]);
+                                log::add('previsy', 'debug', 'get :. START [' . $al_last["START"] . '] TYPE ['. $al_last["TYPE"] .'] VILLE [' . $now["GLOBAL"]["VILLE"] . ']');
                             }
                         }
                         
@@ -1229,12 +1233,6 @@ class previsy extends eqLogic {
                         
                         
                         $al_last["ICON"] = $eqLogic->getIcon($al_last["TYPE"]);
-                        
-                        if ($alertes <= $eqLogic->getCofingNbAlerte()) {
-                            log::add('previsy', 'debug', 'get :. DAY_JSON [' . $tmp_now["TMP"]["DAY_JSON"] . ']'); 
-                            log::add('previsy', 'debug', 'get :. HOUR_JSON [' . $tmp_now["TMP"]["HOUR_JSON"] . ']');
-                            log::add('previsy', 'debug', 'get :. MM [' . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->APCPsfc . ']');
-                        }
                         
                         // Précipitations
                         $mm = $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->APCPsfc;
@@ -1282,8 +1280,19 @@ class previsy extends eqLogic {
                             $now["ALERTES"]["DETAILS"][] = $tmp_now;
                         }    
                         if ($alertes <= $eqLogic->getCofingNbAlerte()) {
-                            log::add('previsy', 'debug', 'get :. Start [' . $al_last["START"] . ' ('.$mm.')] / End [' . $al_last["END"] . ']');                     
-                            log::add('previsy', 'debug', 'get :. Durée [' . $al_last["DUREE_HEURE"] . ']');
+                            log::add('previsy', 'debug', '=======================================================================================');
+                            log::add('previsy', 'debug', 'get :. DAY_JSON [' . $tmp_now["TMP"]["DAY_JSON"] . ']'); 
+                            log::add('previsy', 'debug', 'get :. HOUR_JSON [' . $tmp_now["TMP"]["HOUR_JSON"] . ']');
+                            log::add('previsy', 'debug', 'get :. DUREE [' . $al_last["DUREE_HEURE"] . 'H]');
+                            log::add('previsy', 'debug', 'get :. CONDITION_KEY [' . $tmp_now["CONDITION_KEY"] . ']');
+                            log::add('previsy', 'debug', 'get :. TEMPERATURE [' . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->TMP2m . '°]');
+                            log::add('previsy', 'debug', 'get :. MM [' . $mm . ']');
+                            log::add('previsy', 'debug', 'get :. HUMIDITE [' . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->RH2m . ']');
+                            log::add('previsy', 'debug', 'get :. VENT_VITESSE [' . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDSPD10m . ']');
+                            log::add('previsy', 'debug', 'get :. VENT_RAFALES [' . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDGUST10m . ']');
+                            log::add('previsy', 'debug', 'get :. VENT_NOM [' . $al_last["VENT_NOM"] . ']');
+                            log::add('previsy', 'debug', 'get :. START [' . $al_last["START"] . ' ('.$mm.')] / END [' . $al_last["END"] . ']');                     
+                            
                         }
                     }
                                         
@@ -1303,7 +1312,7 @@ class previsy extends eqLogic {
             }
         }
         
-        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+        log::add('previsy', 'debug', '#######################################################################################');
     }
 
     public function clearDatas($previsy) {

@@ -2,7 +2,8 @@
 - Suppression à la règle qui annonce la prédiction de l'heure d'après à 50.
 - Texte prédictif : Correction si précipitation min et max sont identiques.
 - Texte prédictif : Ajustement des espaces en fin de phrase.
-- Ajout de la version dans la page de configuration.
+- Affichage la version dans la page de configuration.
+- Ajout de logs
 
 # 25/08/2020 | Beta 1.0.2
 
