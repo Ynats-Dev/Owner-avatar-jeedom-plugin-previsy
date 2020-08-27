@@ -1,5 +1,8 @@
-# 28/08/2020 | Stable 1.0.2
-- Passage en stable
+# 27/08/2020 | Beta 1.0.3
+- Suppression à la règle qui annonce la prédiction de l'heure d'après à 50.
+- Texte prédictif : Correction si précipitation min et max sont identiques.
+- Texte prédictif : Ajustement des espaces en fin de phrase.
+- Ajout de la version dans la page de configuration.
 
 # 25/08/2020 | Beta 1.0.2
 
