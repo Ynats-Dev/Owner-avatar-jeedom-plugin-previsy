@@ -1,4 +1,8 @@
+# 29/08/2020 | Stable 1.0.3
+- Passage en stable
+
 # 27/08/2020 | Beta 1.0.3
+
 - Suppression à la règle qui annonce la prédiction de l'heure d'après à 50.
 - Texte prédictif : Correction si précipitation min et max sont identiques.
 - Texte prédictif : Ajustement des espaces en fin de phrase.
@@ -24,6 +28,7 @@
 - BUG : Fix PHP Notice - Undefined property: stdClass::$errors
 
 # 30/06/2020 | Beta 1.2
+
 - BUG : Priorisation des alertes par rapport aux alertes vent
 - BUG : Correction du décompte du temps d'alerte
 - Possibilité d'installer sur une V3 pour test

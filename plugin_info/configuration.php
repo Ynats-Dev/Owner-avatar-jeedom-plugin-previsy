@@ -89,4 +89,4 @@ if (!isConnect()) {
   </fieldset>
 </form>
 
-<div style="float: right; font-size: xx-small;">27/08/2020 | Beta 1.0.3</div>
+<div style="float: right; font-size: xx-small;">29/08/2020 | Stable 1.0.3</div>
