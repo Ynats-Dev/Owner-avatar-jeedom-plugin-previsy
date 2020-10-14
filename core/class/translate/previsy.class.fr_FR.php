@@ -142,7 +142,7 @@ class previsy_language {
         } elseif ($_input >= 50 AND $_input < 62) {
             return 'grand vent frais';
         } elseif ($_input >= 62 AND $_input < 75) {
-            $return["NOM"] = 'coup de vent';
+            return 'coup de vent';
         } elseif ($_input >= 75 AND $_input < 89) {
             return 'fort coup de vent';
         } elseif ($_input >= 89 AND $_input < 103) {
