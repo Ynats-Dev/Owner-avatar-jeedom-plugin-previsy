@@ -1,4 +1,4 @@
-# 19/10/2020 | stable 1.0.4
+# 19/10/2020 | beta 1.0.4 (Par Piug)
 - Ajout de la traduction en Anglais
 - Ajout d'une courte description des commandes dans la configuration
 
