@@ -88,7 +88,7 @@ class previsy_language {
                 $return["ALERTE"] = "orage";
                 break;
             case "Fortement orageux":
-                $return["TXT"] = __("le ciel sear fortement orageux",  __FILE__);
+                $return["TXT"] = __("le ciel sera fortement orageux",  __FILE__);
                 $return["ALERTE"] = "orage";
                 break;
             case "Averses de neige faible":
