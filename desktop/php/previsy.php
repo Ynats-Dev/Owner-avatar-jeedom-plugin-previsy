@@ -9,7 +9,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 
 <div class="row row-overflow">
     <div class="col-xs-12 eqLogicThumbnailDisplay">
-        <legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
+        <legend><i class="fas fa-cog"></i>{{Gestion}}</legend>
         <div class="eqLogicThumbnailContainer">
             <div class="cursor eqLogicAction logoPrimary" data-action="add">
                 <i class="fas fa-plus-circle"></i>
@@ -120,7 +120,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                             </div>
                         </div>-->
                         <div class="form-group" style="margin-top: 5px;">
-                            <label class="col-sm-3 control-label">{{Afficher le texte prédictif dans le widget }}</label>
+                            <label class="col-sm-3 control-label">{{Afficher le texte prédictif dans le widget}}</label>
                             <div class="col-sm-3">
                                 <input type="checkbox" class="eqLogicAttr checkbox-inline" data-l1key="configuration"  data-l2key="afficheTxt" />
                             </div>
@@ -129,15 +129,15 @@ $eqLogics = eqLogic::byType($plugin->getId());
                             <label class="col-sm-3 control-label">{{Seuil d'alerte pour le vent (échelle de Beaufort)}}</label>
                             <div class="col-sm-3">
                                 <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="seuilVent">
-                                    <option value="20">[Force 4] Moyenne du vent à partir de 20 Km/H (Jolie brise)</option>
-                                    <option value="29">[Force 5] Moyenne du vent à partir de 29 Km/H (Bonne brise)</option>
-                                    <option value="39">[Force 6] Moyenne du vent à partir de 39 Km/H (Vent frais)</option>
-                                    <option value="50">[Force 7] Moyenne du vent à partir de 50 Km/H (Grand frais)</option>
-                                    <option value="62">[Force 8] Moyenne du vent à partir de 62 Km/H (Coup de vent)</option>
-                                    <option value="75">[Force 9] Moyenne du vent à partir de 75 Km/H (Fort coup de vent)</option>
-                                    <option value="89">[Force 10] Moyenne du vent à partir de 89 Km/H (Tempête)</option>
-                                    <option value="103">[Force 11] Moyenne du vent à partir de 103 Km/H (Violente tempête)</option>
-                                    <option value="118">[Force 12] Moyenne du vent à partir de 118 Km/H (Ouragan )</option>
+                                    <option value="20">{{[Force 4] Moyenne du vent à partir de 20 km/h (Jolie brise)}}</option>
+                                    <option value="29">{{[Force 5] Moyenne du vent à partir de 29 km/h (Bonne brise)}}</option>
+                                    <option value="39">{{[Force 6] Moyenne du vent à partir de 39 km/h (Vent frais)}}</option>
+                                    <option value="50">{{[Force 7] Moyenne du vent à partir de 50 km/h (Grand frais)}}</option>
+                                    <option value="62">{{[Force 8] Moyenne du vent à partir de 62 km/h (Coup de vent)}}</option>
+                                    <option value="75">{{[Force 9] Moyenne du vent à partir de 75 km/h (Fort coup de vent)}}</option>
+                                    <option value="89">{{[Force 10] Moyenne du vent à partir de 89 km/h (Tempête)}}</option>
+                                    <option value="103">{{[Force 11] Moyenne du vent à partir de 103 km/h (Violente tempête)}}</option>
+                                    <option value="118">{{[Force 12] Moyenne du vent à partir de 118 km/h (Ouragan)}}</option>
                                 </select>
                             </div>
                         </div>

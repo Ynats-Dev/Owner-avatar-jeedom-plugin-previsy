@@ -3,6 +3,8 @@ layout: default
 lang: fr_FR
 ---
 
+[English version available here](docs/en_US/index.md)
+
 Description
 ===
 

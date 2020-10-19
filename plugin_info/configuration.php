@@ -28,20 +28,20 @@ if (!isConnect()) {
             <label class="col-lg-4 control-label">{{Nombre d'alerte en prévision à afficher}}</label>
             <div class="col-lg-2">
                 <select class="configKey form-control" data-l1key="nb_alerte">
-                    <option value="1">1 alerte</option>
-                    <option value="2">2 alertes</option>
-                    <option value="3">3 alertes</option>
-                    <option value="4">4 alertes</option>
-                    <option value="5">5 alertes</option>
+                    <option value="1">1 {{alerte}}</option>
+                    <option value="2">2 {{alertes}}</option>
+                    <option value="3">3 {{alertes}}</option>
+                    <option value="4">4 {{alertes}}</option>
+                    <option value="5">5 {{alertes}}</option>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-lg-4 control-label">{{Temperature}}</label>
+            <label class="col-lg-4 control-label">{{Température}}</label>
             <div class="col-lg-2">
                 <select class="configKey form-control" data-l1key="type_degre">
-                    <option value="°C">Degrés Celsius (°C)</option>
-                    <option value="°F">Degrés Fahrenheit (°F)</option>
+                    <option value="°C">{{Degrés Celsius (°C)}}</option>
+                    <option value="°F">{{Degrés Fahrenheit (°F)}}</option>
                 </select>
             </div>
         </div>
@@ -58,29 +58,29 @@ if (!isConnect()) {
             <div class="col-lg-3">
                  <table>
                     <?php
-                        addTrConfig("show_mm_min", "Commandes mm_min");
-                        addTrConfig("show_mm_max", "Commandes mm_max");
-                        addTrConfig("show_mm_moyenne", "Commandes mm_moyenne");
-                        addTrConfig("show_mm_total", "Commandes mm_total");
-                        addTrConfig("show_temp_min", "Commandes temp_min");
-                        addTrConfig("show_temp_max", "Commandes temp_max");
-                        addTrConfig("show_temp_moyenne", "Commandes temp_moyenne");
-                        addTrConfig("show_humidite_min", "Commandes humidite_min");
-                        addTrConfig("show_humidite_max", "Commandes humidite_max");
-                        addTrConfig("show_humidite_moyenne", "Commandes humidite_moyenne");  
-                        addTrConfig("show_vent_min", "Commandes vent_min");  
-                        addTrConfig("show_vent_max", "Commandes vent_max");  
-                        addTrConfig("show_vent_moyenne", "Commandes vent_moyenne");  
-                        addTrConfig("show_vent_nom", "Commandes vent_nom");  
-                        addTrConfig("show_rafale_min", "Commandes rafale_min");  
-                        addTrConfig("show_rafale_max", "Commandes rafale_max");  
-                        addTrConfig("show_rafale_moyenne", "Commandes rafale_moyenne");  
-                        addTrConfig("show_txt_start", "Commandes txt_start");  
-                        addTrConfig("show_txt_mm", "Commandes txt_mm");  
-                        addTrConfig("show_txt_humidite", "Commandes txt_humidite");
-                        addTrConfig("show_txt_temperature", "Commandes txt_temperature");
-                        addTrConfig("show_txt_vent", "Commandes txt_vent");
-                        addTrConfig("show_condition_max", "Commandes condition_max");
+                        addTrConfig("show_mm_min", __("Commandes mm_min : Pluviométrie minimale",  __FILE__));
+                        addTrConfig("show_mm_max", __("Commandes mm_max : Pluviométrie maximale",  __FILE__));
+                        addTrConfig("show_mm_moyenne", __("Commandes mm_moyenne : Pluviométrie moyenne",  __FILE__));
+                        addTrConfig("show_mm_total", __("Commandes mm_total : Pluviométrie totale",  __FILE__));
+                        addTrConfig("show_temp_min", __("Commandes temp_min : Température minimale",  __FILE__));
+                        addTrConfig("show_temp_max", __("Commandes temp_max : Température maximale",  __FILE__));
+                        addTrConfig("show_temp_moyenne", __("Commandes temp_moyenne : Température moyenne",  __FILE__));
+                        addTrConfig("show_humidite_min", __("Commandes humidite_min : Humidité moinimale",  __FILE__));
+                        addTrConfig("show_humidite_max", __("Commandes humidite_max : Humidité maximale",  __FILE__));
+                        addTrConfig("show_humidite_moyenne", __("Commandes humidite_moyenne : Humidité moyenne",  __FILE__));  
+                        addTrConfig("show_vent_min", __("Commandes vent_min : Vent minimal",  __FILE__));  
+                        addTrConfig("show_vent_max", __("Commandes vent_max : Vent maximal",  __FILE__));  
+                        addTrConfig("show_vent_moyenne", __("Commandes vent_moyenne : Moyenne du vent",  __FILE__));  
+                        addTrConfig("show_vent_nom", __("Commandes vent_nom : Vent nominal",  __FILE__));  
+                        addTrConfig("show_rafale_min", __("Commandes rafale_min : Rafale minimum",  __FILE__));  
+                        addTrConfig("show_rafale_max", __("Commandes rafale_max : Rafale maximale",  __FILE__));  
+                        addTrConfig("show_rafale_moyenne", __("Commandes rafale_moyenne : Rafale moyenne",  __FILE__));  
+                        addTrConfig("show_txt_start", __("Commandes txt_start : Début texte prédictif",  __FILE__));  
+                        addTrConfig("show_txt_mm", __("Commandes txt_mm : Texte prédictif pluviométrie",  __FILE__));  
+                        addTrConfig("show_txt_humidite", __("Commandes txt_humidite : Texte prédictif humidité",  __FILE__));
+                        addTrConfig("show_txt_temperature", __("Commandes txt_temperature : Texte prédictif température",  __FILE__));
+                        addTrConfig("show_txt_vent", __("Commandes txt_vent : Texte prédictif vent",  __FILE__));
+                        addTrConfig("show_condition_max", __("Commandes condition_max : Condition maximale",  __FILE__));
                     ?>
                 </table>
             </div>
