@@ -59,7 +59,7 @@ function addCmdToTable(_cmd) {
     tr += '<td>';
     if (is_numeric(_cmd.id) && !previsyText.match(/widget/)) {
         tr += '<a class="btn btn-default btn-xs cmdAction" data-action="configure"><i class="fa fa-cogs"></i></a> ';
-        tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fa fa-rss"></i> {{Tester}}</a>';
+        tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fa fa-rss"></i>{{Tester}}</a>';
     }
     if (_cmd.type != 'action' && previsyInArray(previsyText) == 0) {
         tr += '<i class="fas fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
@@ -89,11 +89,10 @@ function previsyNormalizer(str) {
   var final = str.join('').toLowerCase();
   
   if(final !== ''){
-      $( "#previsyLinkVille" ).replaceWith('<a class="btn btn-sm btn-default" id="previsyLinkVille" href="https://www.prevision-meteo.ch/meteo/localite/'+final+'" target="_blank">Testez la ville de <b>'+final+'</b> sur prevision-meteo.ch</a>');
+      $( "#previsyLinkVille" ).replaceWith('<a class="btn btn-sm btn-default" id="previsyLinkVille" href="https://www.prevision-meteo.ch/meteo/localite/'+final+'" target="_blank">{{Testez la ville de }}<b>'+final+'</b> {{sur}} prevision-meteo.ch</a>');
   } else {
       $( "#previsyLinkVille" ).replaceWith('<span id="previsyLinkVille"></span>');
   }
  
   return final;
 }
-

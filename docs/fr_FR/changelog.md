@@ -1,3 +1,7 @@
+# 19/10/2020 | stable 1.0.4
+- Ajout de la traduction en Anglais
+- Ajout d'une courte description des commandes dans la configuration
+
 # 29/08/2020 | Stable 1.0.3
 - Passage en stable
 

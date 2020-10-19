@@ -35,8 +35,7 @@ class previsy extends eqLogic {
     public function getConfigPrevisy() {
         $return["urlApi"] = "https://www.prevision-meteo.ch/services/json/"; // Url du Json de prevision-meteo.ch
         $return["jsonTampon"] = __DIR__ . "/../../../../plugins/previsy/core/json/"; // Dossier des Json en Tampon
-        $return["icons"] = "/plugins/previsy/desktop/icons/"; // Dossier des icones
-        $return["phrasesLangues"] = __DIR__ . "/../../../../plugins/previsy/core/class/translate/"; // Dossier des class permettant de construire des phrases en différentes langues
+        $return["icons"] = "/plugins/previsy/desktop/icons/"; // Dossier des iconespermettant de construire des phrases en différentes langues
         $return["prevHeure"] = 72; // Heure max de récupération des données dans le Json
         $return["maxAlerte"] = 5; // Nombre max d'alerte ou widget à afficher
         $return["timeSynchro"] = 3600 * 2; // Synchro avec le site distant tous les X secondes
@@ -82,13 +81,13 @@ class previsy extends eqLogic {
 
     public function UpdateDatas($previsy) {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'UpdateDatas :. Lancement #ID#' . $previsy->getId());
+        log::add('previsy', 'debug', __('UpdateDatas :. ',  __FILE__) . __('Lancement ',  __FILE__) . '#ID# ' . $previsy->getId());
 
         $previsy->clearDatas($previsy);
 
         $info = $previsy->get($previsy->getId());
 
-        log::add('previsy', 'debug', 'UpdateDatas :. Lancement des mises à jour des données de #ID#' . $previsy->getId());
+        log::add('previsy', 'debug', __('UpdateDatas :. ',  __FILE__) . __('Lancement des mises à jour des données de #ID# ',  __FILE__) . $previsy->getId());
 
         $previsy->checkAndUpdateCmd('ville', $info["GLOBAL"]["VILLE"]);
         $previsy->checkAndUpdateCmd('latitude', $info["GLOBAL"]["LATITUDE"]);
@@ -201,13 +200,13 @@ class previsy extends eqLogic {
         $previsy->toHtml('dashboard');
         $previsy->refreshWidget();
 
-        log::add('previsy', 'debug', 'UpdateDatas :. Fin des mises à jour des données de #ID#' . $previsy->getId());
+        log::add('previsy', 'debug', __('UpdateDatas :. ',  __FILE__) . __('Fin des mises à jour des données de #ID# ',  __FILE__) . $previsy->getId());
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
     }
 
     public function updateTampon() {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'updateTampon :. Lancement');
+        log::add('previsy', 'debug', __('UpdateTampon :. ',  __FILE__) . __('Lancement',  __FILE__));
     }
 
     /*     * *********************Méthodes d'instance************************* */
@@ -218,7 +217,7 @@ class previsy extends eqLogic {
             if ($previsy->getIsEnable() == 1) {
                 $previsy->updateJsonDatas($previsy->getId());
                 log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-                log::add('previsy', 'debug', 'cronHourly :. Lancement pour #ID#' . $previsy->getId());
+                log::add('previsy', 'debug', __('cronHourly :. ',  __FILE__) . __('Lancement pour #ID# ',  __FILE__) . $previsy->getId());
             }
         }
     }
@@ -227,27 +226,27 @@ class previsy extends eqLogic {
 
     public function preInsert() {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'preInsert :. Lancement');
+        log::add('previsy', 'debug', __('preInsert :. ',  __FILE__) . __('Lancement',  __FILE__));
     }
 
     public function postInsert() {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'postInsert :. Lancement');
+        log::add('previsy', 'debug', __('postInsert :. ',  __FILE__) . __('Lancement',  __FILE__));
     }
 
     public function preSave() {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'preSave :. Lancement');
+        log::add('previsy', 'debug', __('preSave :. ',  __FILE__) . __('Lancement',  __FILE__));
     }
 
     public function postSave() {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'postSave :. Début de la création ou Mise à jour des commandes #ID#' . $this->getId());
+        log::add('previsy', 'debug', __('postSave :. ',  __FILE__) . __('Début de la création ou Mise à jour des commandes #ID# ',  __FILE__) . $this->getId());
 
         $nb_alerte = $this->getCofingNbAlerte();
         
         if($nb_alerte == 0){ // Si pas d'enregistrement de config on enregistre des valeurs
-            log::add('previsy', 'debug', 'postSave :. Config Manquante. Enregistrement des valeurs à defaut.');
+            log::add('previsy', 'debug', __('postSave :. ',  __FILE__) . __('Config Manquante. Enregistrement des valeurs à defaut.',  __FILE__));
             config::save('type_degre', '°C', 'previsy');
             config::save('nb_alerte', 1, 'previsy');
             
@@ -793,11 +792,11 @@ class previsy extends eqLogic {
         $refresh->setSubType('other');
         $refresh->save();
         
-        log::add('previsy', 'debug', 'postSave :. Fin de la création ou Mise à jour des commandes #ID#' . $this->getId());
+        log::add('previsy', 'debug', __('postSave :. ',  __FILE__) . __('Fin de la création ou Mise à jour des commandes #ID# ',  __FILE__) . $this->getId());
 
         $eqLogic = self::byId($this->getId());
         if ($eqLogic->getIsEnable() == 1 AND $eqLogic->getConfiguration("ville") != "") {
-            log::add('previsy', 'debug', 'postSave :. miseEnCacheJson : ' . $eqLogic->getConfiguration("ville"));
+            log::add('previsy', 'debug', __('postSave :. ',  __FILE__) . __('miseEnCacheJson : ',  __FILE__) . $eqLogic->getConfiguration("ville"));
             $this->updateJsonDatas($this->getId());
         }
         
@@ -806,12 +805,12 @@ class previsy extends eqLogic {
 
     public function preUpdate() {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'preUpdate :. lancement');
+        log::add('previsy', 'debug', __('preUpdate :. ',  __FILE__) . __('Lancement',  __FILE__));
     }
 
     public function postUpdate() {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'postUpdate :. lancement');
+        log::add('previsy', 'debug', __('postUpdate :. ',  __FILE__) . __('Lancement',  __FILE__));
     }
 
     public function preRemove() {
@@ -819,14 +818,14 @@ class previsy extends eqLogic {
         $tempJson = $config["jsonTampon"] . $this->getConfiguration("ville") . ".json";
         if (is_file($tempJson)) {
             log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-            log::add('previsy', 'debug', 'preRemove :. Suppression du fichier Json : ' . $tempJson);
+            log::add('previsy', 'debug', __('preRemove :. ',  __FILE__) . __('Suppression du fichier Json : ',  __FILE__) . $tempJson);
             unlink($tempJson);
         }
     }
 
     public function postRemove() {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'postRemove :. lancement');
+        log::add('previsy', 'debug', __('postRemove :. ',  __FILE__) . __('Lancement',  __FILE__));
     }
 
 // Non obligatoire mais permet de modifier l'affichage du widget si vous en avez besoin
@@ -834,7 +833,7 @@ class previsy extends eqLogic {
     public function toHtml($_version = 'dashboard') {
         
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'toHtml :. lancement');
+        log::add('previsy', 'debug', __('toHtml :. ',  __FILE__) . __('Lancement',  __FILE__));
 
         $config = $this->getConfigPrevisy();
 
@@ -1032,7 +1031,7 @@ class previsy extends eqLogic {
             $replace["#" . $tmp_cmd . "#"] = (is_object(${$tmp_cmd})) ? ${$tmp_cmd}->execCmd() : '';
         }
         
-        log::add('previsy', 'debug', 'toHtml :. fin');
+        log::add('previsy', 'debug', __('toHtml :. ',  __FILE__) . __('fin',  __FILE__));
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         
         return template_replace($replace, getTemplate('core', $version, 'previsy', 'previsy'));
@@ -1058,22 +1057,15 @@ class previsy extends eqLogic {
     
     public function get($_id) {
         log::add('previsy', 'debug', '#######################################################################################');
-        log::add('previsy', 'debug', 'get :. #ID#' . $_id . ' lancement');
+        log::add('previsy', 'debug', __('get :. ',  __FILE__) . '#ID# ' . $_id . " " .__('Lancement',  __FILE__));
 
         $eqLogic = self::byId($_id);
 
         $config = $eqLogic->getConfigPrevisy();
-
-        $config["LANGUE"] = "fr_FR";
-
-        if ($config["LANGUE"] == "fr_FR") {
-            log::add('previsy', 'debug', 'get :. Chargement du module de construction des phrases en Français');
-            require_once $config["phrasesLangues"] . 'previsy.class.fr_FR.php';
-        } else {
-            log::add('previsy', 'debug', 'get :. Chargement du module de construction des phrases en Anglais');
-            require_once $config["phrasesLangues"] . 'previsy.class.en_US.php';
-        }
-
+		
+		log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('Chargement du module de construction des phrases',  __FILE__));
+		require_once 'previsy.class.phrases.php';
+		
         $now = $tmp_now = $al_last = array();
 
         if ($eqLogic->getIsEnable() == 1) {
@@ -1084,15 +1076,15 @@ class previsy extends eqLogic {
 
             // Récuprération des données JSON
             log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-            log::add('previsy', 'debug', 'get :. Chargement des données du Json en Tampon #ID#' . $_id);
+            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('Chargement des données du Json en Tampon #ID# ',  __FILE__) . $_id);
 
             $getJson = $eqLogic->getJsonTampon($eqLogic->getId());
 
             $json = $getJson["datas"];
             $now["GLOBAL"]["LAST_SYNCHRO"] = $getJson["datetime"];
             
-            log::add('previsy', 'debug', 'get :. LAST_SYNCHRO : [' .date("d/m/Y H:i", $now["GLOBAL"]["LAST_SYNCHRO"]) .']');
-            log::add('previsy', 'debug', 'get :. DATE : [' .date("d/m/Y H:i") .']');
+            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('LAST_SYNCHRO : [',  __FILE__) .date("d/m/Y H:i", $now["GLOBAL"]["LAST_SYNCHRO"]) .']');
+            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('DATE : [',  __FILE__) .date("d/m/Y H:i") .']');
             
             if(!empty($eqLogic->getConfiguration("latitude")) AND !empty($eqLogic->getConfiguration("longitude"))){
                 $now["GLOBAL"]["VILLE"] = NULL;
@@ -1116,13 +1108,13 @@ class previsy extends eqLogic {
                 $dur = 0;
                 $alertes = 0;
 
-//                if ($date->format('i') >= 50) { // A partir de 50 on annonce le temps de l'heure suivante
-//                    $date->add(new DateInterval('PT1H'));
-//                    $date_plus_un->add(new DateInterval('PT2H'));
-//                    $now["GLOBAL"]["HEURE+0"] = $eqLogic->formatHeure($date->format('H')) . "H00";
-//                } else {
+                /* if ($date->format('i') >= 50) { // A partir de 50 on annonce le temps de l'heure suivante
+                    $date->add(new DateInterval('PT1H'));
+                    $date_plus_un->add(new DateInterval('PT2H'));
                     $now["GLOBAL"]["HEURE+0"] = $eqLogic->formatHeure($date->format('H')) . "H00";
-//                }
+                } else { */
+                    $now["GLOBAL"]["HEURE+0"] = $eqLogic->formatHeure($date->format('H')) . "H00";
+                //}
 
                 for ($i = 0; $i <= $config["prevHeure"]; $i++) {
 
@@ -1156,7 +1148,7 @@ class previsy extends eqLogic {
                     
                     if(isset($txt_meteo["ALERTE"]) AND $alertes <= $eqLogic->getCofingNbAlerte()) { 
                         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-                        log::add('previsy', 'debug', 'get :. Alerte [' . $txt_meteo["ALERTE"] . ' -> ' . $tmp_now["TMP"]["CONDITION"].']'); 
+                        log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('Alerte [',  __FILE__) . $txt_meteo["ALERTE"] . ' -> ' . $tmp_now["TMP"]["CONDITION"].']'); 
                     }                    
 
                     if (!isset($txt_meteo["ALERTE"])){
@@ -1189,7 +1181,7 @@ class previsy extends eqLogic {
                     }
                     
                     if($alertes <= $eqLogic->getCofingNbAlerte() AND $traitement != NULL) { 
-                        log::add('previsy', 'debug', 'get :. Type de traitement ['. $traitement .']'); 
+                        log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('Type de traitement [',  __FILE__). $traitement .']'); 
                     }
                               
                     if ($alertes <= $eqLogic->getCofingNbAlerte() AND $traitement != NULL) {
@@ -1217,12 +1209,12 @@ class previsy extends eqLogic {
                             }
                         
                             if ($alertes <= $eqLogic->getCofingNbAlerte()) {
-                                log::add('previsy', 'debug', 'get :. START [' . $al_last["START"] . '] TYPE ['. $al_last["TYPE"] .'] VILLE [' . $now["GLOBAL"]["VILLE"] . ']');
+                                log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('START [',  __FILE__) . $al_last["START"] . __('] TYPE [',  __FILE__). $al_last["TYPE"] .__('] VILLE [',  __FILE__) . $now["GLOBAL"]["VILLE"] . ']');
                             }
                         }
                         
                         if ($alertes > $eqLogic->getCofingNbAlerte()) {
-                                log::add('previsy', 'debug', 'get :. Alertes suivantes Ignorées : ' . $eqLogic->getCofingNbAlerte() . ' en paramètre.');
+                                log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('Alertes suivantes Ignorées : ',  __FILE__) . $eqLogic->getCofingNbAlerte() . __(' en paramètre.',  __FILE__));
                         }  
  
                         $al_last["END"] = $date_plus_un->format('YmdH') . "00";
@@ -1249,7 +1241,7 @@ class previsy extends eqLogic {
                         $al_last["MM"]["MAX"] = max($al_last["MM"]["ARRAY"]);
                         if ($mm == max($al_last["MM"]["ARRAY"])) {
                             $al_last["MM"]["CONDITION_MAX_TXT"] = $txt_meteo["TXT"];
-                            $al_last["CONDITION_MAX"] = $tmp_now["TMP"]["CONDITION"];
+                            $al_last["CONDITION_MAX"] = __($tmp_now["TMP"]["CONDITION"],  __FILE__);
                         }
 
                         $al_last["MM"]["TOTAL"] = array_sum($al_last["MM"]["ARRAY"]);
@@ -1281,17 +1273,17 @@ class previsy extends eqLogic {
                         }    
                         if ($alertes <= $eqLogic->getCofingNbAlerte()) {
                             log::add('previsy', 'debug', '=======================================================================================');
-                            log::add('previsy', 'debug', 'get :. DAY_JSON [' . $tmp_now["TMP"]["DAY_JSON"] . ']'); 
-                            log::add('previsy', 'debug', 'get :. HOUR_JSON [' . $tmp_now["TMP"]["HOUR_JSON"] . ']');
-                            log::add('previsy', 'debug', 'get :. DUREE [' . $al_last["DUREE_HEURE"] . 'H]');
-                            log::add('previsy', 'debug', 'get :. CONDITION_KEY [' . $tmp_now["CONDITION_KEY"] . ']');
-                            log::add('previsy', 'debug', 'get :. TEMPERATURE [' . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->TMP2m . '°]');
-                            log::add('previsy', 'debug', 'get :. MM [' . $mm . ']');
-                            log::add('previsy', 'debug', 'get :. HUMIDITE [' . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->RH2m . ']');
-                            log::add('previsy', 'debug', 'get :. VENT_VITESSE [' . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDSPD10m . ']');
-                            log::add('previsy', 'debug', 'get :. VENT_RAFALES [' . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDGUST10m . ']');
-                            log::add('previsy', 'debug', 'get :. VENT_NOM [' . $al_last["VENT_NOM"] . ']');
-                            log::add('previsy', 'debug', 'get :. START [' . $al_last["START"] . ' ('.$mm.')] / END [' . $al_last["END"] . ']');                     
+                            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('DAY_JSON [',  __FILE__) . $tmp_now["TMP"]["DAY_JSON"] . ']'); 
+                            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('HOUR_JSON [',  __FILE__) . $tmp_now["TMP"]["HOUR_JSON"] . ']');
+                            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('DUREE [',  __FILE__) . $al_last["DUREE_HEURE"] . 'H]');
+                            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('CONDITION_KEY [',  __FILE__) . $tmp_now["CONDITION_KEY"] . ']');
+                            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('TEMPERATURE [',  __FILE__) . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->TMP2m . '°]');
+                            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('MM [',  __FILE__) . $mm . ']');
+                            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('HUMIDITE [',  __FILE__) . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->RH2m . ']');
+                            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('VENT_VITESSE [',  __FILE__) . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDSPD10m . ']');
+                            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('VENT_RAFALES [',  __FILE__) . $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDGUST10m . ']');
+                            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('VENT_NOM [',  __FILE__) . $al_last["VENT_NOM"] . ']');
+                            log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('START [',  __FILE__) . $al_last["START"] . ' ('.$mm.')] / END [' . $al_last["END"] . ']');                     
                             
                         }
                     }
@@ -1299,13 +1291,13 @@ class previsy extends eqLogic {
                 }
                                 
                 if (!isset($now["ALERTES"]["DETAILS"][0]["CONDITION_KEY"])) {
-                    log::add('previsy', 'debug', 'get :. Aucune alerte pour ' . $now["GLOBAL"]["VILLE"]);
+                    log::add('previsy', 'debug', __('get :. ',  __FILE__) . __('Aucune alerte pour ',  __FILE__) . $now["GLOBAL"]["VILLE"]);
                 }
 
                 return $now;
             } else {
                 log::add('previsy', 'error', '---------------------------------------------------------------------------------------');
-                log::add("previsy", "error", "get :. La ville " . $now["GLOBAL"]["VILLE"] . " n'est pas référencé sur prevision-meteo.ch");
+                log::add('previsy', 'error', __('get :. ',  __FILE__) . __('La ville ',  __FILE__) . $now["GLOBAL"]["VILLE"] . __(' n\'est pas référencé sur prevision-meteo.ch',  __FILE__));
                 log::add('previsy', 'error', '---------------------------------------------------------------------------------------');
                 $now["ERROR"] = TRUE;
                 return $now;
@@ -1317,15 +1309,15 @@ class previsy extends eqLogic {
 
     public function clearDatas($previsy) {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'clearDatas :. Lancement du nettoyage des commandes');
+        log::add('previsy', 'debug', __('clearDatas :. ',  __FILE__) . __('Lancement du nettoyage des commandes',  __FILE__));
         $cmds = $previsy->getCmd();
         foreach ($cmds as $cmd) {
             if ($cmd->getLogicalId() != 'refresh') {
                 $previsy->checkAndUpdateCmd($cmd->getLogicalId(), NULL);
-                log::add('previsy', 'debug', 'clearDatas :. ID : '. $cmd->getLogicalId());
+                log::add('previsy', 'debug', __('clearDatas :. ',  __FILE__) . __('#ID# ',  __FILE__) . $cmd->getLogicalId());
             }
         }
-        log::add('previsy', 'debug', 'clearDatas :. Fin du nettoyage des commandes');
+        log::add('previsy', 'debug', __('clearDatas :. ',  __FILE__) . __('Fin du nettoyage des commandes',  __FILE__));
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
     }
 
@@ -1409,7 +1401,7 @@ class previsy extends eqLogic {
         $return["datas"] = json_decode(file_get_contents($config["jsonTampon"] . $_id . ".json"));
         $return["datetime"] = filemtime($config["jsonTampon"] . $_id . ".json");
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'getJsonTampon :. Chargement du Json : ' . $config["jsonTampon"] . $_id . '.json');
+        log::add('previsy', 'debug', __('getJsonTampon :. ',  __FILE__) . __('Chargement du Json : ',  __FILE__) . $config["jsonTampon"] . $_id . '.json');
         return $return;
     }
 
@@ -1430,18 +1422,18 @@ class previsy extends eqLogic {
             $lastUpdate = filemtime($config["jsonTampon"] . $_id . ".json");
             $diffTime = time() - $lastUpdate;
             if ($diffTime > $config["timeSynchro"]) {
-                log::add('previsy', 'debug', 'updateJsonDatas :. Temps de cache écoulé rechargement des données depuis prevision-meteo.ch');
+                log::add('previsy', 'debug', __('updateJsonDatas :. ',  __FILE__) . __('Temps de cache écoulé rechargement des données depuis prevision-meteo.ch',  __FILE__));
                 $eqLogic->miseEnCacheJson($_id);
-                log::add('previsy', 'debug', 'updateJsonDatas :. Mise à jour depuis le json en cache');
+                log::add('previsy', 'debug', __('updateJsonDatas :. ',  __FILE__) . __('Mise à jour depuis le json en cache',  __FILE__));
                 $eqLogic->UpdateDatas($eqLogic);
             } else {
-                log::add('previsy', 'debug', 'updateJsonDatas :. Mise à jour depuis le json en cache');
+                log::add('previsy', 'debug', __('updateJsonDatas :. ',  __FILE__) . __('Mise à jour depuis le json en cache',  __FILE__));
                 $eqLogic->UpdateDatas($eqLogic);
             }
         } else {
-            log::add('previsy', 'debug', 'updateJsonDatas :. Json en cache inexistant chargement des données depuis prevision-meteo.ch');
+            log::add('previsy', 'debug', __('updateJsonDatas :. ',  __FILE__) . __('Json en cache inexistant chargement des données depuis prevision-meteo.ch',  __FILE__));
             $eqLogic->miseEnCacheJson($_id);
-            log::add('previsy', 'debug', 'updateJsonDatas :. Mise à jour depuis le json en cache');
+            log::add('previsy', 'debug', __('updateJsonDatas :. ',  __FILE__) . __('Mise à jour depuis le json en cache',  __FILE__));
             $eqLogic->UpdateDatas($eqLogic);
         }
     }
@@ -1466,11 +1458,11 @@ class previsy extends eqLogic {
         $tempStartTimeUrl = time();
 
         if (!is_dir($config["jsonTampon"])) {
-            log::add('previsy', 'debug', 'miseEnCacheJson :.  Création du dossier ' . $config["jsonTampon"]);
+            log::add('previsy', 'debug', __('miseEnCacheJson :. ',  __FILE__) . __('Création du dossier ',  __FILE__) . $config["jsonTampon"]);
             mkdir($config["jsonTampon"], 0777);
         }
 
-        log::add('previsy', 'debug', 'miseEnCacheJson :. Récupération des données ' . $config["urlApi"] . $ville);
+        log::add('previsy', 'debug', __('miseEnCacheJson :. ',  __FILE__) . __('Récupération des données ',  __FILE__) . $config["urlApi"] . $ville);
         $json = @file_get_contents($config["urlApi"] . $searchBy); // Prod
 
         if (!empty($json)) {
@@ -1488,11 +1480,11 @@ class previsy extends eqLogic {
             $tempStopTimeUrl = time();
             $tempTimeUrl = $tempStopTimeUrl - $tempStartTimeUrl;
 
-            log::add('previsy', 'debug', 'miseEnCacheJson :. La récupération des données de ' . $ville . ' faite en ' . $tempTimeUrl . ' secondes');
-            log::add('previsy', 'debug', 'miseEnCacheJson :. Enregistrement du Json : ' . $file);
+            log::add('previsy', 'debug', __('miseEnCacheJson :. ',  __FILE__) . __('La récupération des données de ',  __FILE__) . $ville . __(' faite en ',  __FILE__) . $tempTimeUrl . __(' secondes',  __FILE__));
+            log::add('previsy', 'debug', __('miseEnCacheJson :. ',  __FILE__) . __('Enregistrement du Json : ',  __FILE__) . $file);
             log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         } else {
-            log::add('previsy', 'debug', 'miseEnCacheJson :.  Impossible de se connecter à https://www.prevision-meteo.ch/services/json/' . $ville . '. Le cache est donc conservé.');
+            log::add('previsy', 'debug', __('miseEnCacheJson :. ',  __FILE__) . __('Impossible de se connecter à https://www.prevision-meteo.ch/services/json/',  __FILE__) . $ville . __('. Le cache est donc conservé.',  __FILE__));
             log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         }
     }
@@ -1506,14 +1498,14 @@ class previsy extends eqLogic {
     public function getWidget($_datas, $_cmdIds = NULL) {
 
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'getWidget :. Lancement de la création ou de la mise à jour du Widget #ID#' . $_cmdIds["widget"]["id"]);
+        log::add('previsy', 'debug', __('getWidget :. ',  __FILE__) . __('Lancement de la création ou de la mise à jour du Widget #ID# ',  __FILE__) . $_cmdIds["widget"]["id"]);
 
         $degre = $this->getCofingFormatDegres();
 
         if ($_datas["DANS_HEURE"] == 0) {
-            $dansHeure = "<span style='font-weight: bold;'>En ce moment</span>";
+            $dansHeure = "<span style='font-weight: bold;'>" . __('En ce moment',  __FILE__) . "</span>";
         } else {
-            $dansHeure = "Dans <span style='font-weight: bold;'>" . $_datas["DANS_HEURE"] . "H</span>";
+            $dansHeure = __('Dans ',  __FILE__) . "<span style='font-weight: bold;'>" . $_datas["DANS_HEURE"] . __(' h',  __FILE__) . "</span>";
         }
         
         $return = "<div data-cmd_id='" . $_cmdIds["widget"]["id"] . "' class='previsyWidget'>
@@ -1523,33 +1515,33 @@ class previsy extends eqLogic {
                             <div style='font-size: 1em;'>" . $dansHeure . "</div>
                             <div style='font-size: 4em; margin-top: -10px;'><img title='Alerte " . $_datas["TYPE"] . "' src='" . $_datas["ICON"] . "' width='60px'></img></div>
                             <div style='font-size:0.9em;'><span style='font-weight: bold;'>" . $_datas["START_TXT"] . "</span> | <span style='font-weight: bold;'>" . $_datas["END_TXT"] . "</span></div>
-                            <div style='font-size:0.9em' margin-top: -10px;><span style='font-weight: bold;'>" . $_datas["CONDITION_MAX"] . "</span> au plus haut et pour une durée de <span style='font-weight: bold;'>" . $_datas["DUREE_HEURE"] . "H</span></div>
-                            <div style='font-size:0.9em;'>Type de vent : <span style='font-weight: bold;'>" . $_datas["VENT_NOM"] . "</span></div>                        
+                            <div style='font-size:0.9em' margin-top: -10px;><span style='font-weight: bold;'>" . $_datas["CONDITION_MAX"] . "</span>" . __(' au plus haut et pour une durée de ',  __FILE__) . "<span style='font-weight: bold;'>" . $_datas["DUREE_HEURE"] . __(' h',  __FILE__) . "</span></div>
+                            <div style='font-size:0.9em;'>" . __('Type de vent : ',  __FILE__) . "<span style='font-weight: bold;'>" . $_datas["VENT_NOM"] . "</span></div>                        
                         </div>
                     
                     <div style='display: inline-block; text-align: center;'>
                         <div class='previsyBlock previsyBlock1'>
                             <div class='previsyBlockMoyenne'>
-                                <div><i title='Total des précipitation' class='fas fa-tachometer-alt' style='font-size:2em; height: 31px;'></i></div>";
+                                <div><i title='" . __('Total des précipitation',  __FILE__) . "' class='fas fa-tachometer-alt' style='font-size:2em; height: 31px;'></i></div>";
         if(isset($_datas["MM"]["TOTAL"])){                        
-                                $return .= "<div class='previsySubTitleMoyenne'>- Moyenne -</div>
-                                <div class='previsySubChiffreMoyenne'>" . number_format($_datas["MM"]["MOY"], 1) . "<span style='font-size:0.7em'>MM</span></div>
-                                <div class='previsySubTitleMoyenne'>Précipitation (" . $_datas["MM"]["TOTAL"] . "<span style='font-size:0.6em'>MM</span>)</div>
+                                $return .= "<div class='previsySubTitleMoyenne'>- " . __('Moyenne',  __FILE__) . " -</div>
+                                <div class='previsySubChiffreMoyenne'>" . number_format($_datas["MM"]["MOY"], 1) . "<span style='font-size:0.7em'>mm</span></div>
+                                <div class='previsySubTitleMoyenne'>" . __('Précipitation',  __FILE__) . " (" . $_datas["MM"]["TOTAL"] . "<span style='font-size:0.6em'>mm</span>)</div>
                             </div>";
         } else {
-                                $return .= "<div class='previsySubTitleMoyenne'>- Néant -</div>
-                                <div class='previsySubChiffreMoyenne'>0<span style='font-size:0.7em'>MM</span></div>
-                                <div class='previsySubTitleMoyenne'>Précipitation</div>
+                                $return .= "<div class='previsySubTitleMoyenne'>- " . __('Néant',  __FILE__) . " -</div>
+                                <div class='previsySubChiffreMoyenne'>0<span style='font-size:0.7em'>mm</span></div>
+                                <div class='previsySubTitleMoyenne'>" . __('Précipitation',  __FILE__) . "</div>
                             </div>";
         }
         if ($_datas["DUREE_HEURE"] > 1 AND isset($_datas["MM"]["MIN"])) {
             $return .= "<div class='previsyBlockMinMax'>
                                 <div class ='previsySubBlock previsySubBlock_G'>
-                                    <div class='previsySubChiffre'>" . $_datas["MM"]["MIN"] . "<span style='font-size:0.7em'>MM</span></div>
+                                    <div class='previsySubChiffre'>" . $_datas["MM"]["MIN"] . "<span style='font-size:0.7em'>mm</span></div>
                                     <div class='previsySubTitleMoyenne'>Min.</div>
                                 </div>
                                 <div class ='previsySubBlock previsySubBlock_D'>
-                                    <div class='previsySubChiffre'>" . $_datas["MM"]["MAX"] . "<span style='font-size:0.7em'>MM</span></div>
+                                    <div class='previsySubChiffre'>" . $_datas["MM"]["MAX"] . "<span style='font-size:0.7em'>mm</span></div>
                                     <div class='previsySubTitleMoyenne'>Max.</div>
                                 </div>
                             </div>";
@@ -1557,10 +1549,10 @@ class previsy extends eqLogic {
         $return .= "</div>
                         <div class='previsyBlock  previsyBlock2'>
                             <div class='previsyBlockMoyenne'>
-                                <div><i title='Tempétature moyenne' class='icon jeedom-thermo-moyen' style='font-size:2em'></i></div>
-                                <div class='previsySubTitleMoyenne'>- Moyenne -</div>
+                                <div><i title='" . __('Tempétature moyenne',  __FILE__) . "' class='icon jeedom-thermo-moyen' style='font-size:2em'></i></div>
+                                <div class='previsySubTitleMoyenne'>- " . __('Moyenne',  __FILE__) . " -</div>
                                 <div class='previsySubChiffreMoyenne'>" . number_format($_datas["TEMPERATURE"]["MOY"], 1) . "<span style='font-size:0.7em'>" . $degre . "</span></div>
-                                <div class='previsySubTitleMoyenne'>Température</div>
+                                <div class='previsySubTitleMoyenne'>" . __('Température',  __FILE__) . "</div>
                             </div>";
         if ($_datas["DUREE_HEURE"] > 1) {
             $return .= "<div class='previsyBlockMinMax'>
@@ -1577,10 +1569,10 @@ class previsy extends eqLogic {
         $return .= "</div>
                         <div class='previsyBlock  previsyBlock3'>
                             <div class='previsyBlockMoyenne'>
-                                <div><i title='Humidité moyenne en pourcentage' class='icon jeedomapp-humidity' style='font-size:2em'></i></div>
-                                <div class='previsySubTitleMoyenne'>- Moyenne -</div>
+                                <div><i title='" . __('Humidité moyenne en pourcentage',  __FILE__) . "' class='icon jeedomapp-humidity' style='font-size:2em'></i></div>
+                                <div class='previsySubTitleMoyenne'>- " . __('Moyenne',  __FILE__) . " -</div>
                                 <div class='previsySubChiffreMoyenne'>" . number_format($_datas["HUMIDITE"]["MOY"], 1) . "<span style='font-size:0.7em'>%</span></div>
-                                <div class='previsySubTitleMoyenne'>Humidité</div>
+                                <div class='previsySubTitleMoyenne'>" . __('Humidité',  __FILE__) . "</div>
                             </div>";
         if ($_datas["DUREE_HEURE"] > 1) {
             $return .= "<div class='previsyBlockMinMax'>
@@ -1597,19 +1589,19 @@ class previsy extends eqLogic {
         $return .= "</div>
                         <div class='previsyBlock  previsyBlock4'>
                             <div class='previsyBlockMoyenne'>
-                                <div><i title='Vitesse moyenne du vent' class='icon meteo-vent' style='font-size:2em'></i></div>
-                                <div class='previsySubTitleMoyenne'>- Moyenne -</div>
-                                <div class='previsySubChiffreMoyenne'>" . number_format($_datas["VENT_VITESSE"]["MOY"], 1) . "<span style='font-size:0.7em'>Km/H</span></div>
-                                <div class='previsySubTitleMoyenne'>Vitesse du vent</div>
+                                <div><i title='" . __('Vitesse moyenne du vent',  __FILE__) . "' class='icon meteo-vent' style='font-size:2em'></i></div>
+                                <div class='previsySubTitleMoyenne'>- " . __('Moyenne',  __FILE__) . " -</div>
+                                <div class='previsySubChiffreMoyenne'>" . number_format($_datas["VENT_VITESSE"]["MOY"], 1) . "<span style='font-size:0.7em'>km/h</span></div>
+                                <div class='previsySubTitleMoyenne'>" . __('Vitesse du vent',  __FILE__) . "</div>
                             </div>";
         if ($_datas["DUREE_HEURE"] > 1) {
             $return .= "<div class='previsyBlockMinMax'>
                                 <div class ='previsySubBlock previsySubBlock_G'>
-                                    <div class='previsySubChiffre'>" . $_datas["VENT_VITESSE"]["MIN"] . "<span style='font-size:0.7em'>Km/H</span></div>
+                                    <div class='previsySubChiffre'>" . $_datas["VENT_VITESSE"]["MIN"] . "<span style='font-size:0.7em'>km/h</span></div>
                                     <div class='previsySubTitleMoyenne'>Min.</div>
                                 </div>
                                 <div class ='previsySubBlock previsySubBlock_D'>
-                                    <div style='font-size:1em'>" . $_datas["VENT_VITESSE"]["MAX"] . "<span style='font-size:0.7em'>Km/H</span></div>
+                                    <div style='font-size:1em'>" . $_datas["VENT_VITESSE"]["MAX"] . "<span style='font-size:0.7em'>km/h</span></div>
                                     <div class='previsySubTitleMoyenne'>Max.</div>
                                 </div>
                             </div>";
@@ -1618,19 +1610,19 @@ class previsy extends eqLogic {
 
                         <div class='previsyBlock  previsyBlock5'>
                             <div class='previsyBlockMoyenne'>
-                                <div><i title='Vitesse moyenne des rafales' class='icon techno-ventilation' style='font-size:2em'></i></div>
-                                <div class='previsySubTitleMoyenne'>- Moyenne -</div>
-                                <div class='previsySubChiffreMoyenne'>" . number_format($_datas["VENT_RAFALES"]["MOY"], 1) . "<span style='font-size:0.7em'>Km/H</span></div>
-                                <div class='previsySubTitleMoyenne'>Force Rafales</div>
+                                <div><i title='" . __('Vitesse moyenne des rafales',  __FILE__) . "' class='icon techno-ventilation' style='font-size:2em'></i></div>
+                                <div class='previsySubTitleMoyenne'>- " . __('Moyenne',  __FILE__) . " -</div>
+                                <div class='previsySubChiffreMoyenne'>" . number_format($_datas["VENT_RAFALES"]["MOY"], 1) . "<span style='font-size:0.7em'>km/h</span></div>
+                                <div class='previsySubTitleMoyenne'>" . __('Force Rafales',  __FILE__) . "</div>
                             </div>";
         if ($_datas["DUREE_HEURE"] > 1) {
             $return .= "<div class='previsyBlockMinMax'>
                                 <div class ='previsySubBlock previsySubBlock_G'>
-                                    <div class='previsySubChiffre'>" . $_datas["VENT_RAFALES"]["MIN"] . "<span style='font-size:0.7em'>Km/H</span></div>
+                                    <div class='previsySubChiffre'>" . $_datas["VENT_RAFALES"]["MIN"] . "<span style='font-size:0.7em'>km/h</span></div>
                                     <div class='previsySubTitleMoyenne'>Min.</div>
                                 </div>
                                 <div class ='previsySubBlock previsySubBlock_D'>
-                                    <div class='previsySubChiffre'>" . $_datas["VENT_RAFALES"]["MAX"] . "<span style='font-size:0.7em'>Km/H</span></div>
+                                    <div class='previsySubChiffre'>" . $_datas["VENT_RAFALES"]["MAX"] . "<span style='font-size:0.7em'>km/h</span></div>
                                     <div class='previsySubTitleMoyenne'>Max.</div>
                                 </div>
                             </div>";
@@ -1646,7 +1638,7 @@ class previsy extends eqLogic {
         $return .= "<div style='float:none; clear:both'></div>
             </div>";
 
-        log::add('previsy', 'debug', 'getWidget :. Fin de la création ou de la mise à jour du Widget #ID#' . $_cmdIds["widget"]["id"]);
+        log::add('previsy', 'debug', __('getWidget :. ',  __FILE__) . __('Fin de la création ou de la mise à jour du Widget #ID# ',  __FILE__) . $_cmdIds["widget"]["id"]);
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
 
         return $return;
@@ -1654,12 +1646,12 @@ class previsy extends eqLogic {
 
     public function getWidgetNull() {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'getWidgetNull :. Création widget rien à signaler');
+        log::add('previsy', 'debug', __('getWidgetNull :. ',  __FILE__) . __('Création widget rien à signaler',  __FILE__));
         return "<div style='width:100%; padding:0 5px;'>
                     <div class='previsyWidget' style='margin:0; padding:5px; width:100%;'>
                         <div style ='text-align: center; display: inline-block; margin: 2px;'>
                             <div style='font-size: 4em; margin-top: -10px;'><i class='far fa-check-circle'></i></div>
-                            <div style='font-size: 1em;'>Auncune alerte à déclarer</div>  
+                            <div style='font-size: 1em;'>" . __('Aucune alerte à déclarer',  __FILE__) . "</div>  
                         </div>
                    </div>
                 </div>";
@@ -1667,12 +1659,12 @@ class previsy extends eqLogic {
 
     public function getWidgetError($_ville) {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', 'getWidgetError :. Création widget error');
+        log::add('previsy', 'debug', __('getWidgetError :. ',  __FILE__) . __('Création widget error',  __FILE__));
         return "<div style='width:100%; padding:0 5px;'>
                     <div class='previsyWidget' style='margin:0; padding:5px; width:100%;'>
                         <div style ='text-align: center; display: inline-block; margin: 2px;'>
                             <div style='font-size: 4em; margin-top: -10px;'><i class='fas fa-exclamation-triangle'></i></div>
-                            <div style='font-size: 1em;'>La ville de <span style='font-weight: bold;'>" . $_ville . "</span> n'est pas référencée sur prevision-meteo.ch </div>
+                            <div style='font-size: 1em;'>" . __('La ville de ',  __FILE__) . "<span style='font-weight: bold;'>" . $_ville . "</span>" . __(' n\'est pas référencée sur prevision-meteo.ch',  __FILE__) . "</div>
                        </div>
                     </div>
                    </div>";
@@ -1704,7 +1696,7 @@ class previsyCmd extends cmd {
         switch ($this->getLogicalId()) { //vérifie le logicalid de la commande 			
             case 'refresh': // LogicalId de la commande rafraîchir que l’on a créé dans la méthode Postsave 
                 log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-                log::add('previsy', 'debug', 'execute :. Lancement de la commande refresh : #ID#' . $eqlogic->getId());
+                log::add('previsy', 'debug', __('execute :. ',  __FILE__) . __('Lancement de la commande refresh : #ID# ',  __FILE__) . $eqlogic->getId());
                 $eqlogic->updateJsonDatas($eqlogic->getId());
                 break;
         }
