@@ -187,7 +187,22 @@
         "Neige forte": "Neige forte",
         "Pluie et neige mêlée faible": "Pluie et neige mêlée faible",
         "Pluie et neige mêlée modérée": "Pluie et neige mêlée modérée",
-        "Pluie et neige mêlée forte": "Pluie et neige mêlée forte"
+        "Pluie et neige mêlée forte": "Pluie et neige mêlée forte",
+        "Ensoleillé" : "Ensoleillé",
+        "Nuit claire" : "Nuit claire",
+        "Ciel voilé" : "Ciel voilé",
+        "Nuit légèrement voilée": "Nuit légèrement voilée",
+        "Faibles passages nuageux": "Faibles passages nuageux",
+        "Nuit bien dégagée": "Nuit bien dégagée",
+        "Stratus": "Stratus",
+        "Stratus se dissipant": "Stratus se dissipant",
+        "Nuit claire et stratus": "Nuit claire et stratus",
+        "Eclaircies": "Eclaircies",
+        "Nuit nuageuse": "Nuit nuageuse",
+        "Faiblement nuageux": "Faiblement nuageux",
+        "Fortement nuageux": "Fortement nuageux",
+        "Développement nuageux": "Développement nuageux",
+        "Nuit avec développement nuageux": "Nuit avec développement nuageux"
     },
     "plugins\/previsy\/core\/class\/previsy.class.phrases.php": {
         " à": " à",
