@@ -187,7 +187,22 @@
         "Neige forte": "Heavy snow",
         "Pluie et neige mêlée faible": "Light rain and mixed snow",
         "Pluie et neige mêlée modérée": "Moderate rain and mixed snow",
-        "Pluie et neige mêlée forte": "Heavy rain and mixed snow"
+        "Pluie et neige mêlée forte": "Heavy rain and mixed snow",
+        "Ensoleillé" : "Sunny",
+        "Nuit claire" : "Clear night",
+        "Ciel voilé" : "Veiled sky",
+        "Nuit légèrement voilée": "Slightly veiled night",
+        "Faibles passages nuageux": "Weak cloudy passages",
+        "Nuit bien dégagée": "Clear night",
+        "Stratus": "Stratus",
+        "Stratus se dissipant": "Stratus dissipating",
+        "Nuit claire et stratus": "Clear night with stratus",
+        "Eclaircies": "Sunny spell",
+        "Nuit nuageuse": "Cloudy night",
+        "Faiblement nuageux": "Lightly cloudy",
+        "Fortement nuageux": "Heavily cloudy",
+        "Développement nuageux": "Cloudy development",
+        "Nuit avec développement nuageux": "Night with cloudy development"
     },
     "plugins\/previsy\/core\/class\/previsy.class.phrases.php": {
         " à": " at",
