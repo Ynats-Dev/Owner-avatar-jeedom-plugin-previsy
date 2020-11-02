@@ -193,7 +193,7 @@ class previsy extends eqLogic {
 
         if (empty($value_alerte["TYPE"]) AND empty($info["ERROR"])) {
             $previsy->checkAndUpdateCmd('alerte_01_widget', $previsy->getWidgetNull());
-        } elseif (!empty($info["ERROR"]) AND $info["ERROR"] == TRUE) {
+        } elseif ($info["ERROR"] == TRUE) {
             $previsy->checkAndUpdateCmd('alerte_01_widget', $previsy->getWidgetError($info["GLOBAL"]["VILLE"]));
         }
 
@@ -1163,21 +1163,21 @@ class previsy extends eqLogic {
                     }
                     
                     // Regroupe les alertes
-                    if (empty($txt_meteo["ALERTE"]) AND $alerteVent == FALSE) { // Si aucune alerte
+                    if (!isset($txt_meteo["ALERTE"]) AND $alerteVent == FALSE) { // Si aucune alerte
                         unset($al_last);
                         $traitement = NULL;
                     } 
-                    elseif(isset($txt_meteo["ALERTE"])){ // Si alerte météo
+                    elseif(isset($txt_meteo["ALERTE"]) AND empty($al_last["TYPE"])){ // Si alerte météo
                         unset($al_last);
                         $traitement = "meteo";
                     }
-                    elseif($alerteVent == TRUE){ // Si alerte vent
+                    elseif(isset($txt_meteo["ALERTE"]) AND !empty($al_last["TYPE"]) AND $al_last["TYPE"] == "vent"){ // Si alerte météo
+                        unset($al_last);
+                        $traitement = "meteo";
+                    }
+                    elseif($alerteVent == TRUE AND $al_last["TYPE"] != "vent"){ // Si alerte vent
                         unset($al_last);
                         $traitement = "vent";
-                    }
-                    else {
-                        unset($al_last);
-                        $traitement = NULL;
                     }
                     
                     if($alertes <= $eqLogic->getCofingNbAlerte() AND $traitement != NULL) { 
@@ -1233,24 +1233,19 @@ class previsy extends eqLogic {
                             $al_last["MM"]["ARRAY"][] = $mm;
                         }
 
-                        $al_last["MM"]["MIN"] = @min($al_last["MM"]["ARRAY"]);
-                        if ($mm == @min($al_last["MM"]["ARRAY"])) {
+                        $al_last["MM"]["MIN"] = min($al_last["MM"]["ARRAY"]);
+                        if ($mm == min($al_last["MM"]["ARRAY"])) {
                             $al_last["MM"]["CONDITION_MIN_TXT"] = $txt_meteo["TXT"];
                         }
 
-                        $al_last["MM"]["MAX"] = @max($al_last["MM"]["ARRAY"]);
-                        if ($mm == @max($al_last["MM"]["ARRAY"])) {
+                        $al_last["MM"]["MAX"] = max($al_last["MM"]["ARRAY"]);
+                        if ($mm == max($al_last["MM"]["ARRAY"])) {
                             $al_last["MM"]["CONDITION_MAX_TXT"] = $txt_meteo["TXT"];
                             $al_last["CONDITION_MAX"] = __($tmp_now["TMP"]["CONDITION"],  __FILE__);
                         }
 
-                        $al_last["MM"]["TOTAL"] = @array_sum($al_last["MM"]["ARRAY"]);
-                        
-                        if(!empty($al_last["MM"]["ARRAY"]) AND count($al_last["MM"]["ARRAY"]) > 0){
-                            $al_last["MM"]["MOY"] = $al_last["MM"]["TOTAL"] / @count($al_last["MM"]["ARRAY"]);
-                        } else {
-                            $al_last["MM"]["MOY"] = 0;
-                        }
+                        $al_last["MM"]["TOTAL"] = array_sum($al_last["MM"]["ARRAY"]);
+                        $al_last["MM"]["MOY"] = $al_last["MM"]["TOTAL"] / count($al_last["MM"]["ARRAY"]);
 
                         // Températures 
                         if ($now["GLOBAL"]["TYPE_DEGRE"] == "°C") {
@@ -1259,12 +1254,12 @@ class previsy extends eqLogic {
                             $temperature = $eqLogic->celsiusToFahrenheit($json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->TMP2m);
                         }
                         
-                        $al_last["TEMPERATURE"] = @$eqLogic->getMinMaxMoyenne($al_last["TEMPERATURE"], $temperature);
+                        $al_last["TEMPERATURE"] = $eqLogic->getMinMaxMoyenne($al_last["TEMPERATURE"], $temperature);
 
                         // Autres données
-                        $al_last["HUMIDITE"] = @$eqLogic->getMinMaxMoyenne($al_last["HUMIDITE"], $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->RH2m);
-                        $al_last["VENT_VITESSE"] = @$eqLogic->getMinMaxMoyenne($al_last["VENT_VITESSE"], $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDSPD10m);
-                        $al_last["VENT_RAFALES"] = @$eqLogic->getMinMaxMoyenne($al_last["VENT_RAFALES"], $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDGUST10m);
+                        $al_last["HUMIDITE"] = $eqLogic->getMinMaxMoyenne($al_last["HUMIDITE"], $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->RH2m);
+                        $al_last["VENT_VITESSE"] = $eqLogic->getMinMaxMoyenne($al_last["VENT_VITESSE"], $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDSPD10m);
+                        $al_last["VENT_RAFALES"] = $eqLogic->getMinMaxMoyenne($al_last["VENT_RAFALES"], $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->WNDGUST10m);
 
                         $al_last["VENT_NOM"] = $lang->echelleBeaufort($al_last["VENT_VITESSE"]["MOY"]);
 
