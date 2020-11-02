@@ -172,7 +172,8 @@ class previsy_language {
     }
 
     public static function constructTxt($_input, $_degre = "°C") {
-
+        $return = NULL;
+        
         if ($_input["DANS_HEURE"] > 0 AND $_input["DANS_HEURE"] <= 6) {
             $return["START"] = __("Dans ",  __FILE__) . $_input["DANS_HEURE"] . __(" heures,",  __FILE__);
         } elseif ($_input["DANS_JOUR"] == 0 AND $_input["DANS_HEURE"] > 6) {
@@ -281,7 +282,7 @@ class previsy_language {
         $return["VENT"] = __("Le vent soufflera en moyenne à ",  __FILE__) . number_format($_input["VENT_VITESSE"]["MOY"], 1) . " km/h";
         $return["VENT"] .= __(" avec des rafales pouvant aller jusqu'à ",  __FILE__) . number_format($_input["VENT_RAFALES"]["MAX"], 1) . " km/h. ";
 
-        $return["FULL"] = $return["START"] . $return["MM"] . $return["HUMIDITE"] . $return["TEMPERATURE"] . $return["VENT"];
+        $return["FULL"] = @$return["START"] . @$return["MM"] . @$return["HUMIDITE"] . @$return["TEMPERATURE"] . @$return["VENT"];
 
         return $return;
     }
