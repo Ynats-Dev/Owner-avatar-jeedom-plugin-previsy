@@ -224,14 +224,14 @@ class previsy_language {
         }
         
         if($_input["MM"]["TOTAL"] > 0){
-            $return["MM"] .= __("Il y aura un total de ",  __FILE__) . @number_format($_input["MM"]["TOTAL"], 1) . __(" millimètre",  __FILE__);
+            $return["MM"] .= __("Il y aura un total de ",  __FILE__) . number_format(@$_input["MM"]["TOTAL"], 1) . __(" millimètre",  __FILE__);
             if ($_input["MM"]["TOTAL"] > 1) {
                 $return["MM"] .= "s";
             }
             $return["MM"] .= __(" de précipitation",  __FILE__); 
             
             if ($_input["DUREE_HEURE"] > 1 AND $_input["MM"]["MOY"] != $_input["MM"]["TOTAL"]) {
-            $return["MM"] .= __(" soit une moyenne de ",  __FILE__) . @number_format($_input["MM"]["MOY"], 1) . __(" millimètre",  __FILE__);
+            $return["MM"] .= __(" soit une moyenne de ",  __FILE__) . number_format(@$_input["MM"]["MOY"], 1) . __(" millimètre",  __FILE__);
             if ($_input["MM"]["MOY"] > 1) {
                 $return["MM"] .= "s";
             }
