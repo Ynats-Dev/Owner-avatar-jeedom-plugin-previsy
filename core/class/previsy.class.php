@@ -1167,15 +1167,15 @@ class previsy extends eqLogic {
                         unset($al_last);
                         $traitement = NULL;
                     } 
-                    elseif(isset($txt_meteo["ALERTE"]) AND !isset($al_last["TYPE"])){ // Si alerte météo
+                    elseif(isset($txt_meteo["ALERTE"]) AND empty($al_last["TYPE"])){ // Si alerte météo
                         unset($al_last);
                         $traitement = "meteo";
                     }
-                    elseif(isset($txt_meteo["ALERTE"]) AND $al_last["TYPE"] == "vent"){ // Si alerte météo
+                    elseif(isset($txt_meteo["ALERTE"]) AND !empty($al_last["TYPE"]) AND $al_last["TYPE"] == "vent"){ // Si alerte météo
                         unset($al_last);
                         $traitement = "meteo";
                     }
-                    elseif($alerteVent == TRUE AND $al_last["TYPE"] != "vent"){ // Si alerte vent
+                    elseif($alerteVent == TRUE AND !empty($al_last["TYPE"]) AND $al_last["TYPE"] != "vent"){ // Si alerte vent
                         unset($al_last);
                         $traitement = "vent";
                     }
@@ -1231,22 +1231,22 @@ class previsy extends eqLogic {
 
                         if($mm > 0){
                             $al_last["MM"]["ARRAY"][] = $mm;
+
+                            $al_last["MM"]["MIN"] = min($al_last["MM"]["ARRAY"]);
+                            if ($mm == min($al_last["MM"]["ARRAY"])) {
+                                $al_last["MM"]["CONDITION_MIN_TXT"] = $txt_meteo["TXT"];
+                            }
+
+                            $al_last["MM"]["MAX"] = max($al_last["MM"]["ARRAY"]);
+                            if ($mm == max($al_last["MM"]["ARRAY"])) {
+                                $al_last["MM"]["CONDITION_MAX_TXT"] = $txt_meteo["TXT"];
+                                $al_last["CONDITION_MAX"] = __($tmp_now["TMP"]["CONDITION"],  __FILE__);
+                            }
+
+                            $al_last["MM"]["TOTAL"] = array_sum($al_last["MM"]["ARRAY"]);
+                            $al_last["MM"]["MOY"] = $al_last["MM"]["TOTAL"] / count($al_last["MM"]["ARRAY"]);
                         }
-
-                        $al_last["MM"]["MIN"] = min($al_last["MM"]["ARRAY"]);
-                        if ($mm == min($al_last["MM"]["ARRAY"])) {
-                            $al_last["MM"]["CONDITION_MIN_TXT"] = $txt_meteo["TXT"];
-                        }
-
-                        $al_last["MM"]["MAX"] = max($al_last["MM"]["ARRAY"]);
-                        if ($mm == max($al_last["MM"]["ARRAY"])) {
-                            $al_last["MM"]["CONDITION_MAX_TXT"] = $txt_meteo["TXT"];
-                            $al_last["CONDITION_MAX"] = __($tmp_now["TMP"]["CONDITION"],  __FILE__);
-                        }
-
-                        $al_last["MM"]["TOTAL"] = array_sum($al_last["MM"]["ARRAY"]);
-                        $al_last["MM"]["MOY"] = $al_last["MM"]["TOTAL"] / count($al_last["MM"]["ARRAY"]);
-
+                        
                         // Températures 
                         if ($now["GLOBAL"]["TYPE_DEGRE"] == "°C") {
                             $temperature = $json->{$tmp_now["TMP"]["DAY_JSON"]}->hourly_data->{$tmp_now["TMP"]["HOUR_JSON"]}->TMP2m;
