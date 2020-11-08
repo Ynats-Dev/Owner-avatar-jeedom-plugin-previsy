@@ -102,93 +102,89 @@ class previsy extends eqLogic {
         foreach ($info["ALERTES"]["GROUP"] as $value_alerte) {
             //$idCmd = array();
             $cpt++;
-            if ($cpt < 10) {
-                $id_key = "0" . $cpt;
-            } else {
-                $id_key = $cpt;
-            }
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_dans_heure', $value_alerte["DANS_HEURE"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_type', $value_alerte["TYPE"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_date_start', $value_alerte["START"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_date_end', $value_alerte["END"]);
+
+            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_dans_heure', $value_alerte["DANS_HEURE"]);
+            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_type', $value_alerte["TYPE"]);
+            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_date_start', $value_alerte["START"]);
+            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_date_end', $value_alerte["END"]);
 
             if ($showCommande["show_condition_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_condition_max', $value_alerte["CONDITION_MAX"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_condition_max', $value_alerte["CONDITION_MAX"]);
             }
             if ($showCommande["show_mm_min"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_min', $value_alerte["MM"]["MIN"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_min', $value_alerte["MM"]["MIN"]);
             }
             if ($showCommande["show_mm_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_max', $value_alerte["MM"]["MAX"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_max', $value_alerte["MM"]["MAX"]);
             }
             if ($showCommande["show_mm_moyenne"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_moyenne', $value_alerte["MM"]["MOY"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_moyenne', $value_alerte["MM"]["MOY"]);
             }
             if ($showCommande["show_mm_total"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_mm_total', $value_alerte["MM"]["TOTAL"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_total', $value_alerte["MM"]["TOTAL"]);
             }
             if ($showCommande["show_temp_min"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_temp_min', $value_alerte["TEMPERATURE"]["MIN"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_temp_min', $value_alerte["TEMPERATURE"]["MIN"]);
             }
             if ($showCommande["show_temp_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_temp_max', $value_alerte["TEMPERATURE"]["MAX"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_temp_max', $value_alerte["TEMPERATURE"]["MAX"]);
             }
             if ($showCommande["show_temp_moyenne"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_temp_moyenne', $value_alerte["TEMPERATURE"]["MOY"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_temp_moyenne', $value_alerte["TEMPERATURE"]["MOY"]);
             }
             if ($showCommande["show_humidite_min"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_humidite_min', $value_alerte["HUMIDITE"]["MIN"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_humidite_min', $value_alerte["HUMIDITE"]["MIN"]);
             }
             if ($showCommande["show_humidite_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_humidite_max', $value_alerte["HUMIDITE"]["MAX"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_humidite_max', $value_alerte["HUMIDITE"]["MAX"]);
             }
             if ($showCommande["show_humidite_moyenne"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_humidite_moyenne', $value_alerte["HUMIDITE"]["MOY"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_humidite_moyenne', $value_alerte["HUMIDITE"]["MOY"]);
             }
             if ($showCommande["show_vent_min"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_vent_min', $value_alerte["VENT_VITESSE"]["MIN"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_min', $value_alerte["VENT_VITESSE"]["MIN"]);
             }
             if ($showCommande["show_vent_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_vent_max', $value_alerte["VENT_VITESSE"]["MAX"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_max', $value_alerte["VENT_VITESSE"]["MAX"]);
             }
             if ($showCommande["show_vent_moyenne"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_vent_moyenne', $value_alerte["VENT_VITESSE"]["MOY"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_moyenne', $value_alerte["VENT_VITESSE"]["MOY"]);
             }
             if ($showCommande["show_vent_nom"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_vent_nom', $value_alerte["VENT_NOM"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_nom', $value_alerte["VENT_NOM"]);
             }
             if ($showCommande["show_rafale_min"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_rafale_min', $value_alerte["VENT_RAFALES"]["MIN"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_rafale_min', $value_alerte["VENT_RAFALES"]["MIN"]);
             }
             if ($showCommande["show_rafale_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_rafale_max', $value_alerte["VENT_RAFALES"]["MAX"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_rafale_max', $value_alerte["VENT_RAFALES"]["MAX"]);
             }
             if ($showCommande["show_rafale_moyenne"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_rafale_moyenne', $value_alerte["VENT_RAFALES"]["MOY"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_rafale_moyenne', $value_alerte["VENT_RAFALES"]["MOY"]);
             }
 
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_duree', $value_alerte["DUREE_HEURE"]);
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_full', $value_alerte["TXT"]["FULL"]);
+            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_duree', $value_alerte["DUREE_HEURE"]);
+            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_full', $value_alerte["TXT"]["FULL"]);
 
             if ($showCommande["show_txt_start"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_start', $value_alerte["TXT"]["START"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_start', $value_alerte["TXT"]["START"]);
             }
             if ($showCommande["show_txt_mm"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_mm', $value_alerte["TXT"]["MM"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_mm', $value_alerte["TXT"]["MM"]);
             }
             if ($showCommande["show_txt_temperature"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_temperature', $value_alerte["TXT"]["TEMPERATURE"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_temperature', $value_alerte["TXT"]["TEMPERATURE"]);
             }
             if ($showCommande["show_txt_humidite"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_humidite', $value_alerte["TXT"]["HUMIDITE"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_humidite', $value_alerte["TXT"]["HUMIDITE"]);
             }
             if ($showCommande["show_txt_vent"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_txt_vent', $value_alerte["TXT"]["VENT"]);
+                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_vent', $value_alerte["TXT"]["VENT"]);
             }
 
-            $idCmd = $previsy->getIdEtNameCmd($id_key, array('widget', 'txt_full'));
+            $idCmd = $previsy->getIdEtNameCmd(self::printZeroDizaine($cpt), array('widget', 'txt_full'));
 
-            $previsy->checkAndUpdateCmd('alerte_' . $id_key . '_widget', $previsy->getWidget($value_alerte, $idCmd));
+            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_widget', $previsy->getWidget($value_alerte, $idCmd));
         }
 
         if (empty($value_alerte["TYPE"]) AND empty($info["ERROR"])) {
@@ -224,21 +220,47 @@ class previsy extends eqLogic {
 
     /*     * *********************Méthodes d'instance************************* */
 
-    public function preInsert() {
-        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', __('preInsert :. ',  __FILE__) . __('Lancement',  __FILE__));
-    }
+//    public function preInsert() {
+//        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+//        log::add('previsy', 'debug', __('preInsert :. ',  __FILE__) . __('Lancement',  __FILE__));
+//    }
+//
+//    public function postInsert() {
+//        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+//        log::add('previsy', 'debug', __('postInsert :. ',  __FILE__) . __('Lancement',  __FILE__));
+//    }
+//
+//    public function preSave() {
+//        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+//        log::add('previsy', 'debug', __('preSave :. ',  __FILE__) . __('Lancement',  __FILE__));
+//    }
 
-    public function postInsert() {
-        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', __('postInsert :. ',  __FILE__) . __('Lancement',  __FILE__));
+    public static function createCmd($_array = NULL, $_this = NULL){
+        $info = $_this->getCmd(null, $_array["LogicalId"]);
+        if (!is_object($info)) {
+            $info = new previsyCmd();
+            $info->setName(__($_array["Name"], __FILE__));
+        }
+        $info->setLogicalId($_array["LogicalId"]);
+        $info->setEqLogic_id($_this->getId());
+        $info->setIsHistorized($_array["Historized"]);
+        $info->setIsVisible($_array["Visible"]);
+        $info->setType($_array["Type"]);
+        $info->setSubType($_array["SubType"]);
+        if(!empty($_array["Unite"])){
+           $info->setUnite($_array["Unite"]);
+        }
+        $info->save();
     }
-
-    public function preSave() {
-        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', __('preSave :. ',  __FILE__) . __('Lancement',  __FILE__));
+     
+    public static function printZeroDizaine($_int){
+        if ($_int < 10) {
+            return "0" . $_int;
+        } else {
+            return $_int;
+        }
     }
-
+    
     public function postSave() {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', __('postSave :. ',  __FILE__) . __('Début de la création ou Mise à jour des commandes #ID# ',  __FILE__) . $this->getId());
@@ -253,545 +275,109 @@ class previsy extends eqLogic {
             $nb_alerte = 1;
         }
         
-        $showCommande = $this->getCofingShowCommandes();
-
-        $info = $this->getCmd(null, 'last_update');
-        if (!is_object($info)) {
-            $info = new previsyCmd();
-            $info->setName(__('SynchroLastUpDate', __FILE__));
-        }
-        $info->setLogicalId('last_update');
-        $info->setEqLogic_id($this->getId());
-        $info->setIsHistorized(0);
-        $info->setIsVisible(0);
-        $info->setType('info');
-        $info->setSubType('numeric');
-        $info->save();
-
-        $info = $this->getCmd(null, 'ville');
-        if (!is_object($info)) {
-            $info = new previsyCmd();
-            $info->setName(__('SynchroVille', __FILE__));
-        }
-        $info->setLogicalId('ville');
-        $info->setEqLogic_id($this->getId());
-        $info->setIsHistorized(0);
-        $info->setIsVisible(0);
-        $info->setType('info');
-        $info->setSubType('string');
-        $info->save();
+        $showCommande = $this->getCofingShowCommandes(); 
         
-        $info = $this->getCmd(null, 'latitude');
-        if (!is_object($info)) {
-            $info = new previsyCmd();
-            $info->setName(__('Latitude', __FILE__));
-        }
-        $info->setLogicalId('latitude');
-        $info->setEqLogic_id($this->getId());
-        $info->setIsHistorized(0);
-        $info->setIsVisible(0);
-        $info->setType('info');
-        $info->setSubType('numeric');
-        $info->save();
+        self::createCmd(["LogicalId" => "last_update", "Name" => "SynchroLastUpDate", "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
+        self::createCmd(["LogicalId" => "ville", "Name" => "SynchroVille", "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
+        self::createCmd(["LogicalId" => "latitude", "Name" => "Latitude", "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
+        self::createCmd(["LogicalId" => "longitude", "Name" => "Longitude", "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
+        self::createCmd(["LogicalId" => "type_degre", "Name" => "Type_degre", "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
         
-        $info = $this->getCmd(null, 'longitude');
-        if (!is_object($info)) {
-            $info = new previsyCmd();
-            $info->setName(__('Longitude', __FILE__));
-        }
-        $info->setLogicalId('longitude');
-        $info->setEqLogic_id($this->getId());
-        $info->setIsHistorized(0);
-        $info->setIsVisible(0);
-        $info->setType('info');
-        $info->setSubType('numeric');
-        $info->save();
-        
-        $info = $this->getCmd(null, 'type_degre');
-        if (!is_object($info)) {
-            $info = new previsyCmd();
-            $info->setName(__('Type_degre', __FILE__));
-        }
-        $info->setLogicalId('type_degre');
-        $info->setEqLogic_id($this->getId());
-        $info->setIsHistorized(0);
-        $info->setIsVisible(0);
-        $info->setType('info');
-        $info->setSubType('string');
-        $info->save();
-
         for ($i = 1; $i <= $nb_alerte; $i++) {
-
-            if ($i < 10) {
-                $id = "0" . $i;
-            } else {
-                $id = $i;
-            }
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_widget');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_widget', __FILE__));
-            }
-            $info->setLogicalId('alerte_' . $id . '_widget');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('string');
-            $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_dans_heure');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_dans_heure', __FILE__));
-            }
-            $info->setLogicalId('alerte_' . $id . '_dans_heure');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('string');
-            $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_type');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_type', __FILE__));
-            }
-            $info->setLogicalId('alerte_' . $id . '_type');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('string');
-            $info->save();
+            
+            self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_widget', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_widget', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
+            self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_type', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_type', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
+            self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_date_start', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_date_start', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
+            self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_date_end', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_date_end', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             
             if ($showCommande["show_condition_max"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_condition_max');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_condition_max', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_condition_max');
-                $info->setEqLogic_id($this->getId());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('string');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_condition_max', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_condition_max', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
             }
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_date_start');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_date_start', __FILE__));
-            }
-            $info->setLogicalId('alerte_' . $id . '_date_start');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('numeric');
-            $info->save();
-
-            $info = $this->getCmd(null, 'alerte_' . $id . '_date_end');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_date_end', __FILE__));
-            }
-            $info->setLogicalId('alerte_' . $id . '_date_end');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setType('info');
-            $info->setSubType('numeric');
-            $info->save();
             
             if ($showCommande["show_mm_moyenne"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_mm_moyenne');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_mm_moyenne', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_mm_moyenne');
-                $info->setEqLogic_id($this->getId());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setUnite('MM');
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_mm_moyenne', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_mm_moyenne', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric", "Unite" => "MM"], $this);
             }
-            
             if ($showCommande["show_mm_min"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_mm_min');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_mm_min', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_mm_min');
-                $info->setEqLogic_id($this->getId());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setUnite('MM');
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_mm_min', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_mm_min', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric", "Unite" => "MM"], $this);
             }
-            
             if ($showCommande["show_mm_max"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_mm_max');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_mm_max', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_mm_max');
-                $info->setEqLogic_id($this->getId());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setUnite('MM');
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_mm_max', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_mm_max', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric", "Unite" => "MM"], $this);
             }
-            
             if ($showCommande["show_mm_total"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_mm_total');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_mm_total', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_mm_total');
-                $info->setEqLogic_id($this->getId());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setUnite('MM');
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
-            }
-            
-            if ($showCommande["show_temp_min"] == 1) {           
-                $info = $this->getCmd(null, 'alerte_' . $id . '_temp_min');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_temp_min', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_temp_min');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
-            }
-            
-            if ($showCommande["show_temp_max"] == 1) {           
-                $info = $this->getCmd(null, 'alerte_' . $id . '_temp_max');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_temp_max', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_temp_max');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_mm_total', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_mm_total', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric", "Unite" => "MM"], $this);
             }
             
             if ($showCommande["show_temp_moyenne"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_temp_moyenne');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_temp_moyenne', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_temp_moyenne');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_temp_moyenne', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_temp_moyenne', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             }
-            
-            if ($showCommande["show_humidite_min"] == 1) {            
-                $info = $this->getCmd(null, 'alerte_' . $id . '_humidite_min');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_humidite_min', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_humidite_min');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+            if ($showCommande["show_temp_min"] == 1) {
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_temp_min', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_temp_min', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             }
-            
-            if ($showCommande["show_humidite_max"] == 1) {            
-                $info = $this->getCmd(null, 'alerte_' . $id . '_humidite_max');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_humidite_max', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_humidite_max');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+            if ($showCommande["show_temp_max"] == 1) {
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_temp_max', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_temp_max', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             }
             
             if ($showCommande["show_humidite_moyenne"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_humidite_moyenne');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_humidite_moyenne', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_humidite_moyenne');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_humidite_moyenne', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_humidite_moyenne', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             }
-            
-            if ($showCommande["show_vent_min"] == 1) {            
-                $info = $this->getCmd(null, 'alerte_' . $id . '_vent_min');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_vent_min', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_vent_min');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+            if ($showCommande["show_humidite_min"] == 1) {
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_humidite_min', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_humidite_min', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             }
-            
-            if ($showCommande["show_vent_max"] == 1) {            
-                $info = $this->getCmd(null, 'alerte_' . $id . '_vent_max');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_vent_max', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_vent_max');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+            if ($showCommande["show_humidite_max"] == 1) {
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_humidite_max', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_humidite_max', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             }
             
             if ($showCommande["show_vent_moyenne"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_vent_moyenne');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_vent_moyenne', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_vent_moyenne');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_vent_moyenne', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_vent_moyenne', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             }
-            
-            if ($showCommande["show_rafale_min"] == 1) {            
-                $info = $this->getCmd(null, 'alerte_' . $id . '_rafale_min');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_rafale_min', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_rafale_min');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+            if ($showCommande["show_vent_min"] == 1) {
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_vent_min', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_vent_min', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             }
-            
-            if ($showCommande["show_rafale_max"] == 1) {            
-                $info = $this->getCmd(null, 'alerte_' . $id . '_rafale_max');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_rafale_max', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_rafale_max');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+            if ($showCommande["show_vent_max"] == 1) {
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_vent_max', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_vent_max', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             }
             
             if ($showCommande["show_rafale_moyenne"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_rafale_moyenne');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_rafale_moyenne', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_rafale_moyenne');
-                $info->setEqLogic_id($this->getId());
-                $info->setUnite($this->getCofingFormatDegres());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('numeric');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_rafale_moyenne', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_rafale_moyenne', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             }
-            
-            $info = $this->getCmd(null, 'alerte_' . $id . '_duree');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_duree', __FILE__));
+            if ($showCommande["show_rafale_min"] == 1) {
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_rafale_min', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_rafale_min', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
             }
-            $info->setLogicalId('alerte_' . $id . '_duree');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setIsVisible(0);
-            $info->setUnite('H');
-            $info->setType('info');
-            $info->setSubType('numeric');
-            $info->save();
+            if ($showCommande["show_rafale_max"] == 1) {
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_rafale_max', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_rafale_max', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
+            }
+           
+            self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_duree', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_duree', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric", "Unite" => "H"], $this);
             
             if ($showCommande["show_txt_start"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_txt_start');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_txt_start', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_txt_start');
-                $info->setEqLogic_id($this->getId());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('string');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_txt_start', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_txt_start', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
             }
-            
-            $info = $this->getCmd(null, 'alerte_' . $id . '_txt_full');
-            if (!is_object($info)) {
-                $info = new previsyCmd();
-                $info->setName(__('Alerte+' . $id . '_txt_full', __FILE__));
-            }
-            $info->setLogicalId('alerte_' . $id . '_txt_full');
-            $info->setEqLogic_id($this->getId());
-            $info->setIsHistorized(0);
-            $info->setType('info');
-            $info->setSubType('string');
-            $info->save();
+                
+            self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_txt_full', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_txt_full', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
             
             if ($showCommande["show_txt_mm"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_txt_mm');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_txt_mm', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_txt_mm');
-                $info->setEqLogic_id($this->getId());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('string');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_txt_mm', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_txt_mm', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
             }
             
             if ($showCommande["show_txt_temperature"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_txt_temperature');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_txt_temperature', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_txt_temperature');
-                $info->setEqLogic_id($this->getId());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('string');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_txt_temperature', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_txt_temperature', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
             }
             
             if ($showCommande["show_txt_humidite"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_txt_humidite');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_txt_humidite', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_txt_humidite');
-                $info->setEqLogic_id($this->getId());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('string');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_txt_humidite', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_txt_humidite', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
             }
             
             if ($showCommande["show_txt_vent"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_txt_vent');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_txt_vent', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_txt_vent');
-                $info->setEqLogic_id($this->getId());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('string');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_txt_vent', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_txt_vent', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
             }
             
             if ($showCommande["show_vent_nom"] == 1) {
-                $info = $this->getCmd(null, 'alerte_' . $id . '_vent_nom');
-                if (!is_object($info)) {
-                    $info = new previsyCmd();
-                    $info->setName(__('Alerte+' . $id . '_vent_nom', __FILE__));
-                }
-                $info->setLogicalId('alerte_' . $id . '_vent_nom');
-                $info->setEqLogic_id($this->getId());
-                $info->setIsHistorized(0);
-                $info->setIsVisible(0);
-                $info->setType('info');
-                $info->setSubType('string');
-                $info->save();
+                self::createCmd(["LogicalId" => 'alerte_' . self::printZeroDizaine($i) . '_vent_nom', "Name" => 'Alerte+' . self::printZeroDizaine($i) . '_vent_nom', "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
             }
         }
-
-        $refresh = $this->getCmd(null, 'refresh');
-        if (!is_object($refresh)) {
-            $refresh = new previsyCmd();
-            $refresh->setName(__('Rafraichir', __FILE__));
-        }
-        $refresh->setEqLogic_id($this->getId());
-        $refresh->setLogicalId('refresh');
-        $refresh->setType('action');
-        $refresh->setSubType('other');
-        $refresh->save();
         
+        self::createCmd(["LogicalId" => "refresh", "Name" => "Rafraichir", "Historized" => 0, "Visible" => 1, "Type" => "action", "SubType" => "other"], $this);
+ 
         log::add('previsy', 'debug', __('postSave :. ',  __FILE__) . __('Fin de la création ou Mise à jour des commandes #ID# ',  __FILE__) . $this->getId());
 
         $eqLogic = self::byId($this->getId());
