@@ -389,15 +389,15 @@ class previsy extends eqLogic {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
     }
 
-    public function preUpdate() {
-        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', __('preUpdate :. ',  __FILE__) . __('Lancement',  __FILE__));
-    }
-
-    public function postUpdate() {
-        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', __('postUpdate :. ',  __FILE__) . __('Lancement',  __FILE__));
-    }
+//    public function preUpdate() {
+//        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+//        log::add('previsy', 'debug', __('preUpdate :. ',  __FILE__) . __('Lancement',  __FILE__));
+//    }
+//
+//    public function postUpdate() {
+//        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+//        log::add('previsy', 'debug', __('postUpdate :. ',  __FILE__) . __('Lancement',  __FILE__));
+//    }
 
     public function preRemove() {
         $config = $this->getConfigPrevisy();
@@ -409,10 +409,10 @@ class previsy extends eqLogic {
         }
     }
 
-    public function postRemove() {
-        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', __('postRemove :. ',  __FILE__) . __('Lancement',  __FILE__));
-    }
+//    public function postRemove() {
+//        log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
+//        log::add('previsy', 'debug', __('postRemove :. ',  __FILE__) . __('Lancement',  __FILE__));
+//    }
 
 // Non obligatoire mais permet de modifier l'affichage du widget si vous en avez besoin
 
