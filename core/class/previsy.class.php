@@ -878,6 +878,7 @@ class previsy extends eqLogic {
     }
     
     public static function getInfoJson($_json, $_a, $_hour_json){
+        $return = NULL;
         $day_json = "fcst_day_" . $_a;
         $return["CONDITION"] = $_json->{$day_json}->hourly_data->{$_hour_json}->CONDITION;
         $return["CONDITION_KEY"] = $_json->{$day_json}->hourly_data->{$_hour_json}->CONDITION_KEY;
@@ -940,7 +941,7 @@ class previsy extends eqLogic {
             $al_last["MM"]["MAX"] = self::getMinAndMax("max", $al_last["MM"]["ARRAY"]);
             if ($mm == $al_last["MM"]["MAX"]) {
                 $al_last["MM"]["CONDITION_MAX_TXT"] = $txt_meteo["TXT"];
-                $al_last["CONDITION_MAX"] = __($getInfoJson["CONDITION"], __FILE__);
+                $al_last["CONDITION_MAX"] = __($_getInfoJson["CONDITION"], __FILE__);
             }
 
             $al_last["MM"]["TOTAL"] = array_sum($al_last["MM"]["ARRAY"]);
