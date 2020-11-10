@@ -38,19 +38,19 @@ class previsy extends eqLogic {
 
     /*     * **************************Configuration************************* */
 
-    public static function getCofingFormatDegres() {
+    public static function getConfigFormatDegres() {
         return config::byKey('type_degre', 'previsy', "°C");
     }
 
-    public static function getCofingNbAlerte() {
+    public static function getConfigNbAlerte() {
         return config::byKey('nb_alerte', 'previsy', 0);
     }
     
-    public static function getCofingMode() {
-        return config::byKey('mode_plugin', 'previsy', 0);
+    public static function getConfigMode() {
+        return config::byKey('mode_plugin', 'previsy', 'normal');
     }
 
-    public static function getCofingShowCommandes() {
+    public static function getConfigShowCommandes() {
         $return["show_mm_min"] = config::byKey('show_mm_min', 'previsy', '0');
         $return["show_mm_max"] = config::byKey('show_mm_max', 'previsy', '0');
         $return["show_mm_moyenne"] = config::byKey('show_mm_moyenne', 'previsy', '0');
@@ -93,9 +93,9 @@ class previsy extends eqLogic {
         $previsy->checkAndUpdateCmd('latitude', $info["GLOBAL"]["LATITUDE"]);
         $previsy->checkAndUpdateCmd('longitude', $info["GLOBAL"]["LONGITUDE"]);
         $previsy->checkAndUpdateCmd('last_update', $info["GLOBAL"]["LAST_SYNCHRO"]);
-        $previsy->checkAndUpdateCmd('type_degre', self::getCofingFormatDegres());
+        $previsy->checkAndUpdateCmd('type_degre', self::getConfigFormatDegres());
 
-        $showCommande = self::getCofingShowCommandes();
+        $showCommande = self::getConfigShowCommandes();
 
         $cpt = 0;
 
@@ -254,7 +254,7 @@ class previsy extends eqLogic {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', __('postSave :. ', __FILE__) . __('Début de la création ou Mise à jour des commandes #ID# ', __FILE__) . $this->getId());
         
-        $nb_alerte = self::getCofingNbAlerte();
+        $nb_alerte = self::getConfigNbAlerte();
 
         if ($nb_alerte == 0) { // Si pas d'enregistrement de config on enregistre des valeurs
             log::add('previsy', 'debug', __('postSave :. ', __FILE__) . __('Config Manquante. Enregistrement des valeurs à defaut.', __FILE__));
@@ -264,7 +264,7 @@ class previsy extends eqLogic {
             $nb_alerte = 1;
         }
 
-        $showCommande = self::getCofingShowCommandes();
+        $showCommande = self::getConfigShowCommandes();
 
         self::createCmd(["LogicalId" => "last_update", "Name" => "SynchroLastUpDate", "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "numeric"], $this);
         self::createCmd(["LogicalId" => "ville", "Name" => "SynchroVille", "Historized" => 0, "Visible" => 0, "Type" => "info", "SubType" => "string"], $this);
@@ -456,7 +456,7 @@ class previsy extends eqLogic {
             return $replace;
         }
 
-        $showCommande = self::getCofingShowCommandes();
+        $showCommande = self::getConfigShowCommandes();
 
         $this->emptyCacheWidget(); //vide le cache. Pratique pour le développement
         $version = jeedom::versionAlias($_version);
@@ -668,7 +668,7 @@ class previsy extends eqLogic {
         if ($eqLogic->getIsEnable() == 1) {
 
             // Données de configuration widget
-            $now["GLOBAL"]["TYPE_DEGRE"] = self::getCofingFormatDegres();
+            $now["GLOBAL"]["TYPE_DEGRE"] = self::getConfigFormatDegres();
 
             // Récuprération des données JSON
             log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
@@ -732,7 +732,7 @@ class previsy extends eqLogic {
                     // Récupération des alertes météo
                     $txt_meteo = $lang->infosCondition($getInfoJson["CONDITION"]);
 
-                    if (isset($txt_meteo["ALERTE"]) AND $alertes <= self::getCofingNbAlerte()) {
+                    if (isset($txt_meteo["ALERTE"]) AND $alertes <= self::getConfigNbAlerte()) {
                         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
                         log::add('previsy', 'debug', __('get :. ', __FILE__) . __('Alerte [', __FILE__) . $txt_meteo["ALERTE"] . ' -> ' . $getInfoJson["CONDITION"] . ']');
                     }
@@ -750,11 +750,11 @@ class previsy extends eqLogic {
                     
                     // Récupération des traitements d'alerte
 
-                    if ($alertes <= self::getCofingNbAlerte() AND $traitement != NULL) {
+                    if ($alertes <= self::getConfigNbAlerte() AND $traitement != NULL) {
                         log::add('previsy', 'debug', __('get :. ', __FILE__) . __('Type de traitement [', __FILE__) . $traitement . ']');
                     }
 
-                    if ($alertes <= self::getCofingNbAlerte() AND $traitement != NULL) {
+                    if ($alertes <= self::getConfigNbAlerte() AND $traitement != NULL) {
                         
                         $lastAlerte = $txt_meteo["ALERTE"];
 
@@ -778,13 +778,13 @@ class previsy extends eqLogic {
                                 $al_last["TYPE"] = "vent";
                             }
 
-                            if ($alertes <= self::getCofingNbAlerte()) {
+                            if ($alertes <= self::getConfigNbAlerte()) {
                                 log::add('previsy', 'debug', __('get :. ', __FILE__) . __('START [', __FILE__) . $al_last["START"] . __('] TYPE [', __FILE__) . $al_last["TYPE"] . __('] VILLE [', __FILE__) . $now["GLOBAL"]["VILLE"] . ']');
                             }
                         }
 
-                        if ($alertes > self::getCofingNbAlerte()) {
-                            log::add('previsy', 'debug', __('get :. ', __FILE__) . __('Alertes suivantes Ignorées : ', __FILE__) . self::getCofingNbAlerte() . __(' en paramètre.', __FILE__));
+                        if ($alertes > self::getConfigNbAlerte()) {
+                            log::add('previsy', 'debug', __('get :. ', __FILE__) . __('Alertes suivantes Ignorées : ', __FILE__) . self::getConfigNbAlerte() . __(' en paramètre.', __FILE__));
                         }
 
                         $al_last["END"] = $date_plus_un->format('YmdH') . "00";
@@ -818,11 +818,11 @@ class previsy extends eqLogic {
 
                         $al_last["TXT"] = $lang->constructTxt($al_last, $now["GLOBAL"]["TYPE_DEGRE"]);
 
-                        if ($alertes <= self::getCofingNbAlerte()) {
+                        if ($alertes <= self::getConfigNbAlerte()) {
                             $now["ALERTES"]["GROUP"][$alertes] = $al_last;
                             $now["ALERTES"]["DETAILS"][] = $tmp_now;
                         }
-                        if ($alertes <= self::getCofingNbAlerte()) {
+                        if ($alertes <= self::getConfigNbAlerte()) {
                             log::add('previsy', 'debug', '=======================================================================================');
                             log::add('previsy', 'debug', __('get :. ', __FILE__) . __('DAY_JSON [', __FILE__) . "fcst_day_" . $a . ']');
                             log::add('previsy', 'debug', __('get :. ', __FILE__) . __('HOUR_JSON [', __FILE__) . $tmp_now["TMP"]["HOUR_JSON"] . ']');
@@ -914,7 +914,7 @@ class previsy extends eqLogic {
     }
 
     public static function setAlertesTemperature($_TMP2m) {
-        if (self::getCofingFormatDegres() == "°C") {
+        if (self::getConfigFormatDegres() == "°C") {
             return $_TMP2m;
         } else {
             return self::celsiusToFahrenheit($_TMP2m);
@@ -1194,7 +1194,7 @@ class previsy extends eqLogic {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', __('getWidget :. ', __FILE__) . __('Lancement de la création ou de la mise à jour du Widget #ID# ', __FILE__) . $_cmdIds["widget"]["id"]);
 
-        $degre = self::getCofingFormatDegres();
+        $degre = self::getConfigFormatDegres();
 
         if ($_datas["DANS_HEURE"] == 0) {
             $dansHeure = "<span style='font-weight: bold;'>" . __('En ce moment', __FILE__) . "</span>";

@@ -16,7 +16,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 <br>
                 <span>{{Ajouter une ville}}</span>
             </div>
-<?php if(previsy::getCofingMode() == 2) { ?>
+<?php if(previsy::getConfigMode() == "debug") { ?>
             <div class="cursor logoSecondary" id="bt_previsyDebug">
                 <i class="fas fa-medkit"></i>
                 <br>

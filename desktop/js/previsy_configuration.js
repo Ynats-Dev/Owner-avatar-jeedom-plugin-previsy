@@ -12,7 +12,7 @@ function previsy_cpt() {
 
 function previsy_mode_plugin() { 
     var mode = $( "#previsy_mode" ).val();
-    if(mode == 0){
+    if(mode == "normal"){
         $('#show_commandes_plus').hide();
     } else {
         $('#show_commandes_plus').show();

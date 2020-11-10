@@ -33,9 +33,9 @@ if (!isConnect()) {
         <div class="form-group">
             <div class="col-lg-2" style="right:15px; position: absolute;">
                 <select onchange="previsy_mode_plugin()" class="configKey form-control" data-l1key="mode_plugin" id="previsy_mode">
-                    <option value="0">{{Mode normal}}</option>
-                    <option value="1">{{Mode avancé}}</option>
-                    <option value="2">{{Mode debug}}</option>
+                    <option value="normal">{{Mode normal}}</option>
+                    <option value="advanced">{{Mode avancé}}</option>
+                    <option value="debug">{{Mode debug}}</option>
                 </select>
             </div>
         </div>
