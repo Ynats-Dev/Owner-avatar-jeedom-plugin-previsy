@@ -21,6 +21,12 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
  * Fonction pour l'ajout de commande, appellé automatiquement par plugin.template
  */
 
+// Sur la partie Debug
+$('#bt_previsyDebug').off('click').on('click', function () {
+    $('#md_modal').dialog({title: "{{Debug}}"});
+    $('#md_modal').load('index.php?v=d&plugin=previsy&modal=debug').dialog('open');
+});
+
 function previsyInArray(name){
     if(name.match(/widget/)){ return 1; }
     else if(name.match(/dans_heure/)){ return 1; }

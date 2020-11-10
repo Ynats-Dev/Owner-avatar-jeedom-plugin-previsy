@@ -223,6 +223,10 @@ class previsy_language {
             }            
         }
         
+        if(empty($return["MM"])){
+            $return["MM"] = NULL;
+        }
+        
         if($_input["MM"]["TOTAL"] > 0){
             $return["MM"] .= __("Il y aura un total de ",  __FILE__) . number_format(@$_input["MM"]["TOTAL"], 1) . __(" millimètre",  __FILE__);
             if ($_input["MM"]["TOTAL"] > 1) {

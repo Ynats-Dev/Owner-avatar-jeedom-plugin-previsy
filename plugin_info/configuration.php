@@ -22,12 +22,17 @@ if (!isConnect()) {
     die();
 }
 ?>
+
+<div style="width: 100%; margin: 15px 0;" id="div_alert_previsy" class="jqAlert alert-warning">
+    <span href="#" class="btn_closeAlert pull-right cursor" style="position : relative;top:-2px; left : 30px;color : grey">×</span>
+    <span class="displayError"></span>
+</div>
 <form class="form-horizontal">
     <fieldset>
         <div class="form-group">
             <label class="col-lg-4 control-label">{{Nombre d'alerte en prévision à afficher}}</label>
             <div class="col-lg-2">
-                <select class="configKey form-control" data-l1key="nb_alerte">
+                <select class="configKey form-control" id="previsy_select" onchange="previsy_cpt()" data-l1key="nb_alerte">
                     <option value="1">1 {{alerte}}</option>
                     <option value="2">2 {{alertes}}</option>
                     <option value="3">3 {{alertes}}</option>
@@ -48,7 +53,7 @@ if (!isConnect()) {
        
 <?php function addTrConfig($_datal1key, $_name){
     echo '  <tr style="background-color:transparent!important;">
-                <td style="padding:2px;"><input type="checkbox" class="configKey form-control" style="top:0" data-l1key="'.$_datal1key.'" /></td>
+                <td style="padding:2px;"><input type="checkbox" onclick="previsy_cpt()" class="configKey form-control previsy_checkbox" style="top:0" data-l1key="'.$_datal1key.'" /></td>
                 <td style="padding:2px;">'.$_name.'</td>
             </tr>';
 }
@@ -89,4 +94,20 @@ if (!isConnect()) {
   </fieldset>
 </form>
 
-<div style="float: right; font-size: xx-small;">29/08/2020 | 1.0.4</div>
+<script>
+function previsy_cpt() {   
+    var checked = $(".previsy_checkbox:checked").length;
+    var select = $( "#previsy_select" ).val();
+    var nb = checked*select;
+    if(nb > 23){
+        $('#div_alert_previsy').showAlert({message: "{{Attention ! Vous avez un trop grand nombre de commandes, soit au total "+nb+" commandes et le plugin risque de mettre beaucoup trop de temps à répondre.<br />Pour résoudre le problème, mettre moins d'alerte et/ou moins de commande à afficher.}}", level: 'warning'});
+    } else {
+        $('#div_alert_previsy').hide();
+    }
+}
+
+setTimeout(function(){
+    previsy_cpt();
+}, 150);
+
+</script>

@@ -16,6 +16,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 <br>
                 <span>{{Ajouter une ville}}</span>
             </div>
+            <div class="cursor logoSecondary" id="bt_previsyDebug">
+                <i class="fas fa-medkit"></i>
+                <br>
+                <span>{{Debug}}</span>
+            </div>
             <div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
                 <i class="fas fa-wrench"></i>
                 <br>
