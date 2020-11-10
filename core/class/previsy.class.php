@@ -79,21 +79,21 @@ class previsy extends eqLogic {
 
     /*     * ***********************Methode static*************************** */
 
-    public function UpdateDatas($previsy) {
+    public function UpdateDatas($_previsy) {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        log::add('previsy', 'debug', __('UpdateDatas :. ', __FILE__) . __('Lancement ', __FILE__) . '#ID# ' . $previsy->getId());
+        log::add('previsy', 'debug', __('UpdateDatas :. ', __FILE__) . __('Lancement ', __FILE__) . '#ID# ' . $_previsy->getId());
 
-        $previsy->clearDatas($previsy);
+        $_previsy->clearDatas($_previsy);
 
-        $info = $previsy->get($previsy->getId());
+        $info = $_previsy->get($_previsy->getId());
 
-        log::add('previsy', 'debug', __('UpdateDatas :. ', __FILE__) . __('Lancement des mises à jour des données de #ID# ', __FILE__) . $previsy->getId());
+        log::add('previsy', 'debug', __('UpdateDatas :. ', __FILE__) . __('Lancement des mises à jour des données de #ID# ', __FILE__) . $_previsy->getId());
 
-        $previsy->checkAndUpdateCmd('ville', $info["GLOBAL"]["VILLE"]);
-        $previsy->checkAndUpdateCmd('latitude', $info["GLOBAL"]["LATITUDE"]);
-        $previsy->checkAndUpdateCmd('longitude', $info["GLOBAL"]["LONGITUDE"]);
-        $previsy->checkAndUpdateCmd('last_update', $info["GLOBAL"]["LAST_SYNCHRO"]);
-        $previsy->checkAndUpdateCmd('type_degre', self::getConfigFormatDegres());
+        $_previsy->checkAndUpdateCmd('ville', $info["GLOBAL"]["VILLE"]);
+        $_previsy->checkAndUpdateCmd('latitude', $info["GLOBAL"]["LATITUDE"]);
+        $_previsy->checkAndUpdateCmd('longitude', $info["GLOBAL"]["LONGITUDE"]);
+        $_previsy->checkAndUpdateCmd('last_update', $info["GLOBAL"]["LAST_SYNCHRO"]);
+        $_previsy->checkAndUpdateCmd('type_degre', self::getConfigFormatDegres());
 
         $showCommande = self::getConfigShowCommandes();
 
@@ -104,101 +104,101 @@ class previsy extends eqLogic {
             //$idCmd = array();
             $cpt++;
 
-            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_dans_heure', $value_alerte["DANS_HEURE"]);
-            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_type', $value_alerte["TYPE"]);
-            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_date_start', $value_alerte["START"]);
-            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_date_end', $value_alerte["END"]);
+            $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_dans_heure', $value_alerte["DANS_HEURE"]);
+            $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_type', $value_alerte["TYPE"]);
+            $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_date_start', $value_alerte["START"]);
+            $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_date_end', $value_alerte["END"]);
 
             if ($showCommande["show_condition_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_condition_max', $value_alerte["CONDITION_MAX"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_condition_max', $value_alerte["CONDITION_MAX"]);
             }
             if ($showCommande["show_mm_min"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_min', $value_alerte["MM"]["MIN"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_min', $value_alerte["MM"]["MIN"]);
             }
             if ($showCommande["show_mm_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_max', $value_alerte["MM"]["MAX"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_max', $value_alerte["MM"]["MAX"]);
             }
             if ($showCommande["show_mm_moyenne"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_moyenne', $value_alerte["MM"]["MOY"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_moyenne', $value_alerte["MM"]["MOY"]);
             }
             if ($showCommande["show_mm_total"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_total', $value_alerte["MM"]["TOTAL"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_mm_total', $value_alerte["MM"]["TOTAL"]);
             }
             if ($showCommande["show_temp_min"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_temp_min', $value_alerte["TEMPERATURE"]["MIN"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_temp_min', $value_alerte["TEMPERATURE"]["MIN"]);
             }
             if ($showCommande["show_temp_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_temp_max', $value_alerte["TEMPERATURE"]["MAX"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_temp_max', $value_alerte["TEMPERATURE"]["MAX"]);
             }
             if ($showCommande["show_temp_moyenne"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_temp_moyenne', $value_alerte["TEMPERATURE"]["MOY"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_temp_moyenne', $value_alerte["TEMPERATURE"]["MOY"]);
             }
             if ($showCommande["show_humidite_min"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_humidite_min', $value_alerte["HUMIDITE"]["MIN"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_humidite_min', $value_alerte["HUMIDITE"]["MIN"]);
             }
             if ($showCommande["show_humidite_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_humidite_max', $value_alerte["HUMIDITE"]["MAX"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_humidite_max', $value_alerte["HUMIDITE"]["MAX"]);
             }
             if ($showCommande["show_humidite_moyenne"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_humidite_moyenne', $value_alerte["HUMIDITE"]["MOY"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_humidite_moyenne', $value_alerte["HUMIDITE"]["MOY"]);
             }
             if ($showCommande["show_vent_min"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_min', $value_alerte["VENT_VITESSE"]["MIN"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_min', $value_alerte["VENT_VITESSE"]["MIN"]);
             }
             if ($showCommande["show_vent_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_max', $value_alerte["VENT_VITESSE"]["MAX"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_max', $value_alerte["VENT_VITESSE"]["MAX"]);
             }
             if ($showCommande["show_vent_moyenne"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_moyenne', $value_alerte["VENT_VITESSE"]["MOY"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_moyenne', $value_alerte["VENT_VITESSE"]["MOY"]);
             }
             if ($showCommande["show_vent_nom"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_nom', $value_alerte["VENT_NOM"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_vent_nom', $value_alerte["VENT_NOM"]);
             }
             if ($showCommande["show_rafale_min"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_rafale_min', $value_alerte["VENT_RAFALES"]["MIN"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_rafale_min', $value_alerte["VENT_RAFALES"]["MIN"]);
             }
             if ($showCommande["show_rafale_max"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_rafale_max', $value_alerte["VENT_RAFALES"]["MAX"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_rafale_max', $value_alerte["VENT_RAFALES"]["MAX"]);
             }
             if ($showCommande["show_rafale_moyenne"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_rafale_moyenne', $value_alerte["VENT_RAFALES"]["MOY"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_rafale_moyenne', $value_alerte["VENT_RAFALES"]["MOY"]);
             }
 
-            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_duree', $value_alerte["DUREE_HEURE"]);
-            $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_full', $value_alerte["TXT"]["FULL"]);
+            $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_duree', $value_alerte["DUREE_HEURE"]);
+            $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_full', $value_alerte["TXT"]["FULL"]);
 
             if ($showCommande["show_txt_start"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_start', $value_alerte["TXT"]["START"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_start', $value_alerte["TXT"]["START"]);
             }
             if ($showCommande["show_txt_mm"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_mm', $value_alerte["TXT"]["MM"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_mm', $value_alerte["TXT"]["MM"]);
             }
             if ($showCommande["show_txt_temperature"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_temperature', $value_alerte["TXT"]["TEMPERATURE"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_temperature', $value_alerte["TXT"]["TEMPERATURE"]);
             }
             if ($showCommande["show_txt_humidite"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_humidite', $value_alerte["TXT"]["HUMIDITE"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_humidite', $value_alerte["TXT"]["HUMIDITE"]);
             }
             if ($showCommande["show_txt_vent"] == 1) {
-                $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_vent', $value_alerte["TXT"]["VENT"]);
+                $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_txt_vent', $value_alerte["TXT"]["VENT"]);
             }
             
-        $idCmd = $previsy->getIdEtNameCmd(self::printZeroDizaine($cpt), array('widget', 'txt_full'));
-        $previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_widget', self::getWidget($value_alerte, $idCmd));   
+        $idCmd = $_previsy->getIdEtNameCmd(self::printZeroDizaine($cpt), array('widget', 'txt_full'));
+        $_previsy->checkAndUpdateCmd('alerte_' . self::printZeroDizaine($cpt) . '_widget', self::getWidget($value_alerte, $idCmd));   
             
         }
         }
             
         if (empty($value_alerte["TYPE"]) AND empty($info["ERROR"])) {
-            $previsy->checkAndUpdateCmd('alerte_01_widget', self::getWidgetNull());
+            $_previsy->checkAndUpdateCmd('alerte_01_widget', self::getWidgetNull());
         } elseif (!empty($info["ERROR"]) AND $info["ERROR"] == TRUE) {
-            $previsy->checkAndUpdateCmd('alerte_01_widget', self::getWidgetError($info["GLOBAL"]["VILLE"]));
+            $_previsy->checkAndUpdateCmd('alerte_01_widget', self::getWidgetError($info["GLOBAL"]["VILLE"]));
         }
 
-        $previsy->toHtml('dashboard');
-        $previsy->refreshWidget();
+        $_previsy->toHtml('dashboard');
+        $_previsy->refreshWidget();
 
-        log::add('previsy', 'debug', __('UpdateDatas :. ', __FILE__) . __('Fin des mises à jour des données de #ID# ', __FILE__) . $previsy->getId());
+        log::add('previsy', 'debug', __('UpdateDatas :. ', __FILE__) . __('Fin des mises à jour des données de #ID# ', __FILE__) . $_previsy->getId());
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
     }
 
@@ -903,11 +903,11 @@ class previsy extends eqLogic {
         }
     }
 
-    public static function setAlerte($txt_meteo, $alerteVent, $_type = NULL) {
+    public static function setAlerte($_txt_meteo, $_alerteVent, $_type = NULL) {
         // Regroupe les alertes
-        if (isset($txt_meteo)) { // Si alerte météo
+        if (isset($_txt_meteo)) { // Si alerte météo
             return "meteo";
-        } elseif ($alerteVent == TRUE) { // Si alerte vent
+        } elseif ($_alerteVent == TRUE) { // Si alerte vent
             return "vent";
         } else {
             return NULL;
@@ -922,33 +922,33 @@ class previsy extends eqLogic {
         }
     }
 
-    public static function setAlertesPrevision($_getInfoJson, $al_last, $txt_meteo) {
+    public static function setAlertesPrevision($_getInfoJson, $_al_last, $_txt_meteo) {
 
         $mm = $_getInfoJson["APCPsfc"];
         
-        if(empty($al_last["CONDITION_MAX"])){ $al_last["CONDITION_MAX"] = NULL; }
-        if(empty($al_last["MM"])){ $al_last["MM"] = NULL; }
+        if(empty($_al_last["CONDITION_MAX"])){ $_al_last["CONDITION_MAX"] = NULL; }
+        if(empty($_al_last["MM"])){ $_al_last["MM"] = NULL; }
         
         if ($mm > 0) {
 
-            $al_last["MM"]["ARRAY"][] = $mm;
+            $_al_last["MM"]["ARRAY"][] = $mm;
 
-            $al_last["MM"]["MIN"] = self::getMinAndMax("min", $al_last["MM"]["ARRAY"]);
-            if ($mm == $al_last["MM"]["MIN"]) {
-                $al_last["MM"]["CONDITION_MIN_TXT"] = $txt_meteo["TXT"];
+            $_al_last["MM"]["MIN"] = self::getMinAndMax("min", $_al_last["MM"]["ARRAY"]);
+            if ($mm == $_al_last["MM"]["MIN"]) {
+                $_al_last["MM"]["CONDITION_MIN_TXT"] = $_txt_meteo["TXT"];
             }
 
-            $al_last["MM"]["MAX"] = self::getMinAndMax("max", $al_last["MM"]["ARRAY"]);
-            if ($mm == $al_last["MM"]["MAX"]) {
-                $al_last["MM"]["CONDITION_MAX_TXT"] = $txt_meteo["TXT"];
-                $al_last["CONDITION_MAX"] = __($_getInfoJson["CONDITION"], __FILE__);
+            $_al_last["MM"]["MAX"] = self::getMinAndMax("max", $_al_last["MM"]["ARRAY"]);
+            if ($mm == $_al_last["MM"]["MAX"]) {
+                $_al_last["MM"]["CONDITION_MAX_TXT"] = $_txt_meteo["TXT"];
+                $_al_last["CONDITION_MAX"] = __($_getInfoJson["CONDITION"], __FILE__);
             }
 
-            $al_last["MM"]["TOTAL"] = array_sum($al_last["MM"]["ARRAY"]);
-            $al_last["MM"]["MOY"] = $al_last["MM"]["TOTAL"] / count($al_last["MM"]["ARRAY"]);
+            $_al_last["MM"]["TOTAL"] = array_sum($_al_last["MM"]["ARRAY"]);
+            $_al_last["MM"]["MOY"] = $_al_last["MM"]["TOTAL"] / count($_al_last["MM"]["ARRAY"]);
         }
 
-        return array($al_last["MM"], $al_last["CONDITION_MAX"], $mm);
+        return array($_al_last["MM"], $_al_last["CONDITION_MAX"], $mm);
     }
 
     public static function getMinAndMax($_minOrmax, $_array) { 
@@ -963,13 +963,13 @@ class previsy extends eqLogic {
         }
     }
 
-    public function clearDatas($previsy) {
+    public function clearDatas($_previsy) {
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', __('clearDatas :. ', __FILE__) . __('Lancement du nettoyage des commandes', __FILE__));
-        $cmds = $previsy->getCmd();
+        $cmds = $_previsy->getCmd();
         foreach ($cmds as $cmd) {
             if ($cmd->getLogicalId() != 'refresh') {
-                $previsy->checkAndUpdateCmd($cmd->getLogicalId(), NULL);
+                $_previsy->checkAndUpdateCmd($cmd->getLogicalId(), NULL);
                 log::add('previsy', 'debug', __('clearDatas :. ', __FILE__) . __('#ID# ', __FILE__) . $cmd->getLogicalId());
             }
         }
@@ -978,6 +978,7 @@ class previsy extends eqLogic {
     }
 
     public function getIdEtNameCmd($_idKey, $_sarray) {
+        $return = NULL;
         foreach ($_sarray as $name) {
             $nameCmd = 'alerte_' . $_idKey . '_' . $name;
             $tempCmd = $this->getCmd(null, $nameCmd);
