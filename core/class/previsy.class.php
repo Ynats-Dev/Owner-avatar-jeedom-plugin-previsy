@@ -45,6 +45,10 @@ class previsy extends eqLogic {
     public static function getCofingNbAlerte() {
         return config::byKey('nb_alerte', 'previsy', 0);
     }
+    
+    public static function getCofingMode() {
+        return config::byKey('mode_plugin', 'previsy', 0);
+    }
 
     public static function getCofingShowCommandes() {
         $return["show_mm_min"] = config::byKey('show_mm_min', 'previsy', '0');

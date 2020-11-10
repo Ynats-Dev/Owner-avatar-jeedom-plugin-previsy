@@ -16,11 +16,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 <br>
                 <span>{{Ajouter une ville}}</span>
             </div>
+<?php if(previsy::getCofingMode() == 2) { ?>
             <div class="cursor logoSecondary" id="bt_previsyDebug">
                 <i class="fas fa-medkit"></i>
                 <br>
                 <span>{{Debug}}</span>
             </div>
+<?php } ?>
             <div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
                 <i class="fas fa-wrench"></i>
                 <br>
@@ -166,4 +168,5 @@ $eqLogics = eqLogic::byType($plugin->getId());
 </div>
 
 <?php include_file('desktop', 'previsy', 'js', 'previsy'); ?>
+<?php include_file('desktop', 'previsy_equ', 'js', 'previsy'); ?>
 <?php include_file('core', 'plugin.template', 'js'); ?>

@@ -23,12 +23,25 @@ if (!isConnect()) {
 }
 ?>
 
-<div style="width: 100%; margin: 15px 0;" id="div_alert_previsy" class="jqAlert alert-warning">
+<div style="width: 100%; margin: 15px 0; display:none;" id="div_alert_previsy" class="jqAlert alert-warning">
     <span href="#" class="btn_closeAlert pull-right cursor" style="position : relative;top:-2px; left : 30px;color : grey">×</span>
     <span class="displayError"></span>
 </div>
+
 <form class="form-horizontal">
+    
+        <div class="form-group">
+            <div class="col-lg-2" style="right:15px; position: absolute;">
+                <select onchange="previsy_mode_plugin()" class="configKey form-control" data-l1key="mode_plugin" id="previsy_mode">
+                    <option value="0">{{Mode normal}}</option>
+                    <option value="1">{{Mode avancé}}</option>
+                    <option value="2">{{Mode debug}}</option>
+                </select>
+            </div>
+        </div>
+    
     <fieldset>
+        <br />
         <div class="form-group">
             <label class="col-lg-4 control-label">{{Nombre d'alerte en prévision à afficher}}</label>
             <div class="col-lg-2">
@@ -41,6 +54,7 @@ if (!isConnect()) {
                 </select>
             </div>
         </div>
+        <br />
         <div class="form-group">
             <label class="col-lg-4 control-label">{{Température}}</label>
             <div class="col-lg-2">
@@ -51,16 +65,19 @@ if (!isConnect()) {
             </div>
         </div>
        
-<?php function addTrConfig($_datal1key, $_name){
-    echo '  <tr style="background-color:transparent!important;">
-                <td style="padding:2px;"><input type="checkbox" onclick="previsy_cpt()" class="configKey form-control previsy_checkbox" style="top:0" data-l1key="'.$_datal1key.'" /></td>
-                <td style="padding:2px;">'.$_name.'</td>
+<?php 
+
+    function addTrConfig($_datal1key, $_name) {
+        echo '<tr style="background-color:transparent!important;">
+            <td style="padding:2px;"><input type="checkbox" onclick="previsy_cpt()" class="configKey form-control previsy_checkbox" style="top:0" data-l1key="' . $_datal1key . '" /></td>
+            <td style="padding:2px;">' . $_name . '</td>
             </tr>';
-}
+    }
 ?>
-        <div class="form-group">
+        <div class="form-group" id="show_commandes_plus" style="display:none;">
+            <br />
             <label class="col-lg-4 control-label">{{Commandes à afficher (en option pour vos scénarios)}}</label>
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                  <table>
                     <?php
                         addTrConfig("show_mm_min", __("Commandes mm_min : Pluviométrie minimale",  __FILE__));
@@ -90,24 +107,9 @@ if (!isConnect()) {
                 </table>
             </div>
         </div>
-
+    <br />
   </fieldset>
+    
 </form>
 
-<script>
-function previsy_cpt() {   
-    var checked = $(".previsy_checkbox:checked").length;
-    var select = $( "#previsy_select" ).val();
-    var nb = checked*select;
-    if(nb > 23){
-        $('#div_alert_previsy').showAlert({message: "{{Attention ! Vous avez un trop grand nombre de commandes, soit au total "+nb+" commandes et le plugin risque de mettre beaucoup trop de temps à répondre.<br />Pour résoudre le problème, mettre moins d'alerte et/ou moins de commande à afficher.}}", level: 'warning'});
-    } else {
-        $('#div_alert_previsy').hide();
-    }
-}
-
-setTimeout(function(){
-    previsy_cpt();
-}, 150);
-
-</script>
+<?php include_file('desktop', 'previsy_configuration', 'js', 'previsy'); ?>
