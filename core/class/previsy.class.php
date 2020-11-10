@@ -981,7 +981,7 @@ class previsy extends eqLogic {
         foreach ($_sarray as $name) {
             $nameCmd = 'alerte_' . $_idKey . '_' . $name;
             $tempCmd = $this->getCmd(null, $nameCmd);
-            $return[$name]["id"] = $this->getId();
+            $return[$name]["id"] = $tempCmd->getId();
             $return[$name]["name"] = $nameCmd;
         }
         return $return;
