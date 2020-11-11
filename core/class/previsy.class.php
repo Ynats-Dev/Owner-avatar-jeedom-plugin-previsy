@@ -878,15 +878,42 @@ class previsy extends eqLogic {
     }
     
     public static function getInfoJson($_json, $_a, $_hour_json){
-        $return = NULL;
         $day_json = "fcst_day_" . $_a;
-        $return["CONDITION"] = $_json->{$day_json}->hourly_data->{$_hour_json}->CONDITION;
-        $return["CONDITION_KEY"] = $_json->{$day_json}->hourly_data->{$_hour_json}->CONDITION_KEY;
-        $return["RH2m"] = $_json->{$day_json}->hourly_data->{$_hour_json}->RH2m;
-        $return["TMP2m"] = $_json->{$day_json}->hourly_data->{$_hour_json}->TMP2m;
-        $return["WNDSPD10m"] = $_json->{$day_json}->hourly_data->{$_hour_json}->WNDSPD10m;
-        $return["WNDGUST10m"] = $_json->{$day_json}->hourly_data->{$_hour_json}->WNDGUST10m;
-        $return["APCPsfc"] = $_json->{$day_json}->hourly_data->{$_hour_json}->APCPsfc;
+        if(!empty($_json->{$day_json}->hourly_data->{$_hour_json}->CONDITION)){
+            $return["CONDITION"] = $_json->{$day_json}->hourly_data->{$_hour_json}->CONDITION;
+        } else {
+            $return["CONDITION"] = NULL;
+        }
+        if(!empty($_json->{$day_json}->hourly_data->{$_hour_json}->CONDITION_KEY)){
+            $return["CONDITION_KEY"] = $_json->{$day_json}->hourly_data->{$_hour_json}->CONDITION_KEY;
+        } else {
+            $return["CONDITION_KEY"] = NULL;
+        }
+        if(!empty($_json->{$day_json}->hourly_data->{$_hour_json}->RH2m)){
+            $return["RH2m"] = $_json->{$day_json}->hourly_data->{$_hour_json}->RH2m;
+        } else {
+            $return["RH2m"] = NULL;
+        }
+        if(!empty($_json->{$day_json}->hourly_data->{$_hour_json}->TMP2m)){
+            $return["TMP2m"] = $_json->{$day_json}->hourly_data->{$_hour_json}->TMP2m;
+        } else {
+            $return["TMP2m"] = NULL;
+        }
+        if(!empty($_json->{$day_json}->hourly_data->{$_hour_json}->WNDGUST10m)){
+            $return["WNDGUST10m"] = $_json->{$day_json}->hourly_data->{$_hour_json}->WNDGUST10m;
+        } else {
+            $return["WNDGUST10m"] = NULL;
+        }
+        if(!empty($_json->{$day_json}->hourly_data->{$_hour_json}->WNDSPD10m)){
+            $return["WNDSPD10m"] = $_json->{$day_json}->hourly_data->{$_hour_json}->WNDSPD10m;
+        } else {
+            $return["WNDSPD10m"] = NULL;
+        }
+        if(!empty($_json->{$day_json}->hourly_data->{$_hour_json}->APCPsfc)){
+            $return["APCPsfc"] = $_json->{$day_json}->hourly_data->{$_hour_json}->APCPsfc;
+        } else {
+            $return["APCPsfc"] = NULL;
+        }
         return $return;
     }
     
@@ -1095,18 +1122,18 @@ class previsy extends eqLogic {
         if (is_file($tempJson)) {
             if (self::jsonTestTimeRefresh(self::$_jsonTampon . $_id . ".json") == TRUE) {
                 log::add('previsy', 'debug', __('updateJsonDatas :. ', __FILE__) . __('Temps de cache écoulé rechargement des données depuis prevision-meteo.ch', __FILE__));
-                $eqLogic->miseEnCacheJson($_id);
+                $ok = $eqLogic->miseEnCacheJson($_id);
                 log::add('previsy', 'debug', __('updateJsonDatas :. ', __FILE__) . __('Mise à jour depuis le json en cache', __FILE__));
-                $eqLogic->UpdateDatas($eqLogic);
+                if($ok == TRUE){ $eqLogic->UpdateDatas($eqLogic); }
             } else {
                 log::add('previsy', 'debug', __('updateJsonDatas :. ', __FILE__) . __('Mise à jour depuis le json en cache', __FILE__));
                 $eqLogic->UpdateDatas($eqLogic);
             }
         } else {
             log::add('previsy', 'debug', __('updateJsonDatas :. ', __FILE__) . __('Json en cache inexistant chargement des données depuis prevision-meteo.ch', __FILE__));
-            $eqLogic->miseEnCacheJson($_id);
+            $ok = $eqLogic->miseEnCacheJson($_id);
             log::add('previsy', 'debug', __('updateJsonDatas :. ', __FILE__) . __('Mise à jour depuis le json en cache', __FILE__));
-            $eqLogic->UpdateDatas($eqLogic);
+            if($ok == TRUE){ $eqLogic->UpdateDatas($eqLogic); }
         }
     }
 
@@ -1127,7 +1154,12 @@ class previsy extends eqLogic {
         log::add('previsy', 'debug', __('miseEnCacheJson :. ', __FILE__) . __('Récupération des données ', __FILE__) . "#" . $_id);
         self::prepareJsonFolder();
         $json = self::getInfoApi($_id);
-        self::createJsonFile(self::$_jsonTampon . $_id, $json);
+        if($json != NULL){
+            self::createJsonFile(self::$_jsonTampon . $_id, $json);
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     public static function getInfoApi($_id) {
@@ -1141,18 +1173,20 @@ class previsy extends eqLogic {
         } else {
             $searchBy = $eqLogic->getConfiguration("ville");
         }
-
+       
         try {
-            return json_decode(file_get_contents(self::$_urlApi . $searchBy));
+            $return = json_decode(file_get_contents(self::$_urlApi . $searchBy));
         } catch (Exception $e) {
-            return NULL;
+            $return = NULL;
+        } finally {
+            return $return;
         }
     }
 
     public static function prepareJsonFolder() {
         log::add('previsy', 'debug', 'prepareJsonFolder :. Lancement');
         if (!is_dir(self::$_jsonTampon)) {
-            log::add('previsy', 'debug', 'miseEnCacheJson :.  Création du dossier :' . self::$_jsonTampon);
+            log::add('previsy', 'debug', 'prepareJsonFolder :.  Création du dossier :' . self::$_jsonTampon);
             mkdir(self::$_jsonTampon, 0777);
         }
     }
