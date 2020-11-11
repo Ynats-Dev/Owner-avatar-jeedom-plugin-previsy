@@ -1175,7 +1175,7 @@ class previsy extends eqLogic {
         }
        
         try {
-            $return = json_decode(file_get_contents(self::$_urlApi . $searchBy));
+            $return = @json_decode(@file_get_contents(self::$_urlApi . $searchBy));
         } catch (Exception $e) {
             $return = NULL;
         } finally {
