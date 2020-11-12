@@ -172,7 +172,8 @@ class previsy_language {
     }
 
     public static function constructTxt($_input, $_degre = "°C") {
-        $return = NULL;
+        
+        $return["START"] = NULL;
         
         if ($_input["DANS_HEURE"] > 0 AND $_input["DANS_HEURE"] <= 6) {
             $return["START"] = __("Dans ",  __FILE__) . $_input["DANS_HEURE"] . __(" heures,",  __FILE__);
@@ -223,9 +224,7 @@ class previsy_language {
             }            
         }
         
-        if(empty($return["MM"])){
-            $return["MM"] = NULL;
-        }
+        $return["MM"] = NULL;
         
         if($_input["MM"]["TOTAL"] > 0){
             $return["MM"] .= __("Il y aura un total de ",  __FILE__) . number_format(@$_input["MM"]["TOTAL"], 1) . __(" millimètre",  __FILE__);
@@ -268,7 +267,9 @@ class previsy_language {
         } else {
             $return["MM"] = NULL;
         }
-
+                 
+        $return["TEMPERATURE"] = NULL;
+        
         if ($_input["TEMPERATURE"]["MIN"] != $_input["TEMPERATURE"]["MAX"]) {
             $return["TEMPERATURE"] = __("La température moyenne sera de ",  __FILE__) . number_format($_input["TEMPERATURE"]["MOY"], 1) . $_degre;
             $return["TEMPERATURE"] .= __(" allant d'une amplitude de ",  __FILE__) . number_format($_input["TEMPERATURE"]["MIN"], 1) . $_degre . __(" à ",  __FILE__) . number_format($_input["TEMPERATURE"]["MAX"], 1) . $_degre . ". ";
@@ -276,6 +277,8 @@ class previsy_language {
             $return["TEMPERATURE"] = __("La température sera de ",  __FILE__) . number_format($_input["TEMPERATURE"]["MOY"], 1) . $_degre . ". ";
         }
 
+        $return["HUMIDITE"] = NULL;
+        
         if ($_input["HUMIDITE"]["MIN"] != $_input["HUMIDITE"]["MAX"]) {
             $return["HUMIDITE"] = __("Le taux d'humidité sera en moyenne à ",  __FILE__) . number_format($_input["HUMIDITE"]["MOY"], 1) . "%";
             $return["HUMIDITE"] .= __(" allant d'une amplitude de ",  __FILE__) . number_format($_input["HUMIDITE"]["MIN"], 1) . "%" . __(" à ",  __FILE__) . number_format($_input["HUMIDITE"]["MAX"], 1) . "%. ";
@@ -283,6 +286,8 @@ class previsy_language {
             $return["HUMIDITE"] = __("Le taux d'humidité sera de ",  __FILE__) . number_format($_input["HUMIDITE"]["MOY"], 1) . "%. ";
         }
 
+        $return["VENT"] = NULL;
+        
         $return["VENT"] = __("Le vent soufflera en moyenne à ",  __FILE__) . number_format($_input["VENT_VITESSE"]["MOY"], 1) . " km/h";
         $return["VENT"] .= __(" avec des rafales pouvant aller jusqu'à ",  __FILE__) . number_format($_input["VENT_RAFALES"]["MAX"], 1) . " km/h. ";
 
