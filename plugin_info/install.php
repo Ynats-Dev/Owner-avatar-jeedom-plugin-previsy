@@ -23,9 +23,11 @@ function previsy_install() {
 }
 
 function previsy_update() {
-    
+    if(@glob(__DIR__ . "/../../../plugins/previsy/core/json/*")){
+        shell_exec("sudo chmod 777 -R ". __DIR__ . "/../../../plugins/previsy/data");
+        shell_exec("sudo mv " . dirname(__DIR__) . "/../../../plugins/previsy/core/json/*.json " . dirname(__DIR__) . "/../../../plugins/previsy/data/json");
+    } 
 }
-
 
 function previsy_remove() {
     
