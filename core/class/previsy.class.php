@@ -250,7 +250,7 @@ class previsy extends eqLogic {
         }
     }
 
-    public function postSave() {
+    public function postSave() { 
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
         log::add('previsy', 'debug', __('postSave :. ', __FILE__) . __('Début de la création ou Mise à jour des commandes #ID# ', __FILE__) . $this->getId());
         
@@ -433,7 +433,7 @@ class previsy extends eqLogic {
         }
 
         log::add('previsy', 'debug', '---------------------------------------------------------------------------------------');
-        ajax::success(utils::o2a($this));
+        //ajax::success(utils::o2a($this));
     }
 
     public function preRemove() {
