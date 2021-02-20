@@ -31,7 +31,7 @@ class previsy extends eqLogic {
     public static $_widgetPossibility = array('custom' => true);
     public static $_jsonTampon = __DIR__ . "/../../../../plugins/previsy/data/json/"; // Dossier des Json en Tampon
     public static $_urlApi = "https://www.prevision-meteo.ch/services/json/"; // Url du Json de prevision-meteo.ch
-    public static $_icons = "/plugins/previsy/desktop/icons/"; // Dossier des iconespermettant de construire des phrases en différentes langues
+    public static $_icons = "plugins/previsy/desktop/icons/"; // Dossier des iconespermettant de construire des phrases en différentes langues
     public static $_prevHeure = 72; // Heure max de récupération des données dans le Json
     public static $_maxAlerte = 5; // Nombre max d'alerte ou widget à afficher
     public static $_timeSynchro = 3600 * 2; // Synchro avec le site distant tous les X secondes
